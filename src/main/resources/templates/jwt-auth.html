@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title th:text="${title}"></title>
+    <th:block th:replace="general.html :: head"/>
+
+    <style>
+        #results {
+            height: 150px;
+            overflow: scroll;
+            padding: 10px;
+        }
+
+        #login-message {
+            padding: 10px;
+            margin: 10px;
+        }
+    </style>
+
+</head>
+
+<body>
+<div class="container">
+    <div th:insert="general.html :: header" class="header"></div>
+    <div class="container">
+        <div class="card mt-3">
+            <div class="card-body">
+                <h5 class="card-title">Local Session JWT Token:</h5>
+                <pre id="jwt-token"></pre>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#basicExampleModal">
+                    Login
+                </button>
+                <button type="button" id="logout" class="btn btn-primary">Logout</button>
+            </div>
+        </div>
+        <div class="card mt-3">
+            <div class="card-body">
+                <h5 class="card-title">Item Search:</h5>
+                <input id="search" type="text">
+                <input class="btn btn-primary" type="button" id="items" value="Search">
+                <pre id="results"></pre>
+            </div>
+        </div>
+    </div>
+
+    <!-- Button trigger modal -->
+    <!-- Modal -->
+    <div class="modal fade" id="basicExampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Log into JWT Rest API</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm">
+                            <label for="username">Username:</label>
+                        </div>
+                        <div class="col-sm">
+                            <input id="username" type="text" name="username"/>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm">
+                            <label for="password">Password:</label>
+                        </div>
+                        <div class="col-sm">
+                            <input id="password" type="password" name="password"/>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col" id="login-message-container">
+                            <pre id="login-message">&nbsp;</pre>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" id="login" class="btn btn-primary">Log In</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <th:block th:replace="general.html :: scripts"/>
+    <script lang="javascript">
+
+        function showToken() {
+            console.log('Showing jwt token');
+            var jwt_token = localStorage.jwt_token;
+            if (!jwt_token) {
+                jwt_token = 'Not set';
+            }
+            $("#jwt-token").text(jwt_token);
+        }
+
+        function clearToken() {
+            localStorage.clear();
+            console.log('Cleared local storage');
+            showToken();
+        }
+
+        $(function () {
+            showToken();
+
+            $("#items").click(function () {
+                var searchText = $("#search").val();
+                resetResult($('result'));
+                $.ajax('/api/jwt/items/search/' + searchText, {
+                    type: 'GET',
+                    dataType: 'json',
+                    beforeSend: function (xhr, settings) {
+                        if (localStorage.jwt_token) {
+                            console.log('Setting jwt token');
+                            xhr.setRequestHeader('Authorization', 'Bearer ' + localStorage.jwt_token);
+                        }
+                    },
+                    success: function (data) {
+                        successResults($('#results'), data);
+                    },
+                    error: function (xhr, textStatus, errorThrown) {
+                        console.log(xhr);
+                        failResults($('#results'), xhr.responseJSON);
+                    }
+                });
+            });
+
+            $('#basicExampleModal').on('show.bs.modal', function (e) {
+                resetResult($('#login-message'));
+                resetResult($('#results'));
+            });
+
+            $('#login').click(function () {
+                var data = {'username': $('#username').val(), 'password': $('#password').val()};
+
+                resetResult($('#login-message'));
+                resetResult($('#results'));
+
+                $.ajax('/api/jwt/auth/signin', {
+                    data: JSON.stringify(data),
+                    contentType: 'application/json',
+                    type: 'POST',
+                    dataType: "json",
+                    success: function (data, textStatus, xhr) {
+                        localStorage.jwt_token = data.token;
+                        console.log('Added token to local storage');
+                        successResults($('#login-message'), xhr.status + ' ' + xhr.statusText);
+                        console.log(xhr);
+                    },
+                    error: function (xhr, textStatus, errorThrown) {
+                        clearToken();
+                        failResults($('#login-message'),
+                            xhr.status + ' ' + xhr.responseJSON.error + ' ' + xhr.responseJSON.message);
+                        console.log(xhr)
+                    },
+                    complete: function () {
+                        showToken();
+                    }
+                });
+            });
+
+            $('#logout').click(function () {
+                clearToken();
+                resetResult($('#results'));
+            });
+
+        });
+    </script>
+</div>
+</body>
+</html>

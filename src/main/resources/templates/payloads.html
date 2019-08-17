@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title th:text="${title}"></title>
+    <th:block th:replace="general.html :: head"/>
+</head>
+
+<body>
+<div class="container">
+    <div th:insert="general.html :: header" class="header"></div>
+
+    <ul>
+        <li th:each="p,i  : ${payloads}">
+            <a th:if="${i.index % 2 == 0}" th:href="@{/payload/stream/{size}(size=${p})}" th:text="'Payload ' + ${i.index}"></a>
+            <a th:if="${i.index % 2 != 0}" th:href="@{/payload/{size}(size=${p})}" th:text="'Payload ' + ${i.index}"></a>
+        </li>
+    </ul>
+
+    <th:block th:replace="general.html :: scripts"/>
+</div>
+</body>
+</html>

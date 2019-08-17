@@ -1,0 +1,72 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:fragment="head">
+    <title>StackHawk</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+        .header {
+            background: lightsteelblue;
+        }
+
+        .header a {
+            padding: 0 20px 0 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="header card clearfix mt-2" th:fragment="header">
+    <div class="card-body">
+        <div class="float-left">
+            <a href="/">Form Auth</a>|<a href="/jwt-auth">JWT Auth</a>|<a href="/token-auth">Token Auth</a>|<a href="/basic-auth">Basic Auth</a>
+        </div>
+
+        <div class="float-right" sec:authorize="isAuthenticated()">
+            <form th:action="@{/logout}" method="post" class="float-right" sec:authorize="isAuthenticated()">
+                <button type="submit" class="btn btn-primary">Sign Out</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<th:block th:fragment="scripts">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+    <script lang="javascript">
+        function successResults(results, data) {
+            results
+                .text(JSON.stringify(data, undefined, 2))
+                .removeClass('alert-danger')
+                .addClass('alert-success');
+        }
+
+        function failResults(results, data) {
+            results
+                .text(JSON.stringify(data, undefined, 2))
+                .removeClass('alert-success')
+                .addClass('alert-danger');
+
+        }
+
+        function resetResult(result) {
+            result.text('')
+                .removeClass('alert-success')
+                .removeClass('alert-danger');
+        }
+
+    </script>
+</th:block>
+
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title th:text="${title}"></title>
+    <th:block th:replace="general.html :: head"/>
+
+    <style>
+        #results {
+            height: 150px;
+            overflow: scroll;
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+<div class="container">
+    <div th:insert="general.html :: header" class="header"></div>
+    <div class="container">
+        <div class="card mt-3">
+            <div class="card-body">
+                <h5 class="card-title">Token Header</h5>
+                <div class="row">
+                    <div class="col-sm"><label for="token-name">Token Name</label></div>
+                    <div class="col-sm"><input type="text" id="token-name" placeholder="SH_AUTH_TOKEN"></div>
+                </div>
+                <div class="row">
+                    <div class="col-sm"><label for="token-value">Token Value</label></div>
+                    <div class="col-sm"><input type="text" id="token-value" placeholder="ITSASECRET"></div>
+                </div>
+            </div>
+        </div>
+        <div class="card mt-3">
+            <div class="card-body">
+                <h5 class="card-title">Item Search:</h5>
+                <input id="search" type="text">
+                <input class="btn btn-primary" type="button" id="items" value="Search">
+                <pre id="results"></pre>
+            </div>
+        </div>
+    </div>
+    <th:block th:replace="general.html :: scripts"/>
+    <script lang="javascript">
+        $(function () {
+            $("#items").click(function () {
+                var searchText = $("#search").val();
+                resetResult($('result'));
+                $.ajax('/api/token/items/search/' + searchText, {
+                    type: 'GET',
+                    dataType: 'json',
+                    beforeSend: function (xhr) {
+                        var tokenName = $('#token-name').val();
+                        var tokenValue = $('#token-value').val();
+                        if (tokenName && tokenValue) {
+                            console.log('Setting jwt token');
+                            xhr.setRequestHeader(tokenName, tokenValue);
+                        }
+                    },
+                    success: function (data) {
+                        successResults($('#results'), data);
+                    },
+                    error: function (xhr) {
+                        console.log('Error ', xhr);
+                        failResults($('#results'), xhr.responseJSON);
+                    }
+                });
+            });
+        });
+    </script>
+</div>
+</body>
+</html>

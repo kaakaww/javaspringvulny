@@ -1,0 +1,29 @@
+hawk:
+  spider:
+    maxDurationMinutes: 2
+app:
+  api: openapi.json
+  applicationId: test-app-id
+  env: dev
+  contactEmail: hawkdeploy@stackhawk.com
+  host: ${APP_HOST:https://localhost:9000}
+  excludePaths:
+    - "/logout"
+  antiCsrfParam: "_csrf"
+  authentication:
+    loggedInIndicator: "\\QSign Out\\E"
+    loggedOutIndicator: ".*Location:.*/login.*"
+    usernamePassword:
+      type: FORM
+      loginPath: /login
+      loginPagePath: /login
+      usernameField: username
+      passwordField: password
+      scanUsername: "user"
+      scanPassword: "password"
+    cookieAuthorization:
+      cookieNames:
+        - "JSESSIONID"
+    testPath:
+      path: /search
+      success: ".*200.*"
