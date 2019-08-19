@@ -19,7 +19,7 @@ docker build -t stackhawk/javaspringvulny .
 
 ### Run docker
 ```shell script
-docker run --rm -p 8080:8080 --name javaspringvulny stackhawk/javaspringvulny
+docker run --rm -p 9000:9000 --name javaspringvulny stackhawk/javaspringvulny
 ```
 
 ### Do bad stuff
