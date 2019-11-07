@@ -1,5 +1,6 @@
 package hawk;
 
+import hawk.entity.Item;
 import hawk.form.Search;
 import hawk.repos.ItemsRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,16 +28,17 @@ public class SearchController {
     @GetMapping("/search")
     public String searchForm(Model model) {
         model.addAttribute("search", new Search());
+        model.addAttribute("title", "Search");
         return "search";
     }
 
     @PostMapping("/search")
     public String searchSubmit(@ModelAttribute Search search, Model model) {
-        List itemsx = searchService.search(search);
-        //List items = repo.findByNameContainingOrDescriptionContaining(search.getSearchText(), search.getSearchText());
-        model.addAttribute("items", itemsx);
+        List<Item> items = searchService.search(search);
+        model.addAttribute("items", items);
         model.addAttribute("search", search);
-        return "searchResult";
+        model.addAttribute("title", "Search");
+        return "search";
     }
 
 }
