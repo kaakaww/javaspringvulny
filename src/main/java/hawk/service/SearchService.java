@@ -1,4 +1,4 @@
-package hawk;
+package hawk.service;
 
 import hawk.entity.Item;
 import hawk.form.Search;
@@ -19,7 +19,7 @@ public class SearchService {
     @Autowired
     EntityManager entityManager;
 
-    List<Item> search(Search search) {
+    public List<Item> search(Search search) {
         final Session session = (Session) entityManager.unwrap(Session.class);
         List items = session.doReturningWork(new ReturningWork<List<Item>>() {
             @Override

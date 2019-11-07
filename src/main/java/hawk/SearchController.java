@@ -3,6 +3,7 @@ package hawk;
 import hawk.entity.Item;
 import hawk.form.Search;
 import hawk.repos.ItemsRepo;
+import hawk.service.SearchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
