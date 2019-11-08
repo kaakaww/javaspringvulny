@@ -1,4 +1,4 @@
-package hawk;
+package hawk.controller;
 
 import hawk.entity.Item;
 import hawk.form.Search;

@@ -1,6 +1,6 @@
 package hawk;
 
-import com.sun.tools.javac.util.DefinedBy;
+import hawk.provider.JwtConfigurer;
 import hawk.provider.JwtTokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
