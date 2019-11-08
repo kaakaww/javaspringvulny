@@ -1,21 +1,27 @@
 package hawk;
 
-import hawk.provider.JwtConfigurer;
-import hawk.provider.JwtTokenProvider;
+import hawk.api.jwt.JwtConfigurer;
+import hawk.api.jwt.JwtTokenProvider;
+import hawk.api.token.TokenFilter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.web.access.ExceptionTranslationFilter;
+import org.springframework.security.web.authentication.Http403ForbiddenEntryPoint;
 
 @EnableWebSecurity
 public class MultiHttpSecurityConfig {
@@ -39,13 +45,13 @@ public class MultiHttpSecurityConfig {
 
         protected void configure(HttpSecurity http) throws Exception {
             http
-                    .antMatcher("/jwt/**")
+                    .antMatcher("/api/jwt/**")
                         .httpBasic().disable()
                         .csrf().disable()
                         .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                     .and()
                         .authorizeRequests()
-                        .antMatchers("/jwt/auth/signin").permitAll()
+                        .antMatchers("/api/jwt/auth/signin").permitAll()
                         .anyRequest().authenticated()
                     .and()
                         .apply(new JwtConfigurer(jwtTokenProvider));
@@ -53,6 +59,51 @@ public class MultiHttpSecurityConfig {
     }
 
     @Configuration
+    @Order(2)
+    public static class TokenWebSecurityConfigurationAdapter extends WebSecurityConfigurerAdapter {
+
+        @Value("${token.http.auth.name:SH_AUTH_TOKEN}")
+        private String authHeaderName;
+
+        @Value("${token.http.auth.value:ITSASECRET}")
+        private String authHeaderValue;
+
+        protected void configure(HttpSecurity http) throws Exception {
+
+            TokenFilter filter = new TokenFilter(authHeaderName);
+
+            filter.setAuthenticationManager(new AuthenticationManager() {
+            @Override
+            public Authentication authenticate(Authentication authentication) throws AuthenticationException {
+                String principal = (String) authentication.getPrincipal();
+
+                if (!authHeaderValue.equals(principal)) {
+                    throw new BadCredentialsException("The API key was not found or not the expected value.");
+                }
+                authentication.setAuthenticated(true);
+                return authentication;
+            }
+            });
+
+            http
+                    .antMatcher("/api/token/**")
+                    .httpBasic().disable()
+                    .csrf().disable()
+                    .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                    .and()
+                        .addFilter(filter)
+                        .addFilterBefore(new ExceptionTranslationFilter(
+                                    new Http403ForbiddenEntryPoint()),
+                            filter.getClass()
+                        )
+                    .authorizeRequests()
+                        .anyRequest()
+                        .authenticated();
+        }
+    }
+
+    @Configuration
+    @Order(3)
     public static class FormLoginWebSecurityConfigurerAdapter extends WebSecurityConfigurerAdapter {
         @Override
         protected void configure(HttpSecurity http) throws Exception {

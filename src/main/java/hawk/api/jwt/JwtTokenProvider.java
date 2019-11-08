@@ -1,4 +1,4 @@
-package hawk.provider;
+package hawk.api.jwt;
 
 import io.jsonwebtoken.*;
 import org.springframework.beans.factory.annotation.Autowired;

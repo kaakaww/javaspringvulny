@@ -1,6 +1,6 @@
-package hawk.filter;
+package hawk.api.jwt;
 
-import hawk.provider.JwtTokenProvider;
+import hawk.api.jwt.JwtTokenProvider;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.GenericFilterBean;
