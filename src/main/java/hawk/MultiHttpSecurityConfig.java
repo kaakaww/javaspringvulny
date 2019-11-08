@@ -1,0 +1,87 @@
+package hawk;
+
+import com.sun.tools.javac.util.DefinedBy;
+import hawk.provider.JwtTokenProvider;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
+import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+
+@EnableWebSecurity
+public class MultiHttpSecurityConfig {
+
+
+    @Configuration
+    @Order(1)
+    public static class ApiWebSecurityConfigurationAdapter extends WebSecurityConfigurerAdapter {
+        private final JwtTokenProvider jwtTokenProvider;
+
+        @Autowired
+        public ApiWebSecurityConfigurationAdapter(JwtTokenProvider jwtTokenProvider) {
+            this.jwtTokenProvider = jwtTokenProvider;
+        }
+
+        @Bean
+        @Override
+        public AuthenticationManager authenticationManagerBean() throws Exception {
+            return super.authenticationManagerBean();
+        }
+
+        protected void configure(HttpSecurity http) throws Exception {
+            http
+                    .antMatcher("/api/**")
+                        .httpBasic().disable()
+                        .csrf().disable()
+                        .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                    .and()
+                        .authorizeRequests()
+                        .antMatchers("/api/auth/signin").permitAll()
+                        .antMatchers(HttpMethod.GET, "/vehicles/**").permitAll()
+                        .antMatchers(HttpMethod.GET, "/v1/vehicles/**").permitAll()
+                        .anyRequest().authenticated()
+                    .and()
+                        .apply(new JwtConfigurer(jwtTokenProvider));
+        }
+    }
+
+    @Configuration
+    public static class FormLoginWebSecurityConfigurerAdapter extends WebSecurityConfigurerAdapter {
+        @Override
+        protected void configure(HttpSecurity http) throws Exception {
+            http
+                    .authorizeRequests()
+                        .antMatchers("/").permitAll()
+                        .anyRequest().authenticated()
+                    .and()
+                        .formLogin()
+                        .loginPage("/login")
+                        .permitAll()
+                    .and()
+                        .logout()
+                        .logoutSuccessUrl("/")
+                        .permitAll();
+        }
+    }
+
+    @Bean
+    public UserDetailsService userDetailsService() {
+        UserDetails user =
+                User.withDefaultPasswordEncoder()
+                        .username("user")
+                        .password("password")
+                        .roles("USER")
+                        .build();
+
+        return new InMemoryUserDetailsManager(user);
+    }
+}
