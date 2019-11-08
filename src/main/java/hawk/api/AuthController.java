@@ -21,7 +21,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/auth")
+@RequestMapping("/api/V1/auth")
 public class AuthController {
 
     private final AuthenticationManager authenticationManager;
