@@ -23,11 +23,11 @@ public class MultiHttpSecurityConfig {
 
     @Configuration
     @Order(1)
-    public static class ApiWebSecurityConfigurationAdapter extends WebSecurityConfigurerAdapter {
+    public static class JwtWebSecurityConfigurationAdapter extends WebSecurityConfigurerAdapter {
         private final JwtTokenProvider jwtTokenProvider;
 
         @Autowired
-        public ApiWebSecurityConfigurationAdapter(JwtTokenProvider jwtTokenProvider) {
+        public JwtWebSecurityConfigurationAdapter(JwtTokenProvider jwtTokenProvider) {
             this.jwtTokenProvider = jwtTokenProvider;
         }
 
@@ -39,15 +39,13 @@ public class MultiHttpSecurityConfig {
 
         protected void configure(HttpSecurity http) throws Exception {
             http
-                    .antMatcher("/api/**")
+                    .antMatcher("/jwt/**")
                         .httpBasic().disable()
                         .csrf().disable()
                         .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                     .and()
                         .authorizeRequests()
-                        .antMatchers("/api/auth/signin").permitAll()
-                        .antMatchers(HttpMethod.GET, "/vehicles/**").permitAll()
-                        .antMatchers(HttpMethod.GET, "/v1/vehicles/**").permitAll()
+                        .antMatchers("/jwt/auth/signin").permitAll()
                         .anyRequest().authenticated()
                     .and()
                         .apply(new JwtConfigurer(jwtTokenProvider));

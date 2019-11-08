@@ -1,4 +1,4 @@
-package hawk.api;
+package hawk.api.jwt;
 
 import hawk.form.Search;
 import hawk.service.SearchService;
@@ -10,13 +10,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/V1/items")
-public class ItemController {
+@RequestMapping("/api/jwt/items")
+public class JwtItemController {
 
     private final SearchService searchService;
 
     @Autowired
-    public ItemController(SearchService searchService) {
+    public JwtItemController(SearchService searchService) {
         this.searchService = searchService;
     }
 
