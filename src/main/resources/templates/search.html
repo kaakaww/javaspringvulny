@@ -19,16 +19,25 @@
                 <button type="submit" class="btn btn-primary">Search</button>
             </form>
         </div>
+    </div>
 
-        <div class="container">
-            <p th:if="${search.searchText}" th:utext="'Searched for: ' + ${search.searchText}"></p>
-
-            <div class="row" th:each="item: ${items}">
-                <div class="col-sm" th:text="${item.id}"></div>
-                <div class="col-sm" th:text="${item.name}"></div>
-                <div class="col-sm" th:text="${item.description}"></div>
-            </div>
-        </div>
+    <div th:if="${items}" class="card mt-3">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Name</th>
+                <th scope="col">Description</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="item: ${items}">
+                <th scope="row" th:text="${item.id}"></th>
+                <td th:text="${item.name}"></td>
+                <td th:text="${item.description}"></td>
+            </tr>
+            </tbody>
+        </table>
     </div>
 </div>
 
