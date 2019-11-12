@@ -104,12 +104,28 @@ public class MultiHttpSecurityConfig {
 
     @Configuration
     @Order(3)
+    public static class BasicAuthWebSecurityConfigurerAdapter extends WebSecurityConfigurerAdapter {
+        @Override
+        protected void configure(HttpSecurity http) throws Exception {
+            http
+                    .antMatcher("/api/basic/**")
+                    .csrf().disable()
+                    .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
+                    .authorizeRequests().anyRequest().authenticated()
+                .and()
+                    .httpBasic();
+        }
+    }
+
+    @Configuration
+    @Order(4)
     public static class FormLoginWebSecurityConfigurerAdapter extends WebSecurityConfigurerAdapter {
         @Override
         protected void configure(HttpSecurity http) throws Exception {
             http
                     .authorizeRequests()
-                        .antMatchers("/", "/jwt-auth", "/token-auth").permitAll()
+                        .antMatchers("/", "/jwt-auth", "/token-auth", "/basic-auth").permitAll()
                         .anyRequest().authenticated()
                     .and()
                         .formLogin()

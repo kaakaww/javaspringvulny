@@ -24,4 +24,10 @@ public class IndexController {
         model.addAttribute("title", "Token Auth");
         return "token-auth";
     }
+
+    @GetMapping("/basic-auth")
+    public String basicAuth(Model model) {
+        model.addAttribute("title", "Basic Auth");
+        return "basic-auth";
+    }
 }
