@@ -109,6 +109,21 @@
             showToken();
         }
 
+        function successResults(results, data) {
+            results
+                .text(JSON.stringify(data, undefined, 2))
+                .removeClass('alert-danger')
+                .addClass('alert-success');
+        }
+
+        function failResults(results, data) {
+            results
+                .text(JSON.stringify(data, undefined, 2))
+                .removeClass('alert-success')
+                .addClass('alert-danger');
+
+        }
+
         $(function () {
 
             showToken();
@@ -126,17 +141,11 @@
                         }
                     },
                     success: function (data) {
-                        $('#results')
-                            .text(JSON.stringify(data, undefined, 2))
-                            .removeClass('alert-danger')
-                            .addClass('alert-success');
+                        successResults($( '#results' ), data);
                     },
                     error: function (xhr, textStatus, errorThrown) {
                         console.log(xhr);
-                        $('#results')
-                            .text(JSON.stringify(xhr.responseJSON, undefined, 2))
-                            .removeClass('alert-success')
-                            .addClass('alert-danger');
+                        failResults($( '#results' ), xhr.responseJSON);
                     }
                 });
             });
@@ -160,17 +169,12 @@
                     success: function (data, textStatus, xhr) {
                         localStorage.jwt_token = data.token;
                         console.log('Added token to local storage');
-                        $('#login-message')
-                            .text(xhr.status)
-                            .removeClass('alert-danger')
-                            .addClass('alert-success');
+                        successResults($( '#login-message' ), xhr.status);
                     },
                     error: function (xhr, textStatus, errorThrown) {
                         clearToken();
-                        $('#login-message')
-                            .text(xhr.status + ' ' + xhr.responseJSON.error + ' ' + xhr.responseJSON.message)
-                            .removeClass('alert-success')
-                            .addClass('alert-danger');
+                        failResults($( '#login-message' ),
+                            xhr.status + ' ' + xhr.responseJSON.error + ' ' + xhr.responseJSON.message);
                         console.log(xhr)
                     },
                     complete: function () {
