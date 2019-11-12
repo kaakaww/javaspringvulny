@@ -131,10 +131,16 @@
                 });
             });
 
+            $('#basicExampleModal').on('show.bs.modal', function (e) {
+                resetResult($( '#login-message' ));
+                resetResult($( '#results' ));
+            });
+
             $( '#login' ).click(function() {
                 var data = { 'username': $('#username').val(), 'password': $('#password').val()};
 
-                resetResult($( 'login-message' ));
+                resetResult($( '#login-message' ));
+                resetResult($( '#results' ));
 
                 $.ajax('/api/jwt/auth/signin', {
                     data: JSON.stringify(data),
@@ -152,7 +158,7 @@
                     error: function(xhr, textStatus, errorThrown) {
                         clearToken();
                         $( '#login-message' )
-                            .text(xhr.status + ' ' + xhr.message)
+                            .text(xhr.status + ' ' + xhr.responseJSON.error + ' ' + xhr.responseJSON.message)
                             .removeClass('alert-success')
                             .addClass('alert-danger');
                         console.log(xhr)
@@ -165,12 +171,13 @@
 
             function clearToken() {
                 localStorage.clear();
-                showToken();
                 console.log('Cleared local storage');
+                showToken();
             }
 
             $( '#logout' ).click(function() {
                 clearToken();
+                resetResult($( '#results' ));
             });
 
         });
