@@ -6,8 +6,9 @@
     <th:block th:replace="general.html :: head"/>
 
     <style>
-        .search {
-            font-size: 28px;
+        #results {
+            height: 150px;
+            overflow: scroll;
         }
     </style>
 </head>
@@ -16,11 +17,73 @@
 <div class="container">
     <div th:insert="general.html :: header" class="header"></div>
     <div class="container">
-        <div class="search">
-            Find fresh items <a th:href="@{/search}">here</a>
+        <div class="card mt-3">
+            <div class="card-body">
+                <h5 class="card-title">Token Header</h5>
+                <div class="row">
+                    <div class="col-sm"><label for="token-name">Token Name</label></div>
+                    <div class="col-sm"><input type="text" id="token-name" placeholder="SH_AUTH_TOKEN"></div>
+                </div>
+                <div class="row">
+                    <div class="col-sm"><label for="token-value">Token Value</label></div>
+                    <div class="col-sm"><input type="text" id="token-value" placeholder="ITSASECRET"></div>
+                </div>
+            </div>
+        </div>
+        <div class="card mt-3">
+            <div class="card-body">
+                <h5 class="card-title">Item Search:</h5>
+                <input id="search" type="text">
+                <input class="btn btn-primary" type="button" id="items" value="Search">
+                <pre id="results"></pre>
+            </div>
         </div>
     </div>
     <th:block th:replace="general.html :: scripts"/>
+    <script lang="javascript">
+
+        function resetResult(result) {
+            result.text('')
+                .removeClass('alert-success')
+                .removeClass('alert-danger');
+        }
+
+        $(function() {
+
+            $( "#items" ).click(function() {
+                var searchText = $( "#search" ).val();
+                resetResult($( 'result' ));
+                $.ajax('/api/token/items/search/' + searchText, {
+                    type: 'GET',
+                    dataType: 'json',
+                    beforeSend: function (xhr, settings) {
+                        var tokenName = $( '#token-name' ).val();
+                        var tokenValue = $( '#token-value' ).val();
+                        console.log('Setting token ' + tokenName + ' to ' + tokenValue);
+                        if (tokenName && tokenValue) {
+                            console.log('Setting jwt token');
+                            xhr.setRequestHeader(tokenName, tokenValue);
+                        }
+                    },
+                    success: function(data) {
+                        $( '#results' )
+                            .text(JSON.stringify(data, undefined, 2))
+                            .removeClass('alert-danger')
+                            .addClass('alert-success');
+                    },
+                    error: function(xhr, textStatus, errorThrown) {
+                        console.log(xhr);
+                        $( '#results' )
+                            .text(JSON.stringify(xhr.responseJSON, undefined, 2))
+                            .removeClass('alert-success')
+                            .addClass('alert-danger');
+                    }
+                });
+            });
+
+        });
+
+    </script>
 </div>
 </body>
 </html>
