@@ -42,48 +42,31 @@
     </div>
     <th:block th:replace="general.html :: scripts"/>
     <script lang="javascript">
-
-        function resetResult(result) {
-            result.text('')
-                .removeClass('alert-success')
-                .removeClass('alert-danger');
-        }
-
         $(function () {
-
             $("#items").click(function () {
                 var searchText = $("#search").val();
                 resetResult($('result'));
                 $.ajax('/api/token/items/search/' + searchText, {
                     type: 'GET',
                     dataType: 'json',
-                    beforeSend: function (xhr, settings) {
+                    beforeSend: function (xhr) {
                         var tokenName = $('#token-name').val();
                         var tokenValue = $('#token-value').val();
-                        console.log('Setting token ' + tokenName + ' to ' + tokenValue);
                         if (tokenName && tokenValue) {
                             console.log('Setting jwt token');
                             xhr.setRequestHeader(tokenName, tokenValue);
                         }
                     },
                     success: function (data) {
-                        $('#results')
-                            .text(JSON.stringify(data, undefined, 2))
-                            .removeClass('alert-danger')
-                            .addClass('alert-success');
+                        successResults($('#results'), data);
                     },
-                    error: function (xhr, textStatus, errorThrown) {
-                        console.log(xhr);
-                        $('#results')
-                            .text(JSON.stringify(xhr.responseJSON, undefined, 2))
-                            .removeClass('alert-success')
-                            .addClass('alert-danger');
+                    error: function (xhr) {
+                        console.log('Error ', xhr);
+                        failResults($('#results'), xhr.responseJSON);
                     }
                 });
             });
-
         });
-
     </script>
 </div>
 </body>

@@ -99,35 +99,13 @@
             $("#jwt-token").text(jwt_token);
         }
 
-        function resetResult(result) {
-            result.text('')
-                .removeClass('alert-success')
-                .removeClass('alert-danger');
-        }
-
         function clearToken() {
             localStorage.clear();
             console.log('Cleared local storage');
             showToken();
         }
 
-        function successResults(results, data) {
-            results
-                .text(JSON.stringify(data, undefined, 2))
-                .removeClass('alert-danger')
-                .addClass('alert-success');
-        }
-
-        function failResults(results, data) {
-            results
-                .text(JSON.stringify(data, undefined, 2))
-                .removeClass('alert-success')
-                .addClass('alert-danger');
-
-        }
-
         $(function () {
-
             showToken();
 
             $("#items").click(function () {

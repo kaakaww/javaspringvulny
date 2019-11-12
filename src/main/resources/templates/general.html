@@ -43,6 +43,29 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
             integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
             crossorigin="anonymous"></script>
+    <script lang="javascript">
+        function successResults(results, data) {
+            results
+                .text(JSON.stringify(data, undefined, 2))
+                .removeClass('alert-danger')
+                .addClass('alert-success');
+        }
+
+        function failResults(results, data) {
+            results
+                .text(JSON.stringify(data, undefined, 2))
+                .removeClass('alert-success')
+                .addClass('alert-danger');
+
+        }
+
+        function resetResult(result) {
+            result.text('')
+                .removeClass('alert-success')
+                .removeClass('alert-danger');
+        }
+
+    </script>
 </th:block>
 
 </body>
