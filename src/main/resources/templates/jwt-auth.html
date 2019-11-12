@@ -18,14 +18,15 @@
 <div class="container">
     <div th:insert="general.html :: header" class="header"></div>
     <div class="container">
-        <h3>AJAX With JWT</h3>
         <div class="card mt-3">
             <div class="card-body">
-                <div>JWT Token in Local Session: <pre id="jwt-token"></pre></div>
+                <h5 class="card-title">Local Session JWT Token:</h5>
+                <pre id="jwt-token"></pre>
             </div>
         </div>
         <div class="card mt-3">
             <div class="card-body">
+                <h5 class="card-title">Item Search:</h5>
                 <input id="search" type="text">
                 <input class="btn btn-primary" type="button" id="items" value="Search">
                 <pre id="results"></pre>
