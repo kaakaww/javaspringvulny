@@ -20,6 +20,12 @@ public class JwtItemController {
         this.searchService = searchService;
     }
 
+    @GetMapping("/search/")
+    public ResponseEntity searchAll() {
+        Search search = new Search("");
+        return ResponseEntity.ok(searchService.search(search));
+    }
+
     @GetMapping("/search/{text}")
     public ResponseEntity search(@PathVariable("text") String text) {
         Search search = new Search(text);

@@ -109,7 +109,7 @@ public class MultiHttpSecurityConfig {
         protected void configure(HttpSecurity http) throws Exception {
             http
                     .authorizeRequests()
-                        .antMatchers("/").permitAll()
+                        .antMatchers("/", "/jwt-auth", "/token-auth").permitAll()
                         .anyRequest().authenticated()
                     .and()
                         .formLogin()

@@ -9,8 +9,19 @@ public class IndexController {
 
     @GetMapping("/")
     public String index(Model model) {
-        model.addAttribute("title", "Index title");
+        model.addAttribute("title", "StackHawk Java Vulny Application");
         return "index";
     }
 
+    @GetMapping("/jwt-auth")
+    public String jwtAuth(Model model) {
+        model.addAttribute("title", "JWT Auth");
+        return "jwt-auth";
+    }
+
+    @GetMapping("/token-auth")
+    public String tokenAuth(Model model) {
+        model.addAttribute("title", "Token Auth");
+        return "token-auth";
+    }
 }
