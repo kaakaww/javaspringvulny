@@ -9,8 +9,6 @@
     <style>
         .header {
             background: lightblue;
-            min-height: 50px;
-            line-height: 50px;
         }
 
         .header a {
@@ -21,7 +19,8 @@
 
 <body>
 
-<div class="header container clearfix" th:fragment="header">
+<div class="header card clearfix mt-2" th:fragment="header">
+    <div class="card-body">
     <div class="float-left">
         <a href="/">Form Auth</a>|<a href="/jwt-auth">JWT Auth</a>|<a href="/token-auth">Token Auth</a>
     </div>
@@ -30,6 +29,7 @@
         <form th:action="@{/logout}" method="post" class="float-right" sec:authorize="isAuthenticated()">
             <button type="submit" class="btn btn-primary">Sign Out</button>
         </form>
+    </div>
     </div>
 </div>
 

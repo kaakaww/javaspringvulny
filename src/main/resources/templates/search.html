@@ -9,23 +9,25 @@
 <body>
 <div class="container">
     <div th:insert="general.html :: header" class="header"></div>
-    <div class="container clearfix">
-        <form th:action="@{/search}" th:object="${search}" method="post" class="float-left">
-            <div class="form-group">
-                <label for="search">Find Items</label>
-                <input th:field="*{searchText}" type="text" class="form-control" id="search" name="search">
+    <div class="card mt-3 clearfix">
+        <div class="card-body">
+            <form th:action="@{/search}" th:object="${search}" method="post" class="float-left">
+                <div class="form-group">
+                    <label for="search">Find Items</label>
+                    <input th:field="*{searchText}" type="text" class="form-control" id="search" name="search">
+                </div>
+                <button type="submit" class="btn btn-primary">Search</button>
+            </form>
+        </div>
+
+        <div class="container">
+            <p th:if="${search.searchText}" th:utext="'Searched for: ' + ${search.searchText}"></p>
+
+            <div class="row" th:each="item: ${items}">
+                <div class="col-sm" th:text="${item.id}"></div>
+                <div class="col-sm" th:text="${item.name}"></div>
+                <div class="col-sm" th:text="${item.description}"></div>
             </div>
-            <button type="submit" class="btn btn-primary">Search</button>
-        </form>
-    </div>
-
-    <div class="container">
-        <p th:if="${search.searchText}" th:utext="'Searched for: ' + ${search.searchText}"></p>
-
-        <div class="row" th:each="item: ${items}">
-            <div class="col-sm" th:text="${item.id}"></div>
-            <div class="col-sm" th:text="${item.name}"></div>
-            <div class="col-sm" th:text="${item.description}"></div>
         </div>
     </div>
 </div>
