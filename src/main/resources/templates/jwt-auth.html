@@ -9,6 +9,12 @@
         #results {
             height: 150px;
             overflow: scroll;
+            padding: 10px;
+        }
+
+        #login-message {
+            padding: 10px;
+            margin: 10px;
         }
     </style>
 
@@ -169,7 +175,8 @@
                     success: function (data, textStatus, xhr) {
                         localStorage.jwt_token = data.token;
                         console.log('Added token to local storage');
-                        successResults($( '#login-message' ), xhr.status);
+                        successResults($( '#login-message' ), xhr.status + ' ' + xhr.statusText);
+                        console.log(xhr);
                     },
                     error: function (xhr, textStatus, errorThrown) {
                         clearToken();
