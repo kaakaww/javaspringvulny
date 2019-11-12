@@ -28,6 +28,10 @@
             <div class="card-body">
                 <h5 class="card-title">Local Session JWT Token:</h5>
                 <pre id="jwt-token"></pre>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#basicExampleModal">
+                    Login
+                </button>
+                <button type="button" id="logout" class="btn btn-primary">Logout</button>
             </div>
         </div>
         <div class="card mt-3">
@@ -36,14 +40,6 @@
                 <input id="search" type="text">
                 <input class="btn btn-primary" type="button" id="items" value="Search">
                 <pre id="results"></pre>
-            </div>
-        </div>
-        <div class="card mt-3">
-            <div class="card-body">
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#basicExampleModal">
-                    Login
-                </button>
-                <button type="button" id="logout" class="btn btn-primary">Logout</button>
             </div>
         </div>
     </div>
@@ -147,11 +143,11 @@
                         }
                     },
                     success: function (data) {
-                        successResults($( '#results' ), data);
+                        successResults($('#results'), data);
                     },
                     error: function (xhr, textStatus, errorThrown) {
                         console.log(xhr);
-                        failResults($( '#results' ), xhr.responseJSON);
+                        failResults($('#results'), xhr.responseJSON);
                     }
                 });
             });
@@ -175,12 +171,12 @@
                     success: function (data, textStatus, xhr) {
                         localStorage.jwt_token = data.token;
                         console.log('Added token to local storage');
-                        successResults($( '#login-message' ), xhr.status + ' ' + xhr.statusText);
+                        successResults($('#login-message'), xhr.status + ' ' + xhr.statusText);
                         console.log(xhr);
                     },
                     error: function (xhr, textStatus, errorThrown) {
                         clearToken();
-                        failResults($( '#login-message' ),
+                        failResults($('#login-message'),
                             xhr.status + ' ' + xhr.responseJSON.error + ' ' + xhr.responseJSON.message);
                         console.log(xhr)
                     },
