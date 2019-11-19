@@ -21,6 +21,10 @@
         </div>
     </div>
 
+    <div class="container">
+        <span th:utext="${search.searchText}"></span>
+    </div>
+
     <div th:if="${items}" class="card mt-3">
         <table class="table table-striped">
             <thead>
