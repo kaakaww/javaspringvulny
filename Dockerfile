@@ -1,5 +1,15 @@
 FROM openjdk:11.0.4-jdk
 
+RUN mkdir /javavulny /app
+COPY . /javavulny/
+
+RUN cd /javavulny \
+&& ./gradlew --no-daemon build \
+&& cp build/libs/java-spring-vuly-0.1.0.jar /app/ \
+&& rm -Rf build/ \
+&& cd / \
+&& rm -Rf /javavulny /root/.gradle/
+
 WORKDIR /app
 COPY build/libs/java-spring-vuly-0.1.0.jar .
 COPY ./db ./db
