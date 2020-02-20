@@ -6,20 +6,15 @@ I'm both sophisticated and naive all while using a best in class in web framewor
 You should probably scan me with a web app vulnerability scanner.
 
 
-### Run
-```shell script
-./gradlew bootRun
-```
 
 ### Build
 ```shell script
-./gradlew bootJar 
-docker build -t stackhawk/javaspringvulny .
+docker-compose-build
 ```
 
 ### Run docker
 ```shell script
-docker run --rm -p 9000:9000 --name javaspringvulny stackhawk/javaspringvulny
+docker-compose up -d
 ```
 
 ### Do bad stuff
