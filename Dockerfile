@@ -11,7 +11,6 @@ RUN cd /javavulny \
 && rm -Rf /javavulny /root/.gradle/
 
 WORKDIR /app
-COPY build/libs/java-spring-vuly-0.1.0.jar .
 COPY ./db ./db
 
 ENV PWD=/app
