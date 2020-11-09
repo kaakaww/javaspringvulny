@@ -54,6 +54,8 @@ dependencies {
     compile("com.h2database:h2")
     compile("io.jsonwebtoken:jjwt-api:0.10.7")
 
+    implementation("org.springdoc:springdoc-openapi-ui:1.2.32")
+
     testCompile("junit:junit")
 
     runtime("io.jsonwebtoken:jjwt-impl:0.10.7")

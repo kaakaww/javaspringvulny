@@ -2,6 +2,7 @@ hawk:
   spider:
     maxDurationMinutes: 2
 app:
+  api: openapi.yaml
   applicationId: test-app-id
   env: dev
   contactEmail: hawkdeploy@stackhawk.com
