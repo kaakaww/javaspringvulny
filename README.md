@@ -9,7 +9,7 @@ You should probably scan me with a web app vulnerability scanner.
 
 ### Build
 ```shell script
-docker-compose-build
+docker-compose build
 ```
 
 ### Run docker
