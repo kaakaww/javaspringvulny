@@ -22,3 +22,6 @@ app:
     testPath:
       path: /search
       success: ".*200.*"
+hawk:
+  spider:
+    maxDurationMinutes: 5
