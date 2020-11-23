@@ -125,7 +125,7 @@ public class MultiHttpSecurityConfig {
         protected void configure(HttpSecurity http) throws Exception {
             http
                     .authorizeRequests()
-                        .antMatchers("/", "/jwt-auth", "/token-auth", "/basic-auth").permitAll()
+                        .antMatchers("/", "/jwt-auth", "/token-auth", "/basic-auth", "/openapi", "/openapi.yaml").permitAll()
                         .anyRequest().authenticated()
                     .and()
                         .formLogin()

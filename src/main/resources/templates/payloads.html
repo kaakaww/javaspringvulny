@@ -9,19 +9,14 @@
 <body>
 <div class="container">
     <div th:insert="general.html :: header" class="header"></div>
-    <div class="card mt-3">
-        <div class="search card-body">
-            <h5 class="card-title">Item Search</h5>
-            Find your fresh items <a th:href="@{/search}">here</a>
-        </div>
-    </div>
-    <div class="card mt-3">
-        <div class="card-body">
-            <ul>
-                <li><a th:href="@{/payloads}">Payloads</a> </li>
-            </ul>
-        </div>
-    </div>
+
+    <ul>
+        <li th:each="p,i  : ${payloads}">
+            <a th:if="${i.index % 2 == 0}" th:href="@{/payload/stream/{size}(size=${p})}" th:text="'Payload ' + ${i.index}"></a>
+            <a th:if="${i.index % 2 != 0}" th:href="@{/payload/{size}(size=${p})}" th:text="'Payload ' + ${i.index}"></a>
+        </li>
+    </ul>
+
     <th:block th:replace="general.html :: scripts"/>
 </div>
 </body>
