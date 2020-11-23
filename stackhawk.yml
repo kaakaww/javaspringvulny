@@ -25,5 +25,3 @@ app:
 hawk:
   spider:
     maxDurationMinutes: 5
-  config:
-    - "hawkscan.throttlePassiveBacklog=75"
