@@ -1,17 +1,6 @@
-# A Vulnerable Spring App
+# Java Spring Vulny
 
-Hi I'm The Vulny Spring App, a modern web stack using the latest(-ish) in Java Spring framework technology.  
-I'm both sophisticated and naïve all while using a best in class web framework.
-
-Ever since my developers implemented some new authorization method types and form handlers, I haven't
-been feeling very well.
-
-I'm probably due for a thorough checkup using a trusted web application vulnerability scanner.
-
-Will you please scan me?
-
-I recommend [OWASP ZAProxy](https://www.zaproxy.org/) or [StackHawk - Powered by ZAP](https://www.stackhawk.com/) 
-to make sure all of my bugs are diagnosed.
+Java Spring Vulny combines the power and sophistication of the Spring framework with some homegrown naïveté to provide a platform for testing web application security test scanners such as [OWASP ZAProxy](https://www.zaproxy.org/) and [StackHawk - Powered by ZAP](https://www.stackhawk.com/).
 
 ## How to start
 
