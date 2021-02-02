@@ -6,6 +6,18 @@ servers:
 - url: https://localhost:9000
   description: Generated server url
 paths:
+  /api/jwt/items/search/:
+    get:
+      tags:
+      - jwt-item-controller
+      operationId: searchAll
+      responses:
+        200:
+          description: default response
+          content:
+            '*/*':
+              schema:
+                type: string
   /api/jwt/items/search/{text}:
     get:
       tags:
@@ -17,18 +29,6 @@ paths:
         required: true
         schema:
           type: string
-      responses:
-        200:
-          description: default response
-          content:
-            '*/*':
-              schema:
-                type: string
-  /api/jwt/items/search/:
-    get:
-      tags:
-      - jwt-item-controller
-      operationId: searchAll
       responses:
         200:
           description: default response
