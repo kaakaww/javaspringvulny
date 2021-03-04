@@ -2,10 +2,4 @@ app:
   applicationId: ${APP_ID}
   env: ${APP_ENV:Development}
   host: ${APP_HOST:https://localhost:9000}
-  api: /openapi
-  excludePaths:
-    - "/logout"
-  antiCsrfParam: "_csrf"
-hawk:
-  spider:
-    maxDurationMinutes: 2
+#  api: /openapi

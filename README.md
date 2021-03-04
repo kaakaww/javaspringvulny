@@ -57,3 +57,59 @@ A [ZAP](https://www.zaproxy.org/) or [StackHawk](https://www.stackhawk.com/login
 | --- | --- |
 | SQL Injection via search box | `a%'; insert into item values (999, 'bad bad description', 'hacker item name'); select * from item where name like  '%banan` |
 | Cross Site Scripting via search box | `<script>alert('hey guy');</script>` |
+
+### StackHawk Scan
+
+The following examples will run HawkScan against the JavaSpringVulny app running on localhost and port 9000, which is the default setup. The StackHawk configuration files are already present in this repository.
+
+You should create a new application in the [StackHawk app](https://app.stackhawk.com/applications) to collect data from these scans. The following environment variables are required for these scans to work:
+
+ * `API_KEY`: Your StackHawk API key
+ * `APP_ID`: The application ID from the [StackHawk app](https://app.stackhawk.com/applications).
+
+You can optionally include the following variables to customize the scan.
+
+ * `APP_HOST`: The host to scan. Default: https://localhost:9000
+ * `APP_ENV`: The application environment. Default: Development
+
+Unauthenticated scan:
+```shell
+docker run --tty --rm --network host --volume $(pwd):/hawk \
+  --env API_KEY \
+  --env APP_ID \
+  stackhawk/hawkscan
+```
+
+Scan using web form authentication with a session cookie. [See the docs](https://docs.stackhawk.com/hawkscan/configuration/authenticated-scanning.html#example-usernamepassword-authentication--cookie-authorization) for more information about this type of authentication.
+```shell
+docker run --tty --rm --network host --volume $(pwd):/hawk \
+  --env API_KEY \
+  --env APP_ID \
+  stackhawk/hawkscan
+```
+
+Scan using an authorization token retrieved by POSTing credentials to an API endpoint. [See the docs](https://docs.stackhawk.com/hawkscan/configuration/authenticated-scanning.html#usernamepassword-authentication--bearer-token-authorization) for more information about this type of authentication.
+```shell
+docker run --tty --rm --network host --volume $(pwd):/hawk \
+  --env API_KEY \
+  --env APP_ID \
+  stackhawk/hawkscan
+```
+
+Scan using an authorization token extracted by an external script. This method can be useful for third-party authentication systems. [See the docs](https://docs.stackhawk.com/hawkscan/configuration/authenticated-scanning.html#example-external-token-authentication--custom-token-authorization) for more information about this type of authentication.
+```shell
+export AUTH_TOKEN=$(./scripts/basic-auth.sh)
+docker run --tty --rm --network host --volume $(pwd):/hawk \
+  --env API_KEY \
+  --env APP_ID \
+  stackhawk/hawkscan
+```
+
+Scan using basic authentication, using an external script to derive the correct authorization token. This legacy method is an outdated form of bearer token authentication. [See the docs](https://docs.stackhawk.com/hawkscan/configuration/authenticated-scanning.html#example-external-token-authentication--custom-token-authorization) for more information about this type of authentication.
+```shell
+export AUTH_TOKEN=$(./scripts/basic-auth.sh)
+docker run --tty --rm --network host --volume $(pwd):/hawk \
+  --env API_KEY \
+  --env APP_ID \
+  stackhawk/hawkscan
+```

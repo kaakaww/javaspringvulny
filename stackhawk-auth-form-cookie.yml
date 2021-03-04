@@ -1,4 +1,7 @@
 app:
+  excludePaths:
+    - "/logout"
+  antiCsrfParam: "_csrf"
   authentication:
     loggedInIndicator: "\\QSign Out\\E"
     loggedOutIndicator: ".*Location:.*/login.*"
