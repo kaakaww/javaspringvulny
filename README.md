@@ -72,7 +72,7 @@ You can optionally include the following variables to customize the scan.
  * `APP_HOST`: The host to scan. Default: https://localhost:9000
  * `APP_ENV`: The application environment. Default: Development
 
-Unauthenticated scan:
+Baseline scan without authentication:
 ```shell
 docker run --tty --rm --network host --volume $(pwd):/hawk \
   --env API_KEY \
@@ -80,36 +80,36 @@ docker run --tty --rm --network host --volume $(pwd):/hawk \
   stackhawk/hawkscan
 ```
 
-Scan using web form authentication with a session cookie. [See the docs](https://docs.stackhawk.com/hawkscan/configuration/authenticated-scanning.html#example-usernamepassword-authentication--cookie-authorization) for more information about this type of authentication.
+Scan using web form authentication with a session cookie. [See the docs](https://docs.stackhawk.com/hawkscan/configuration/authenticated-scanning.html#example-usernamepassword-authentication--cookie-authorization) for more information.
 ```shell
 docker run --tty --rm --network host --volume $(pwd):/hawk \
   --env API_KEY \
   --env APP_ID \
-  stackhawk/hawkscan
+  stackhawk/hawkscan stackhawk.yml stackhawk-auth-form-cookie.yml
 ```
 
-Scan using an authorization token retrieved by POSTing credentials to an API endpoint. [See the docs](https://docs.stackhawk.com/hawkscan/configuration/authenticated-scanning.html#usernamepassword-authentication--bearer-token-authorization) for more information about this type of authentication.
+Scan using an authorization token retrieved by POSTing credentials to an API endpoint. [See the docs](https://docs.stackhawk.com/hawkscan/configuration/authenticated-scanning.html#usernamepassword-authentication--bearer-token-authorization) for more information.
 ```shell
 docker run --tty --rm --network host --volume $(pwd):/hawk \
   --env API_KEY \
   --env APP_ID \
-  stackhawk/hawkscan
+  stackhawk/hawkscan stackhawk.yml stackhawk-auth-json-token.yml
 ```
 
-Scan using an authorization token extracted by an external script. This method can be useful for third-party authentication systems. [See the docs](https://docs.stackhawk.com/hawkscan/configuration/authenticated-scanning.html#example-external-token-authentication--custom-token-authorization) for more information about this type of authentication.
+Scan using an authorization token extracted by an external script. This method can be useful for third-party authentication systems. [See the docs](https://docs.stackhawk.com/hawkscan/configuration/authenticated-scanning.html#example-external-token-authentication--custom-token-authorization) for more information.
+```shell
+docker run --tty --rm --network host --volume $(pwd):/hawk \
+  --env API_KEY \
+  --env APP_ID \
+  stackhawk/hawkscan stackhawk.yml stackhawk-auth-external-token.yml
+```
+
+Scan using basic authentication, using an external script to derive the correct authorization token. This legacy method is an insecure form of bearer token authentication. [See the docs](https://docs.stackhawk.com/hawkscan/configuration/authenticated-scanning.html#example-external-token-authentication--custom-token-authorization) for more information.
 ```shell
 export AUTH_TOKEN=$(./scripts/basic-auth.sh)
 docker run --tty --rm --network host --volume $(pwd):/hawk \
   --env API_KEY \
   --env APP_ID \
-  stackhawk/hawkscan
-```
-
-Scan using basic authentication, using an external script to derive the correct authorization token. This legacy method is an outdated form of bearer token authentication. [See the docs](https://docs.stackhawk.com/hawkscan/configuration/authenticated-scanning.html#example-external-token-authentication--custom-token-authorization) for more information about this type of authentication.
-```shell
-export AUTH_TOKEN=$(./scripts/basic-auth.sh)
-docker run --tty --rm --network host --volume $(pwd):/hawk \
-  --env API_KEY \
-  --env APP_ID \
-  stackhawk/hawkscan
+  --env AUTH_TOKEN \
+  stackhawk/hawkscan stackhawk.yml stackhawk-auth-basic.yml
 ```

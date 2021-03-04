@@ -1,0 +1,13 @@
+app:
+  authentication:
+    loggedInIndicator: "\\QSign Out\\E"
+    loggedOutIndicator: ".*Location:.*/login.*"
+    testPath:
+      path: /api/token/items/search/1
+      success: ".*200.*"
+    external:
+      type: TOKEN
+      value: "ITSASECRET"
+    tokenAuthorization:
+      type: HEADER
+      value: "SH_AUTH_TOKEN"
