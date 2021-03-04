@@ -1,0 +1,15 @@
+app:
+  authentication:
+    loggedInIndicator: "\\QSign Out\\E"
+    loggedOutIndicator: ".*Location:.*/login.*"
+    testPath:
+      path: /api/basic/items/search/1
+      success: ".*200.*"
+      requestMethod: GET
+    external:
+      type: TOKEN
+      value: ${AUTH_TOKEN}
+    tokenAuthorization:
+      type: HEADER
+      value: Authorization
+      tokenType: Basic
