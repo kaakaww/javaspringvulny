@@ -1,0 +1,15 @@
+app:
+  authentication:
+    external:
+      type: TOKEN
+      value: ${AUTH_TOKEN}
+    tokenAuthorization:
+      type: HEADER
+      value: Authorization
+      tokenType: Basic
+    testPath:
+      path: /api/basic/items/search/1
+      success: ".*200.*"
+      requestMethod: GET
+    loggedInIndicator: "Sign Out"
+    loggedOutIndicator: "wubba lubba dub dub"
