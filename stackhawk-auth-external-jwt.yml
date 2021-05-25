@@ -1,18 +1,19 @@
 app:
-  env: External Token
+  env: External JWT
   api: /openapi
   authentication:
     loggedInIndicator: "\\QSign Out\\E"
     loggedOutIndicator: ".*Location:.*/login.*"
     testPath:
-      path: /api/token/items/search/1
+      path: /api/jwt/items/search/
       success: ".*200.*"
     external:
       type: TOKEN
-      value: "ITSASECRET"
+      value: ${AUTH_TOKEN}
     tokenAuthorization:
       type: HEADER
-      value: "SH_AUTH_TOKEN"
+      value: Authorization
+      tokenType: Bearer
 
 hawk:
   spider:
