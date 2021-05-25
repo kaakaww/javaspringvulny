@@ -2,11 +2,6 @@ app:
   env: JSON Token
   api: /openapi
   authentication:
-    loggedInIndicator: "\\QSign Out\\E"
-    loggedOutIndicator: ".*Location:.*/login.*"
-    testPath:
-      path: /api/jwt/items/search/
-      success: ".*200.*"
     usernamePassword:
       type: JSON
       loginPath: /api/jwt/auth/signin
@@ -14,13 +9,18 @@ app:
       passwordField: password
       scanUsername: "user"
       scanPassword: "password"
+    tokenExtraction:
+      type: TOKEN_PATH
+      value: "token"
     tokenAuthorization:
       type: HEADER
       value: Authorization
       tokenType: Bearer
-    tokenExtraction:
-      type: TOKEN_PATH
-      value: "token"
+    testPath:
+      path: /api/jwt/items/search/
+      success: ".*200.*"
+    loggedInIndicator: "Sign Out"
+    loggedOutIndicator: "wubba lubba dub dub"
 
 hawk:
   spider:

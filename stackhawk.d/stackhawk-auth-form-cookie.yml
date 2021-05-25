@@ -4,11 +4,6 @@ app:
     - "/logout"
   antiCsrfParam: "_csrf"
   authentication:
-    loggedInIndicator: "\\QSign Out\\E"
-    loggedOutIndicator: ".*Location:.*/login.*"
-    testPath:
-      path: /search
-      success: ".*200.*"
     usernamePassword:
       type: FORM
       loginPath: /login
@@ -20,3 +15,8 @@ app:
     cookieAuthorization:
       cookieNames:
         - "JSESSIONID"
+    testPath:
+      path: /search
+      success: ".*200.*"
+    loggedInIndicator: "Sign Out"
+    loggedOutIndicator: "wubba lubba dub dub"

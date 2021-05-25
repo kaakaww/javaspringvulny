@@ -85,7 +85,7 @@ Scan using web form authentication with a session cookie. [See the docs](https:/
 docker run --tty --rm --network host --volume $(pwd):/hawk \
   --env API_KEY \
   --env APP_ID \
-  stackhawk/hawkscan stackhawk.yml stackhawk-auth-form-cookie.yml
+  stackhawk/hawkscan stackhawk.yml stackhawk.d/stackhawk-auth-form-cookie.yml
 ```
 
 Scan using an authorization token retrieved by POSTing credentials to an API endpoint. [See the docs](https://docs.stackhawk.com/hawkscan/configuration/authenticated-scanning.html#usernamepassword-authentication--bearer-token-authorization) for more information.
@@ -93,7 +93,7 @@ Scan using an authorization token retrieved by POSTing credentials to an API end
 docker run --tty --rm --network host --volume $(pwd):/hawk \
   --env API_KEY \
   --env APP_ID \
-  stackhawk/hawkscan stackhawk.yml stackhawk-auth-json-token.yml
+  stackhawk/hawkscan stackhawk.yml stackhawk.d/stackhawk-auth-json-token.yml
 ```
 
 Scan using an authorization token extracted by an external script. This method can be useful for third-party authentication systems. [See the docs](https://docs.stackhawk.com/hawkscan/configuration/authenticated-scanning.html#example-external-token-authentication--custom-token-authorization) for more information.
@@ -101,7 +101,7 @@ Scan using an authorization token extracted by an external script. This method c
 docker run --tty --rm --network host --volume $(pwd):/hawk \
   --env API_KEY \
   --env APP_ID \
-  stackhawk/hawkscan stackhawk.yml stackhawk-auth-external-token.yml
+  stackhawk/hawkscan stackhawk.yml stackhawk.d/stackhawk-auth-external-token.yml
 ```
 
 Scan using basic authentication, using an external script to derive the correct authorization token. This legacy method is an insecure form of bearer token authentication. [See the docs](https://docs.stackhawk.com/hawkscan/configuration/authenticated-scanning.html#example-external-token-authentication--custom-token-authorization) for more information.
@@ -111,5 +111,5 @@ docker run --tty --rm --network host --volume $(pwd):/hawk \
   --env API_KEY \
   --env APP_ID \
   --env AUTH_TOKEN \
-  stackhawk/hawkscan stackhawk.yml stackhawk-auth-basic.yml
+  stackhawk/hawkscan stackhawk.yml stackhawk.d/stackhawk-auth-basic.yml
 ```
