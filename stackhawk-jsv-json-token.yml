@@ -2,10 +2,11 @@ hawk:
   spider:
     maxDurationMinutes: 2
 app:
-  api: openapi.yaml
-  applicationId: test-app-id
+  applicationId: ${APP_ID:44d63acb-a50b-4ab5-baa3-9508bb12691f}
+  env: ${APP_ENV:dev}
+  openApiConf:
+    path: openapi
   env: dev
-  contactEmail: hawkdeploy@stackhawk.com
   host: ${APP_HOST:https://localhost:9000}
   authentication:
     loggedInIndicator: "\\QSign Out\\E"
