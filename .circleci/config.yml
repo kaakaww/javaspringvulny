@@ -15,6 +15,7 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker
+      - docker/check
       - run: docker build -t $IMAGE_NAME .
       - snyk/scan:
           docker-image-name: '$IMAGE_NAME:latest'
@@ -24,6 +25,12 @@ jobs:
           severity-threshold: high
           target-file: Dockerfile
           token-variable: SNYK_TOKEN
+      - run: docker push $IMAGE_NAME:latest 
+          
+workflows:
+  all-the-things:
+    jobs:
+      - build-scan
       - stackhawk/hawkscan-local:
           configuration-files: ./stackhawk.yml ./stackhawk-circleci.yml
           docker-network: scan_net
@@ -34,9 +41,4 @@ jobs:
                 command: docker network create scan_net
             - run:
                 name: Run Vulny
-                command: docker run --detach --network scan_net --name hawkdog --rm $IMAGE_NAME:latest
-          
-workflows:
-  all-the-things:
-    jobs:
-      - build-scan
+                command: docker run --detach --network scan_net --name hawkdog --rm tomgonzo/hawkdog:latest
