@@ -2,10 +2,11 @@ version: 2.1
 orbs:
   docker: circleci/docker@1.7.0
   snyk: snyk/snyk@1.1.1
+  stackhawk: stackhawk/stackhawk@1.0.1
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
 jobs:
-  docker-build:
+  build-scan:
     docker:
       # replace with your preferred image
       - image: cimg/base:stable
@@ -23,7 +24,19 @@ jobs:
           severity-threshold: high
           target-file: Dockerfile
           token-variable: SNYK_TOKEN
+      - stackhawk/hawkscan-local:
+          configuration-files: ./stackhawk.yml ./stackhawk-circleci.yml
+          docker-network: scan_net
+          app-id: 2c8f6807-844b-4998-8a35-1003af16d218
+          steps:
+            - run:
+                name: Create scan_net Network
+                command: docker network create scan_net
+            - run:
+                name: Run Vulny
+                command: docker run --detach --network scan_net --name hawkdog --rm $IMAGE_NAME:latest
+          
 workflows:
-  build-and-scan:
+  all-the-things:
     jobs:
-      - docker-build
+      - build-scan
