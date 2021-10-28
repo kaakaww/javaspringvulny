@@ -34,10 +34,10 @@ workflows:
       - stackhawk/hawkscan-local:
           requires:
             - build-scan
-          configuration-files: ./stackhawk.yml ./stackhawk-circleci.yml
           docker-network: scan_net
           app-id: 2c8f6807-844b-4998-8a35-1003af16d218
           steps:
+            - checkout
             - run:
                 name: Create scan_net Network
                 command: docker network create scan_net
