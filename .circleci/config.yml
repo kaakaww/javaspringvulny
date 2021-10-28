@@ -43,4 +43,4 @@ workflows:
                 command: docker network create scan_net
             - run:
                 name: Run Vulny
-                command: docker run --detach --network scan_net --name hawkdog --rm tomgonzo/hawkdog:latest
+                command: docker run --detach -p 9000:9000 --network scan_net --name hawkdog --rm tomgonzo/hawkdog:latest
