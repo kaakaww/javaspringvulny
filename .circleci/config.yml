@@ -1,0 +1,43 @@
+version: 2.1
+orbs:
+  docker: circleci/docker@1.7.0
+  snyk: snyk/snyk@1.1.1
+  stackhawk: stackhawk/stackhawk@1.0.3
+# Define a job to be invoked later in a workflow.
+# See: https://circleci.com/docs/2.0/configuration-reference/#jobs
+jobs:
+  build-scan:
+    docker:
+      # replace with your preferred image
+      - image: cimg/base:stable
+    environment:
+      IMAGE_NAME: tomgonzo/hawkdog
+    steps:
+      - checkout
+      - setup_remote_docker
+      - docker/check
+      - run: docker build -t $IMAGE_NAME .
+      - snyk/scan:
+          docker-image-name: '$IMAGE_NAME:latest'
+          fail-on-issues: false
+          monitor-on-build: true
+          project: '${CIRCLE_PROJECT_REPONAME}/${CIRCLE_BRANCH}-container'
+          severity-threshold: high
+          target-file: Dockerfile
+          token-variable: SNYK_TOKEN
+      - run: docker push $IMAGE_NAME:latest 
+          
+workflows:
+  all-the-things:
+    jobs:
+      - build-scan
+      - stackhawk/hawkscan-local:
+          requires:
+            - build-scan
+          docker-network: host
+          app-id: 2c8f6807-844b-4998-8a35-1003af16d218
+          steps:
+            - checkout
+            - run:
+                name: Run Vulny
+                command: docker-compose up -d
