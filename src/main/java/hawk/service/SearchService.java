@@ -6,7 +6,6 @@ import org.hibernate.Session;
 import org.hibernate.jdbc.ReturningWork;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-
 import javax.persistence.EntityManager;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -28,7 +27,7 @@ public class SearchService {
         LOGGER.setLevel(Level.FINE);
 
         final Session session = (Session) entityManager.unwrap(Session.class);
-        List items = session.doReturningWork(new ReturningWork<List<Item>>() {
+        return session.doReturningWork(new ReturningWork<List<Item>>() {
             @Override
             public List<Item> execute(Connection connection) throws SQLException {
                 List<Item> items = new ArrayList<>();
@@ -46,7 +45,6 @@ public class SearchService {
                 return items;
             }
         });
-        return items;
     }
 
 
