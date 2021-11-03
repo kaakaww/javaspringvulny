@@ -1,4 +1,4 @@
-FROM openjdk:11.0.4-jdk
+FROM openjdk:11.0.10-jdk-slim
 
 RUN mkdir /javavulny /app
 COPY . /javavulny/
@@ -11,7 +11,6 @@ RUN cd /javavulny \
 && rm -Rf /javavulny /root/.gradle/
 
 WORKDIR /app
-COPY ./db ./db
 
 ENV PWD=/app
 CMD ["java", "-Djava.security.egd=file:/dev/./urandom", "-jar", "/app/java-spring-vuly-0.1.0.jar"]
