@@ -1,0 +1,22 @@
+app:
+  env: Form Cookie
+  excludePaths:
+    - "/logout"
+  antiCsrfParam: "_csrf"
+  authentication:
+    usernamePassword:
+      type: FORM
+      loginPath: /login
+      loginPagePath: /login
+      usernameField: username
+      passwordField: password
+      scanUsername: "user"
+      scanPassword: "password"
+    cookieAuthorization:
+      cookieNames:
+        - "JSESSIONID"
+    testPath:
+      path: /search
+      success: ".*200.*"
+    loggedInIndicator: "Sign Out"
+    loggedOutIndicator: "wubba lubba dub dub"

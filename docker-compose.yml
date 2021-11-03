@@ -1,21 +1,8 @@
-version: "3.2"
+version: "3.7"
 services:
-  db:
-    image: postgres
-    ports:
-      - "5432:5432"
-    environment:
-      - POSTGRES_DB=postgresql
-      - POSTGRES_USER=postgresql
-      - POSTGRES_PASSWORD=postgresql
-
   javavulny:
     build: .
     image: stackhawk/javavulny:latest
     container_name: javavulny
     ports:
       - "9000:9000"
-    links:
-      - db
-    depends_on:
-      - db

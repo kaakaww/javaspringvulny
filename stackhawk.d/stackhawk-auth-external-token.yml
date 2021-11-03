@@ -1,0 +1,19 @@
+app:
+  env: External Token
+  api: /openapi
+  authentication:
+    external:
+      type: TOKEN
+      value: "ITSASECRET"
+    tokenAuthorization:
+      type: HEADER
+      value: "SH_AUTH_TOKEN"
+    testPath:
+      path: /api/token/items/search/1
+      success: ".*200.*"
+    loggedInIndicator: "Sign Out"
+    loggedOutIndicator: "wubba lubba dub dub"
+
+hawk:
+  spider:
+    base: false
