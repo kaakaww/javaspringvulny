@@ -22,7 +22,8 @@
     </div>
 
     <div class="container">
-        <span th:text="${search.searchText}"></span>
+        <!--/* In Thymeleaf utext is unescaped text, and text is escaped text */-->
+        <span th:utext="${search.searchText}"></span>
     </div>
 
     <div th:if="${items}" class="card mt-3">

@@ -29,12 +29,22 @@ public class SearchService {
             @Override
             public List<Item> execute(Connection connection) throws SQLException {
                 List<Item> items = new ArrayList<>();
+                // The wrong way
+                String query = "select id, name, description from ITEM where description like '%" +
+                        search.getSearchText() + "%'";
+
+                LOGGER.log(Level.INFO, "SQL Query " + query);
+                ResultSet rs = connection
+                        .createStatement()
+                        .executeQuery(query);
+
+                /* The righter way, should probably use built in Data Model for this, but this is safe
                 String query = "select id, name, description from ITEM where description like ?";
                 PreparedStatement statement = connection.prepareStatement(query);
                 statement.setString(1, "%" + search.getSearchText() + "%");
-
                 LOGGER.log(Level.INFO, "SQL Query " + statement);
                 ResultSet rs = statement.executeQuery();
+                */
                 while (rs.next()) {
                     items.add(new Item(rs.getLong("id"), rs.getString("name"), rs.getString("description")));
                 }
