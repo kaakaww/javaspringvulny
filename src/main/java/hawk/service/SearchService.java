@@ -2,6 +2,7 @@ package hawk.service;
 
 import hawk.entity.Item;
 import hawk.form.Search;
+import lombok.val;
 import org.hibernate.Session;
 import org.hibernate.jdbc.ReturningWork;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +16,9 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
 public class SearchService {
+
+    private static final Logger LOGGER = Logger.getLogger(SearchService.class.getName());
 
     @Autowired
     EntityManager entityManager;
