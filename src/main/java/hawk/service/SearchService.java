@@ -2,7 +2,6 @@ package hawk.service;
 
 import hawk.entity.Item;
 import hawk.form.Search;
-import lombok.val;
 import org.hibernate.Session;
 import org.hibernate.jdbc.ReturningWork;
 import org.springframework.beans.factory.annotation.Autowired;
