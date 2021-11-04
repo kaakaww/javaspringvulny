@@ -18,6 +18,8 @@ import java.util.logging.Logger;
 
 public class SearchService {
 
+    private static final Logger LOGGER = Logger.getLogger(SearchService.class.getName());
+
     @Autowired
     EntityManager entityManager;
 
