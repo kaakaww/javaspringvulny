@@ -1,4 +1,4 @@
-package hawk.controller;
+package hawk.api.jwt;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -12,12 +12,12 @@ import java.util.Enumeration;
 import java.util.Map;
 
 @Controller
-public class Log4jController {
+public class JwtLog4jController {
 
     private static final Logger logger = LogManager.getLogger();
 
-    @PostMapping("/log4j")
-    public ResponseEntity searchForm(HttpServletRequest request,
+    @PostMapping("/api/jwt/log4j")
+    public ResponseEntity logRequest(HttpServletRequest request,
                                      @RequestBody Map<String, String> body) {
         Enumeration<String> headers = request.getHeaderNames();
         logger.info("We are in the log4j request");
