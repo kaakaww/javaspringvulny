@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Enumeration;
-import java.util.Map;
 
 @Controller
 public class JwtLog4jController {
