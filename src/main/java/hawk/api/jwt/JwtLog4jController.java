@@ -18,7 +18,7 @@ public class JwtLog4jController {
 
     @PostMapping("/api/jwt/log4j")
     public ResponseEntity logRequest(HttpServletRequest request,
-                                     @RequestBody Map<String, String> body) {
+                                     @RequestBody String body) {
         Enumeration<String> headers = request.getHeaderNames();
         logger.info("We are in the log4j request");
         while (headers.hasMoreElements()) {
