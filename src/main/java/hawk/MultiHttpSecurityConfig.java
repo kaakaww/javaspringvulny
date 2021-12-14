@@ -51,7 +51,7 @@ public class MultiHttpSecurityConfig {
                         .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                     .and()
                         .authorizeRequests()
-                        .antMatchers("/api/jwt/auth/signin").permitAll()
+                        .antMatchers("/api/jwt/auth/signin", "/log4j").permitAll()
                         .anyRequest().authenticated()
                     .and()
                         .apply(new JwtConfigurer(jwtTokenProvider));
@@ -97,6 +97,8 @@ public class MultiHttpSecurityConfig {
                             filter.getClass()
                         )
                     .authorizeRequests()
+                        .antMatchers("/log4j")
+                        .permitAll()
                         .anyRequest()
                         .authenticated();
         }
@@ -112,7 +114,7 @@ public class MultiHttpSecurityConfig {
                     .csrf().disable()
                     .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
-                    .authorizeRequests().anyRequest().authenticated()
+                    .authorizeRequests().antMatchers("/log4j").permitAll().anyRequest().authenticated()
                 .and()
                     .httpBasic();
         }
@@ -133,7 +135,8 @@ public class MultiHttpSecurityConfig {
                                 "/openapi/**",
                                 "/openapi.yaml",
                                 "/swagger-ui/**",
-                                "/swagger-ui.html"
+                                "/swagger-ui.html",
+                                "/log4j"
                         ).permitAll()
                         .anyRequest().authenticated()
                     .and()
