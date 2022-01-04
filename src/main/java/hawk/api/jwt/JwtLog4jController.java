@@ -13,13 +13,12 @@ import java.util.Enumeration;
 @Controller
 public class JwtLog4jController {
 
-    private static final Logger logger = LogManager.getLogger();
+    private static final Logger logger = LogManager.getLogger(JwtLog4jController.class);
 
     @PostMapping("/api/jwt/log4j")
     public ResponseEntity logRequest(HttpServletRequest request,
                                      @RequestBody String body) {
         Enumeration<String> headers = request.getHeaderNames();
-        logger.info("We are in the log4j request");
         while (headers.hasMoreElements()) {
             String it = headers.nextElement();
             logger.info("{} = {}", it, request.getHeader(it));
