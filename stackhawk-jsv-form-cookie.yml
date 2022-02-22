@@ -2,10 +2,10 @@ hawk:
   spider:
     maxDurationMinutes: 2
 app:
-  api: openapi.json
-  applicationId: test-app-id
+  env: ${APP_ENV:dev}
+  openApiConf:
+    path: openapi.json
   env: dev
-  contactEmail: hawkdeploy@stackhawk.com
   host: ${APP_HOST:https://localhost:9000}
   excludePaths:
     - "/logout"
