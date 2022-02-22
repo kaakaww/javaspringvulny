@@ -1,8 +1,22 @@
 version: "3.7"
 services:
+  javavulny-pg:
+    image: postgres
+    container_name: javavulny-pg
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=postgresql
+      - POSTGRES_USER=postgresql
+      - POSTGRES_PASSWORD=postgresql
+
   javavulny:
     build: .
-    image: stackhawk/javavulny:latest
+    image: 890775141873.dkr.ecr.us-west-2.amazonaws.com/stackhawk/javavulny:latest
     container_name: javavulny
     ports:
       - "9000:9000"
+    links:
+      - javavulny-pg
+    depends_on:
+      - javavulny-pg
