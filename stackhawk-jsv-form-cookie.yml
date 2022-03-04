@@ -5,7 +5,7 @@ app:
   applicationId: ${APP_ID:ae764fec-e001-4f4a-b4b4-85aaf8f0605c}
   env: ${APP_ENV:dev}
   openApiConf:
-    path: /openapi.json
+    path: /openapi.yaml
   # env: dev
   host: ${APP_HOST:https://localhost:9000}
   excludePaths:
