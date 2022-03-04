@@ -1,7 +1,7 @@
 app:
   applicationId: ${APP_ID:ae764fec-e001-4f4a-b4b4-85aaf8f0605c}
   env: ${APP_ENV:dev}
-  host: ${APP_HOST:https://public-firing-range.appspot.com/}
+  host: ${APP_HOST:https://localhost:9000}
   excludePaths:
     - "/logout"
   antiCsrfParam: "_csrf"
