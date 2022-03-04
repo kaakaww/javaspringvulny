@@ -12,4 +12,6 @@ jobs:
       - uses: stackhawk/hawkscan-action@v1.3.0
         with:
           apiKey: ${{ secrets.HAWK_API_KEY }}
+          environmentVariables: APP_ID="ae764fec-e001-4f4a-b4b4-85aaf8f0605c"
+          configurationFiles: stackhawk.yml stackhawk-jsv-form-cookie.yml
           network: mynetwork
