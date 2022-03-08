@@ -114,7 +114,7 @@ paths:
               schema:
                 type: string
   /api/jwt/log4j:
-    post:
+    get:
       tags:
         - jwt-auth-controller
       operationId: log4j,
