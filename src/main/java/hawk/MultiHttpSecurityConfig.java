@@ -147,6 +147,17 @@ public class MultiHttpSecurityConfig {
         }
     }
 
+       /* @Configuration
+    @Order(1)
+    public static class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+        @Override
+        protected void configure(HttpSecurity http) throws Exception {
+            http
+                .headers()
+                    .contentSecurityPolicy("script-src 'self' https://evildooer.com");
+        }
+    }*/
+
     @Bean
     public UserDetailsService userDetailsService() {
         UserDetails user =
