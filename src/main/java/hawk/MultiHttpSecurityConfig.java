@@ -133,7 +133,8 @@ public class MultiHttpSecurityConfig {
                                 "/openapi/**",
                                 "/openapi.yaml",
                                 "/swagger-ui/**",
-                                "/swagger-ui.html"
+                                "/swagger-ui.html",
+                                "/log4j"
                         ).permitAll()
                         .anyRequest().authenticated()
                     .and()

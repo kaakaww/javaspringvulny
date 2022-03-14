@@ -113,7 +113,7 @@ paths:
             '*/*':
               schema:
                 type: string
-  /api/jwt/log4j:
+  /log4j:
     get:
       tags:
         - jwt-auth-controller

@@ -4,8 +4,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Enumeration;
@@ -15,16 +14,15 @@ public class JwtLog4jController {
 
     private static final Logger logger = LogManager.getLogger(JwtLog4jController.class);
 
-    @PostMapping("/api/jwt/log4j")
-    public ResponseEntity logRequest(HttpServletRequest request,
-                                     @RequestBody String body) {
+    @GetMapping("/log4j")
+    public ResponseEntity logRequest(HttpServletRequest request) {
         Enumeration<String> headers = request.getHeaderNames();
         while (headers.hasMoreElements()) {
             String it = headers.nextElement();
             logger.info("{} = {}", it, request.getHeader(it));
         }
-        logger.info("{}", body);
-        return ResponseEntity.ok(body);
+        logger.info("{}");
+        return ResponseEntity.ok().build();
     }
 
 }
