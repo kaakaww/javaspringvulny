@@ -28,16 +28,4 @@ public class JwtLog4jController {
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping("/log4j/{text}")
-    public ResponseEntity logRequestPath(@PathVariable String text, HttpServletRequest request) {
-        Enumeration<String> headers = request.getHeaderNames();
-        while (headers.hasMoreElements()) {
-            String it = headers.nextElement();
-            logger.info("{} = {}", it, request.getHeader(it));
-        }
-        logger.info("Hitting Log4J route");
-        logger.info(text);
-        return ResponseEntity.ok().build();
-    }
-
 }
