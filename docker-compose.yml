@@ -1,4 +1,4 @@
-version: "3.9"
+version: "3.2"
 services:
   db:
     image: postgres
@@ -8,8 +8,6 @@ services:
       - POSTGRES_DB=postgresql
       - POSTGRES_USER=postgresql
       - POSTGRES_PASSWORD=postgresql
-    networks:
-      mynetwork:
 
   javavulny:
     build: .
@@ -21,9 +19,3 @@ services:
       - db
     depends_on:
       - db
-    networks:
-      mynetwork:
-
-networks:
-  mynetwork:
-    name: mynetwork
