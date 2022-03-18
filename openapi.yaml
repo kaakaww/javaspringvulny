@@ -113,6 +113,23 @@ paths:
             '*/*':
               schema:
                 type: string
+  /log4j:
+    get:
+      tags:
+        - jwt-auth-controller
+      operationId: log4j,
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              type: string
+      responses:
+        200:
+          description: default response,
+          content:
+            '*/*':
+              schema:
+                type: string
 components:
   schemas:
     AuthenticationRequest:
