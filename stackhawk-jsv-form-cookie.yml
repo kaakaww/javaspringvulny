@@ -4,8 +4,7 @@ hawk:
 app:
   env: ${APP_ENV:dev}
   openApiConf:
-    path: openapi.json
-  env: dev
+    path: /openapi.json
   host: ${APP_HOST:https://localhost:9000}
   excludePaths:
     - "/logout"
