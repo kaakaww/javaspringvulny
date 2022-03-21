@@ -8,10 +8,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Create vulny app directory
-        run: mkdir common/build/integrationTests/github-actions/apps
       - name: Create javaspringvulny app directory
-        run: mkdir common/build/integrationTests/github-actions/apps/javaspringvulny
+        run: mkdir -p common/build/integrationTests/github-actions/apps/javaspringvulny
       - name: Navigate to javaspringvulny app directory
         run: cd common/build/integrationTests/github-actions/apps/javaspringvulny
       - name: Checkout vulny repo
