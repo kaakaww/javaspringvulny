@@ -9,18 +9,18 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Create ${{ github.event.client_payload.repoName }} app directory
-        run: mkdir -p common/build/integrationTests/github-actions/apps/javaspringvulny
-      - name: Navigate to javaspringvulny app directory
-        run: cd common/build/integrationTests/github-actions/apps/javaspringvulny
+        run: mkdir -p common/build/integrationTests/github-actions/apps/${{ github.event.client_payload.repoName }}
+      - name: Navigate to ${{ github.event.client_payload.repoName }} app directory
+        run: cd common/build/integrationTests/github-actions/apps/${{ github.event.client_payload.repoName }}
       - name: Checkout vulny repo
-        run: git clone https://github.com/kaakaww/javaspringvulny.git
-      - name: Run javaspringvulny
+        run: git clone https://github.com/${{ github.event.client_payload.repoOrg }}/${{ github.event.client_payload.repoName }}.git
+      - name: Run ${{ github.event.client_payload.repoName }}
         run: docker-compose up -d
       - uses: stackhawk/hawkscan-action@main
         with:
           apiKey: ${{ secrets.HAWK_API_KEY }}
-          configurationFiles: stackhawk.yml
+          configurationFiles: ${{ github.event.client_payload.configurationFiles }}
           sourceURL: ${{ secrets.HAWK_CLI_SOURCE_URL }}
           version: ${{ github.event.client_payload.hawkscanVersion }}
         env:
-          APP_ID: ae764fec-e001-4f4a-b4b4-85aaf8f0605c
+          APP_ID: ${{ github.event.client_payload.appId }}
