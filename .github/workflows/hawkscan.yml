@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Create javaspringvulny app directory
+      - name: Create ${{ github.event.client_payload.repoName }} app directory
         run: mkdir -p common/build/integrationTests/github-actions/apps/javaspringvulny
       - name: Navigate to javaspringvulny app directory
         run: cd common/build/integrationTests/github-actions/apps/javaspringvulny
