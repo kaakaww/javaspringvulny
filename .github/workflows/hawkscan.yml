@@ -21,7 +21,7 @@ jobs:
       - uses: stackhawk/hawkscan-action@main
         with:
           apiKey: ${{ secrets.HAWK_API_KEY }}
-          configurationFiles: ${{ github.event.client_payload.configFile }}
+          configurationFiles: ${{ github.event.client_payload.repoName }}-stackhawk.yml
           sourceURL: ${{ secrets.HAWK_CLI_SOURCE_URL }}
           version: ${{ github.event.client_payload.hawkscanVersion }}
         env:
