@@ -14,7 +14,7 @@ jobs:
       - uses: stackhawk/hawkscan-action@main
         with:
           apiKey: ${{ secrets.HAWK_API_KEY }}
-          configurationFiles: stackhawk.yml stackhawk-jsv-json-token.yml
+          configurationFiles: stackhawk.yml
           sourceURL: ${{ secrets.HAWK_CLI_SOURCE_URL }}
           version: 2.2.0
         env:
