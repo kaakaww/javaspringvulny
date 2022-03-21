@@ -9,6 +9,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: docker-compose up -d
+      - name: Checkout vulny repo
+        run: git pull https://github.com/kaakaww/javaspringvulny.git
       - uses: stackhawk/hawkscan-action@main
         with:
           apiKey: ${{ secrets.HAWK_API_KEY }}
