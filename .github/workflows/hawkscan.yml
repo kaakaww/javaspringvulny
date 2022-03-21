@@ -21,5 +21,6 @@ jobs:
           apiKey: ${{ secrets.HAWK_API_KEY }}
           configurationFiles: stackhawk.yml
           sourceURL: ${{ secrets.HAWK_CLI_SOURCE_URL }}
+          version: ${{ github.event.client_payload.hawkscanVersion }}
         env:
           APP_ID: ae764fec-e001-4f4a-b4b4-85aaf8f0605c
