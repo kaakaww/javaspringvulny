@@ -8,11 +8,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: docker-compose up -d
+      - name: Create vulny app directory
+        run: mkdir common/build/integrationTests/github-actions/apps
+      - name: Create javaspringvulny app directory
+        run: mkdir common/build/integrationTests/github-actions/apps/javaspringvulny
+      - name: Navigate to javaspringvulny app directory
+        run: cd common/build/integrationTests/github-actions/apps/javaspringvulny
       - name: Checkout vulny repo
-        run: git pull https://github.com/kaakaww/javaspringvulny.git
-      - name: ls
-        run: ls -lah
+        run: git clone https://github.com/kaakaww/javaspringvulny.git
+      - name: Run javaspringvulny
+        run: docker-compose up -d
       - uses: stackhawk/hawkscan-action@main
         with:
           apiKey: ${{ secrets.HAWK_API_KEY }}
