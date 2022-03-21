@@ -14,14 +14,15 @@ jobs:
         run: cd common/build/integrationTests/github-actions/apps/${{ github.event.client_payload.repoName }}
       - name: Checkout vulny repo
         run: git clone https://github.com/${{ github.event.client_payload.repoOrg }}/${{ github.event.client_payload.repoName }}.git
-      - name: Create stackhawk config for ${{ github.event.client_payload.repoName }}
-        run: echo ${{ github.event.client_payload.configFile }} > ${{ github.event.client_payload.repoName }}-stackhawk.yml
+      # - name: Create stackhawk config for ${{ github.event.client_payload.repoName }}
+      #   run: echo ${{ github.event.client_payload.configFile }} > ${{ github.event.client_payload.repoName }}-stackhawk.yml
       - name: Run ${{ github.event.client_payload.repoName }}
         run: docker-compose up -d
       - uses: stackhawk/hawkscan-action@main
         with:
           apiKey: ${{ secrets.HAWK_API_KEY }}
-          configurationFiles: ${{ github.event.client_payload.repoName }}-stackhawk.yml
+          # configurationFiles: ${{ github.event.client_payload.repoName }}-stackhawk.yml
+          configurationFiles: ${{ github.event.client_payload.configFileName }}
           sourceURL: ${{ secrets.HAWK_CLI_SOURCE_URL }}
           version: ${{ github.event.client_payload.hawkscanVersion }}
         env:
