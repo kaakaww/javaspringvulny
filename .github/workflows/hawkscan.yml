@@ -16,8 +16,8 @@ jobs:
         run: git clone https://github.com/${{ github.event.client_payload.repoOrg }}/${{ github.event.client_payload.repoName }}.git
       - name: Run ${{ github.event.client_payload.repoName }}
         run: docker-compose up -d
-      - name: Navigate to repo root directory
-        run: cd /runner/work/${{ github.event.client_payload.repoName }}/${{ github.event.client_payload.repoName }}
+      # - name: Navigate to repo root directory
+      #  run: cd /runner/work/${{ github.event.client_payload.repoName }}/${{ github.event.client_payload.repoName }}
       - uses: stackhawk/hawkscan-action@main
         with:
           apiKey: ${{ secrets.HAWK_API_KEY }}
@@ -26,4 +26,5 @@ jobs:
           version: ${{ github.event.client_payload.hawkscanVersion }}
           verbose: ${{ github.event.client_payload.verbose }}
         env:
-          APPLICATION_ID: ${{ github.event.client_payload.appId }}
+          # APPLICATION_ID: ${{ github.event.client_payload.appId }}
+          APP_ID: ${{ github.event.client_payload.appId }}
