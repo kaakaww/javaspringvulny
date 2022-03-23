@@ -17,7 +17,7 @@ jobs:
       - name: Run ${{ github.event.client_payload.repoName }}
         run: docker-compose up -d
       - name: Navigate to repo root directory
-        run: cd /runner/work/${{ github.event.client_payload.repoName }}/${{ github.event.client_payload.repoName }}
+        run: cd /home/runner/work/${{ github.event.client_payload.repoName }}/${{ github.event.client_payload.repoName }}
       - uses: stackhawk/hawkscan-action@main
         with:
           apiKey: ${{ secrets.HAWK_API_KEY }}
