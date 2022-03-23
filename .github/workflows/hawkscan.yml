@@ -18,7 +18,9 @@ jobs:
         run: docker-compose up -d
       - name: Navigate to repo root directory
         run: cd /home/runner/work/${{ github.event.client_payload.repoName }}/${{ github.event.client_payload.repoName }}
-      - uses: stackhawk/hawkscan-action@main
+      - name: Run HawkScan
+        id: run-hawkscan
+        uses: stackhawk/hawkscan-action@main
         with:
           apiKey: ${{ secrets.HAWK_API_KEY }}
           configurationFiles: ${{ github.event.client_payload.configFile }}
@@ -28,3 +30,5 @@ jobs:
         env:
           # APPLICATION_ID: ${{ github.event.client_payload.appId }}
           APP_ID: ${{ github.event.client_payload.appId }}
+      - if: steps.run-hawkscan.exitcode > 0
+        run: exit 1
