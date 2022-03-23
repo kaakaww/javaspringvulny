@@ -9,13 +9,15 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Create ${{ github.event.client_payload.repoName }} app directory
-        run: mkdir -p common/build/integrationTests/github-actions/apps/${{ github.event.client_payload.repoName }}
+        run: mkdir -p common/build/integrationTests/hawkscan-action/apps/${{ github.event.client_payload.repoName }}
       - name: Navigate to ${{ github.event.client_payload.repoName }} app directory
-        run: cd common/build/integrationTests/github-actions/apps/${{ github.event.client_payload.repoName }}
+        run: cd common/build/integrationTests/hawkscan-action/apps/${{ github.event.client_payload.repoName }}
       - name: Checkout vulny repo
         run: git clone https://github.com/${{ github.event.client_payload.repoOrg }}/${{ github.event.client_payload.repoName }}.git
       - name: Run ${{ github.event.client_payload.repoName }}
         run: docker-compose up -d
+      - name: Navigate to repo root directory
+        run: cd /runner/work/${{ github.event.client_payload.repoName }}/${{ github.event.client_payload.repoName }}
       - uses: stackhawk/hawkscan-action@main
         with:
           apiKey: ${{ secrets.HAWK_API_KEY }}
