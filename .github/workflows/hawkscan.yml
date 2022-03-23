@@ -22,6 +22,6 @@ jobs:
           configurationFiles: ${{ github.event.client_payload.configFile }}
           sourceURL: ${{ secrets.HAWK_CLI_SOURCE_URL }}
           version: ${{ github.event.client_payload.hawkscanVersion }}
-          verbose: true
+          verbose: ${{ github.event.client_payload.verbose }}
         env:
           APP_ID: ${{ github.event.client_payload.appId }}
