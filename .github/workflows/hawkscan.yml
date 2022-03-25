@@ -24,7 +24,7 @@ jobs:
         with:
           apiKey: ${{ secrets.HAWK_API_KEY }}
           configurationFiles: ${{ github.event.client_payload.configFile }}
-          sourceURL: ${{ secrets.HAWK_CLI_SOURCE_URL }}
+          sourceURL: ${{ github.event.client_payload.hawkscanSourceUrl }}
           version: ${{ github.event.client_payload.hawkscanVersion }}
           verbose: ${{ github.event.client_payload.verbose }}
         env:
