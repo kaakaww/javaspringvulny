@@ -30,5 +30,3 @@ jobs:
         env:
           # APPLICATION_ID: ${{ github.event.client_payload.appId }}
           APP_ID: ${{ github.event.client_payload.appId }}
-      - if: steps.run-hawkscan.exitcode > 0
-        run: exit 1
