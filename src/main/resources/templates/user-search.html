@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title th:text="${title}"></title>
+    <th:block th:replace="general.html :: head"/>
+</head>
+
+<body>
+<div class="container">
+    <div th:insert="general.html :: header" class="header"></div>
+    <div class="card mt-3 clearfix">
+        <div class="card-body">
+            <form th:action="@{/admin/search}" th:object="${search}" method="post" class="float-left">
+                <div class="form-group">
+                    <label for="search">Find Users</label>
+                    <input th:field="*{searchText}" type="text" class="form-control" id="search" name="search">
+                </div>
+                <button type="submit" class="btn btn-primary">Search</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="container">
+        <!--/* In Thymeleaf utext is unescaped text, and text is escaped text */-->
+        <span th:utext="${search.searchText}"></span>
+    </div>
+
+    <div th:if="${users}" class="card mt-3">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Name</th>
+                <th scope="col">Description</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="user: ${users}">
+                <th scope="row" th:text="${user.id}"></th>
+                <td th:text="${user.name}"></td>
+                <td th:text="${user.description}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<th:block th:replace="general.html :: scripts"/>
+</body>
+</html>
+

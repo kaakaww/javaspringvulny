@@ -4,15 +4,15 @@ import java.util.Arrays;
 import java.util.stream.Stream;
 
 import hawk.entity.Item;
+import hawk.entity.User;
 import hawk.repos.ItemRepo;
-import hawk.repos.ItemsRepo;
+import hawk.repos.UserRepo;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
 public class Application {
@@ -25,7 +25,7 @@ public class Application {
     private String dbUrl;
 
     @Bean
-    public CommandLineRunner commandLineRunner(ApplicationContext ctx, ItemRepo repo) {
+    public CommandLineRunner commandLineRunner(ApplicationContext ctx, ItemRepo repo, UserRepo userRepo) {
 
 
         return args -> {
@@ -53,6 +53,20 @@ public class Application {
 
                 System.out.println(String.format("Items in DB %d", repo.count()));
                 repo.findAll().forEach(item -> System.out.println(String.format("item: %s", item.getName())));
+            }
+
+            System.out.println(String.format("Users in DB %d", userRepo.count()));
+
+            if (userRepo.count() == 0) {
+                userRepo.findAll().forEach(item -> System.out.println(String.format("item: %s", item.getName())));
+
+                Stream.of(1, 2, 3).forEach(i -> {
+                    System.out.println(String.format("Adding item%d", i));
+                    userRepo.save(new User(String.format("user%d", i), String.format("we have the best users, users%d", i)));
+                });
+
+                System.out.println(String.format("Items in DB %d", userRepo.count()));
+                userRepo.findAll().forEach(item -> System.out.println(String.format("item: %s", item.getName())));
             }
 
         };

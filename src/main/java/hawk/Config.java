@@ -1,6 +1,7 @@
 package hawk;
 
 import hawk.service.SearchService;
+import hawk.service.UserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
@@ -14,5 +15,7 @@ public class Config implements WebMvcConfigurer {
     public SearchService searchService(){
         return new SearchService();
     }
+    @Bean
+    public UserService userService() { return new UserService(); }
 
 }

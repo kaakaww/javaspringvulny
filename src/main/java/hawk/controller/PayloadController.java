@@ -27,7 +27,7 @@ public class PayloadController {
     @Value("${payload.count:10}")
     private int payloadCount = 20;
 
-    @GetMapping("/payload/{size}")
+    @GetMapping(value={"/payload/{size}","/admin/payload/{size}"})
     public String getPayload(Model model,
                              @PathVariable("size") Integer size) {
 
@@ -42,7 +42,7 @@ public class PayloadController {
         return "payload-view";
     }
 
-    @GetMapping("/payloads")
+    @GetMapping(value={"/payloads", "/admin/payloads"})
     public String getPayloadsList(Model model){
         Integer[] payloadSizes = new Integer[payloadCount];
 
@@ -54,7 +54,7 @@ public class PayloadController {
         return "payloads";
     }
 
-    @GetMapping("/payload/stream/{size}")
+    @GetMapping(value={"/payload/stream/{size}", "/admin/payload/stream/{size}"})
     public StreamingResponseBody getPayloadStream(@PathVariable("size") Integer size) {
         String tmpData = "mobile: 555-678-5343 ";
 

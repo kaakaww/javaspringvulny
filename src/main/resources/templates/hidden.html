@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title th:text="${title}"></title>
+    <th:block th:replace="general.html :: head"/>
+</head>
+
+<body>
+<div class="container">
+    <div th:insert="general.html :: header" class="header"></div>
+    <div class="card mt-3">
+        <div class="card-body">
+            <ul>
+                <li><a th:href="@{/hidden/hidden2}">Another rando</a> </li>
+            </ul>
+        </div>
+    </div>
+    <th:block th:replace="general.html :: scripts"/>
+</div>
+</body>
+</html>
