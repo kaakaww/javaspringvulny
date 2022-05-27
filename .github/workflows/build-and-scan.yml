@@ -1,0 +1,35 @@
+name: Build and Scan
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+jobs:
+  build-and-scan:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      - name: Setup Java and Gradle cache
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'adopt' # See 'Supported distributions' for available options
+          java-version: '11'
+          cache: gradle
+
+      - name: Build the app
+        run: ./gradlew build
+
+      - name: Test the app
+        run: ./gradlew test
+
+      - name: Run the app
+        run: ./gradlew bootRun &
+
+      - name: Test with HawkScan
+        uses: stackhawk/hawkscan-action@v2.0.0
+        with:
+          apiKey: ${{ secrets.HAWK_API_KEY }}
