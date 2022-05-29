@@ -8,3 +8,4 @@ bin/
 .settings/
 .env
 .DS_Store
+tmp
