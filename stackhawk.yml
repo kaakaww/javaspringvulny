@@ -29,5 +29,5 @@ hawk:
   spider:
     base: true
     maxDurationMinutes: 5
-  failureThreshold: High
+  failureThreshold: high
 
