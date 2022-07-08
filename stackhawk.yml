@@ -25,4 +25,7 @@ app:
 hawk:
   spider:
     maxDurationMinutes: 5
-
+    ajax: true
+  config:
+    - "ajaxSpider.eventWait=100"
+    - "ajaxSpider.reloadWait=100"
