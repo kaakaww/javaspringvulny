@@ -24,5 +24,6 @@ app:
       success: "HTTP.*200.*"
 hawk:
   spider:
+    base: true
     maxDurationMinutes: 5
 
