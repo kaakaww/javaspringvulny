@@ -21,7 +21,9 @@ app:
         remember: "on"
         csrfExtra: "loginCode"
     cookieAuthorization:
-      cookieNames: []
+      cookieNames:
+        - "JSESSIONID"
+        - "XLOGINID"
     testPath:
       path: /search
       success: "HTTP.*200.*"
