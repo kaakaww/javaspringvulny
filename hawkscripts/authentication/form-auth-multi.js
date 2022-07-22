@@ -1,6 +1,8 @@
 
 /** TEMPLATE BEGIN **/
-/** Use this boilerplate code in all auth scripts. **/
+/** Use this boilerplate code in all auth scripts.
+ * NOTE: This script requires hawkscan version 2.5.1 or higher to support the getHawkConf() function.
+ * **/
 
 /** Import Java classes required for many authentication functions **/
 const URLEncoder = Java.type("java.net.URLEncoder");
