@@ -4,6 +4,8 @@ app:
   host: ${APP_HOST:https://localhost:9000}
   excludePaths:
     - "/logout"
+    - "/login-form-multi"
+    - "/login-code"
   antiCsrfParam: "_csrf"
   authentication:
     loggedInIndicator: "\\QSign Out\\E"
@@ -25,4 +27,8 @@ app:
 hawk:
   spider:
     maxDurationMinutes: 5
+#  config:
+#    - "scanner.analyser.redirectEqualsNotFound=false"
+#    - "scanner.analyser.followRedirect=true"
+
 
