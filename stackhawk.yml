@@ -1,11 +1,11 @@
 app:
-  applicationId: ${APP_ID:dacc7d3e-babc-47d2-b040-ab117ab04526}
+  applicationId: ${APP_ID:30a44281-c5a7-46c9-912d-0f5c6a0f3c69}
   env: ${APP_ENV:dev}
   host: ${APP_HOST:https://localhost:9000}
   excludePaths:
     - "/logout"
-    #- "/login-form-multi"
-    #- "/login-code"
+#    - "/login-form-multi"
+#    - "/login-code"
   antiCsrfParam: "_csrf"
   authentication:
     loggedInIndicator: "\\QSign Out\\E"
@@ -30,5 +30,4 @@ hawk:
 #  config:
 #    - "scanner.analyser.redirectEqualsNotFound=false"
 #    - "scanner.analyser.followRedirect=true"
-
 
