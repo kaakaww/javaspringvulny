@@ -136,7 +136,9 @@ public class MultiHttpSecurityConfig {
                                 "/swagger-ui.html",
                                 "/log4j",
                                 "/hidden",
-                                "/hidden/*"
+                                "/hidden/*",
+                                "/login-code",
+                                "/login-form-multi"
                         ).permitAll()
                         .anyRequest().authenticated()
                     .and()
