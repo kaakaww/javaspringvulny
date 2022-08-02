@@ -3,6 +3,7 @@ package hawk;
 import java.util.Arrays;
 import java.util.stream.Stream;
 
+import hawk.context.TenantContext;
 import hawk.entity.Item;
 import hawk.entity.User;
 import hawk.repos.ItemRepo;
@@ -60,13 +61,22 @@ public class Application {
             if (userRepo.count() == 0) {
                 userRepo.findAll().forEach(item -> System.out.println(String.format("item: %s", item.getName())));
 
+                TenantContext.setCurrentTenant("1234567");
                 Stream.of(1, 2, 3).forEach(i -> {
+                    System.out.println(String.format("Adding user%d", i));
+                    userRepo.save(new User(String.format("user%d", i), String.format("we have the best users, users%d", i), "1234567"));
+                });
+                userRepo.save(new User("user", "The auth user", "1234567"));
+
+                TenantContext.setCurrentTenant("12345678");
+                Stream.of(4, 5, 6).forEach(i -> {
                     System.out.println(String.format("Adding item%d", i));
-                    userRepo.save(new User(String.format("user%d", i), String.format("we have the best users, users%d", i)));
+                    userRepo.save(new User(String.format("user%d", i), String.format("we have the best users, users%d", i), "12345678"));
                 });
 
+
                 System.out.println(String.format("Items in DB %d", userRepo.count()));
-                userRepo.findAll().forEach(item -> System.out.println(String.format("item: %s", item.getName())));
+                userRepo.findAll().forEach(item -> System.out.println(String.format("user: %s", item.getName())));
             }
 
         };
