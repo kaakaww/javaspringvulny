@@ -19,10 +19,12 @@ import java.util.List;
 public class JwtUserController {
 
     private final UserService userService;
+    private final UserSearchService userSearchService;
 
     @Autowired
-    public JwtUserController(UserService userService) {
+    public JwtUserController(UserService userService, UserSearchService userSearchService) {
         this.userService = userService;
+        this.userSearchService = userSearchService;
     }
 
     @GetMapping("/search/")
@@ -35,5 +37,11 @@ public class JwtUserController {
     public ResponseEntity search(@PathVariable("text") String text) {
         Search search = new Search(text);
         return ResponseEntity.ok(this.userService.findUsersByName(search.getSearchText()));
+    }
+
+    @GetMapping("/search/bad/{text}")
+    public ResponseEntity searchCrappy(@PathVariable("text") String text) {
+        Search search = new Search(text);
+        return ResponseEntity.ok(this.userSearchService.search(search));
     }
 }
