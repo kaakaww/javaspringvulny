@@ -27,7 +27,7 @@ public class UserSearchService {
         List users = session.doReturningWork(connection -> {
             List<User> users1 = new ArrayList<>();
             // The wrong way
-            String query = "select id, name, description, tenant_id from users where name like '%" +
+            String query = "select id, name, description, tenant_id from public.user where name like '%" +
                     search.getSearchText() + "%'";
 
             LOGGER.log(Level.INFO, "SQL Query " + query);
