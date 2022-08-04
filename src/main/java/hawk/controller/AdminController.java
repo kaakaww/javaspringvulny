@@ -1,9 +1,8 @@
 package hawk.controller;
 
-import hawk.entity.Item;
+import hawk.entity.User;
 import hawk.form.Search;
-import hawk.service.SearchService;
-import hawk.service.UserService;
+import hawk.service.UserSearchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,7 +15,7 @@ import java.util.List;
 @Controller
 public class AdminController {
     @Autowired
-    UserService userService;
+    UserSearchService userSearchService;
 
     @GetMapping("/admin")
     public String index(Model model) {
@@ -45,7 +44,7 @@ public class AdminController {
 
     @PostMapping( "/admin/search")
     public String searchSubmit(@ModelAttribute Search search, Model model) {
-        List<Item> users = userService.search(search);
+        List<User> users = userSearchService.search(search);
         model.addAttribute("users", users);
         model.addAttribute("search", search);
         model.addAttribute("title", "User Search");

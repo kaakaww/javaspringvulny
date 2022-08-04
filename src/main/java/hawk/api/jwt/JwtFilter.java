@@ -1,6 +1,7 @@
 package hawk.api.jwt;
 
 import hawk.api.jwt.JwtTokenProvider;
+import hawk.context.TenantContext;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.GenericFilterBean;
@@ -28,6 +29,7 @@ public class JwtFilter extends GenericFilterBean {
         if (token != null && jwtTokenProvider.validateToken(token)) {
             Authentication auth = token != null ? jwtTokenProvider.getAuthentication(token) : null;
             SecurityContextHolder.getContext().setAuthentication(auth);
+            TenantContext.setCurrentTenant(jwtTokenProvider.getTenantId(token));
         }
 
         filterChain.doFilter(req, res);
