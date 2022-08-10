@@ -1,4 +1,4 @@
 app:
  openApiConf:
    strict: true
-   filePath: /home/zap/projectDir/openapi.json
+   filePath: ../home/zap/projectDir/openapi.json
