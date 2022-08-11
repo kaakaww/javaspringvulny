@@ -13,8 +13,6 @@ app:
     testPath:
       path: /api/jwt/items/search/
       success: ".*200.*"
-    loggedInIndicator: "Sign Out"
-    loggedOutIndicator: "wubba lubba dub dub"
 
 hawk:
   spider:

@@ -12,5 +12,3 @@ app:
       path: /api/basic/items/search/1
       success: ".*200.*"
       requestMethod: GET
-    loggedInIndicator: "Sign Out"
-    loggedOutIndicator: "wubba lubba dub dub"

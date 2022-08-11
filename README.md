@@ -91,7 +91,7 @@ docker run --tty --rm --network host --volume $(pwd):/hawk \
   stackhawk/hawkscan stackhawk.d/stackhawk.yml
 ```
 
-Scan using web form authentication with a session cookie. [See the docs](https://docs.stackhawk.com/hawkscan/configuration/authenticated-scanning.html#example-usernamepassword-authentication--cookie-authorization) for more information.
+Scan using web form authentication with a session cookie. [See the docs](https://docs.stackhawk.com/hawkscan/authenticated-scanning/form-based-authentication.html#example-form-with-http-parameters-with-cookie-authorization) for more information.
 ```shell
 # With the CLI
 hawk scan stackhawk.d/stackhawk.yml stackhawk.d/stackhawk-auth-form-cookie.yml
@@ -103,7 +103,7 @@ docker run --tty --rm --network host --volume $(pwd):/hawk \
   stackhawk/hawkscan stackhawk.d/stackhawk.yml stackhawk.d/stackhawk-auth-form-cookie.yml
 ```
 
-Scan using an authorization token retrieved by POSTing credentials to an API endpoint. [See the docs](https://docs.stackhawk.com/hawkscan/configuration/authenticated-scanning.html#usernamepassword-authentication--bearer-token-authorization) for more information.
+Scan using an authorization token retrieved by POSTing credentials to an API endpoint. [See the docs](https://docs.stackhawk.com/hawkscan/authenticated-scanning/form-based-authentication.html#example-form-with-api-call--json-payload-with-token-authorization) for more information.
 ```shell
 # With the CLI
 hawk scan stackhawk.d/stackhawk.yml stackhawk.d/stackhawk-auth-json-token.yml
@@ -115,7 +115,7 @@ docker run --tty --rm --network host --volume $(pwd):/hawk \
   stackhawk/hawkscan stackhawk.d/stackhawk.yml stackhawk.d/stackhawk-auth-json-token.yml
 ```
 
-Scan using an authorization token extracted by an external script. This method can be useful for third-party authentication systems. [See the docs](https://docs.stackhawk.com/hawkscan/configuration/authenticated-scanning.html#example-external-token-authentication--custom-token-authorization) for more information.
+Scan using an authorization token extracted by an external script. This method can be useful for third-party authentication systems. [See the docs](https://docs.stackhawk.com/hawkscan/authenticated-scanning/inject-cookies-and-tokens.html#injecting-a-token) for more information.
 ```shell
 # With the CLI
 hawk scan stackhawk.d/stackhawk.yml stackhawk.d/stackhawk-auth-external-token.yml
@@ -127,7 +127,7 @@ docker run --tty --rm --network host --volume $(pwd):/hawk \
   stackhawk/hawkscan stackhawk.d/stackhawk.yml stackhawk.d/stackhawk-auth-external-token.yml
 ```
 
-Scan using basic authentication, using an external script to derive the correct authorization token. This legacy method is an insecure form of bearer token authentication. [See the docs](https://docs.stackhawk.com/hawkscan/configuration/authenticated-scanning.html#example-external-token-authentication--custom-token-authorization) for more information.
+Scan using basic authentication, using an external script to derive the correct authorization token. This legacy method is an insecure form of bearer token authentication. [See the docs](https://docs.stackhawk.com/hawkscan/authenticated-scanning/inject-cookies-and-tokens.html#injecting-a-token) for more information.
 ```shell
 # With the CLI
 export AUTH_TOKEN=$(./scripts/basic-auth.sh)
