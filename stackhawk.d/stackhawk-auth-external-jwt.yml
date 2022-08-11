@@ -1,6 +1,7 @@
 app:
-  env: External Token
-  api: /openapi
+  env: ${APP_ENV:JWT Bearer Token}
+  openApiConf:
+    path: /openapi
   authentication:
     external:
       type: TOKEN

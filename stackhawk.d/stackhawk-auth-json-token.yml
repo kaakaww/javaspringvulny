@@ -1,6 +1,7 @@
 app:
-  env: JSON Token
-  api: /openapi
+  env: ${APP_ENV:JSON Token}
+  openApiConf:
+    path: /openapi
   authentication:
     usernamePassword:
       type: JSON

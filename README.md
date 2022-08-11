@@ -23,7 +23,7 @@ docker-compose up -d
 
 ### Run
 ```shell script
-java -Djava.security.egd=file:/dev/./urandom -jar build/libs/java-spring-vuly-0.1.0.jar
+./gradlew --no-daemon bootRun
 ```
 
 ## Using the Application
@@ -49,7 +49,7 @@ You can log in to the application with the following credentials:
 | https://localhost:9000/openapi.yaml | The OpenAPI spec in YAML format |
 | https://localhost:9000/swagger-ui.html | The Swagger doc for the OpenAPI spec |
 
-## Scanning
+### Security Bugs
 
 A [ZAP](https://www.zaproxy.org/) or [StackHawk](https://www.stackhawk.com/login) scan should uncover these bugs:
 
@@ -58,58 +58,86 @@ A [ZAP](https://www.zaproxy.org/) or [StackHawk](https://www.stackhawk.com/login
 | SQL Injection via search box | `a%'; insert into item values (999, 'bad bad description', 'hacker item name'); select * from item where name like  '%banan` |
 | Cross Site Scripting via search box | `<script>alert('hey guy');</script>` |
 
-### StackHawk Scan
+## Scanning
 
-The following examples will run HawkScan against the JavaSpringVulny app running on localhost and port 9000, which is the default setup. The StackHawk configuration files are already present in this repository.
+The following examples will run HawkScan against the JavaSpringVulny app running on localhost and port 9000, which is the default setup. The StackHawk configuration files are already present in this repository in the `stackhawk.d` directory.
 
 You should create a new application in the [StackHawk app](https://app.stackhawk.com/applications) to collect data from these scans. The following environment variables are required for these scans to work:
 
- * `API_KEY`: Your StackHawk API key
- * `APP_ID`: The application ID from the [StackHawk app](https://app.stackhawk.com/applications).
+ * `API_KEY`: Your StackHawk [API key](https://app.stackhawk.com/settings/apikeys)
+ * `APP_ID`: The [application ID](https://app.stackhawk.com/applications)
+
+For example:
+
+```shell
+export API_KEY=<your-StackHawk-API-key>
+export APP_ID=<your-StackHawk-App-ID>
+```
 
 You can optionally include the following variables to customize the scan.
 
  * `APP_HOST`: The host to scan. Default: https://localhost:9000
- * `APP_ENV`: The application environment. Default: Development
+ * `APP_ENV`: The application environment name.
 
 Baseline scan without authentication:
 ```shell
+# With the CLI
+hawk scan stackhawk.d/stackhawk.yml
+
+# With Docker
 docker run --tty --rm --network host --volume $(pwd):/hawk \
   --env API_KEY \
   --env APP_ID \
-  stackhawk/hawkscan
+  stackhawk/hawkscan stackhawk.d/stackhawk.yml
 ```
 
 Scan using web form authentication with a session cookie. [See the docs](https://docs.stackhawk.com/hawkscan/configuration/authenticated-scanning.html#example-usernamepassword-authentication--cookie-authorization) for more information.
 ```shell
+# With the CLI
+hawk scan stackhawk.d/stackhawk.yml stackhawk.d/stackhawk-auth-form-cookie.yml
+
+# With Docker
 docker run --tty --rm --network host --volume $(pwd):/hawk \
   --env API_KEY \
   --env APP_ID \
-  stackhawk/hawkscan stackhawk.yml stackhawk.d/stackhawk-auth-form-cookie.yml
+  stackhawk/hawkscan stackhawk.d/stackhawk.yml stackhawk.d/stackhawk-auth-form-cookie.yml
 ```
 
 Scan using an authorization token retrieved by POSTing credentials to an API endpoint. [See the docs](https://docs.stackhawk.com/hawkscan/configuration/authenticated-scanning.html#usernamepassword-authentication--bearer-token-authorization) for more information.
 ```shell
+# With the CLI
+hawk scan stackhawk.d/stackhawk.yml stackhawk.d/stackhawk-auth-json-token.yml
+
+# With Docker
 docker run --tty --rm --network host --volume $(pwd):/hawk \
   --env API_KEY \
   --env APP_ID \
-  stackhawk/hawkscan stackhawk.yml stackhawk.d/stackhawk-auth-json-token.yml
+  stackhawk/hawkscan stackhawk.d/stackhawk.yml stackhawk.d/stackhawk-auth-json-token.yml
 ```
 
 Scan using an authorization token extracted by an external script. This method can be useful for third-party authentication systems. [See the docs](https://docs.stackhawk.com/hawkscan/configuration/authenticated-scanning.html#example-external-token-authentication--custom-token-authorization) for more information.
 ```shell
+# With the CLI
+hawk scan stackhawk.d/stackhawk.yml stackhawk.d/stackhawk-auth-external-token.yml
+
+# With Docker
 docker run --tty --rm --network host --volume $(pwd):/hawk \
   --env API_KEY \
   --env APP_ID \
-  stackhawk/hawkscan stackhawk.yml stackhawk.d/stackhawk-auth-external-token.yml
+  stackhawk/hawkscan stackhawk.d/stackhawk.yml stackhawk.d/stackhawk-auth-external-token.yml
 ```
 
 Scan using basic authentication, using an external script to derive the correct authorization token. This legacy method is an insecure form of bearer token authentication. [See the docs](https://docs.stackhawk.com/hawkscan/configuration/authenticated-scanning.html#example-external-token-authentication--custom-token-authorization) for more information.
 ```shell
+# With the CLI
+export AUTH_TOKEN=$(./scripts/basic-auth.sh)
+hawk scan stackhawk.d/stackhawk.yml stackhawk.d/stackhawk-auth-basic.yml
+
+# With Docker
 export AUTH_TOKEN=$(./scripts/basic-auth.sh)
 docker run --tty --rm --network host --volume $(pwd):/hawk \
   --env API_KEY \
   --env APP_ID \
   --env AUTH_TOKEN \
-  stackhawk/hawkscan stackhawk.yml stackhawk.d/stackhawk-auth-basic.yml
+  stackhawk/hawkscan stackhawk.d/stackhawk.yml stackhawk.d/stackhawk-auth-basic.yml
 ```
