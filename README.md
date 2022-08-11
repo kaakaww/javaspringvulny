@@ -65,7 +65,7 @@ The following examples will run HawkScan against the JavaSpringVulny app running
 You should create a new application in the [StackHawk app](https://app.stackhawk.com/applications) to collect data from these scans. The following environment variables are required for these scans to work:
 
  * `API_KEY`: Your StackHawk [API key](https://app.stackhawk.com/settings/apikeys)
- * `APP_ID`: The [application ID](https://app.stackhawk.com/applications)
+ * `APP_ID`: Your StackHawk [application ID](https://app.stackhawk.com/applications)
 
 For example:
 
