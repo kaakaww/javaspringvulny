@@ -13,6 +13,8 @@ app:
     testPath:
       path: /api/jwt/items/search/
       success: ".*200.*"
+    loggedInIndicator: "\\QSign Out\\E"
+    loggedOutIndicator: ".*Location:.*/login.*"
 
 hawk:
   spider:

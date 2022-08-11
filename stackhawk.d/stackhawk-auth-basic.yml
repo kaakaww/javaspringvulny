@@ -12,3 +12,5 @@ app:
       path: /api/basic/items/search/1
       success: ".*200.*"
       requestMethod: GET
+    loggedInIndicator: "\\QSign Out\\E"
+    loggedOutIndicator: ".*Location:.*/login.*"

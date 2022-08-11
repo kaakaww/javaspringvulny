@@ -12,7 +12,8 @@ app:
     testPath:
       path: /api/token/items/search/1
       success: ".*200.*"
-
+    loggedInIndicator: "\\QSign Out\\E"
+    loggedOutIndicator: ".*Location:.*/login.*"
 hawk:
   spider:
     base: false
