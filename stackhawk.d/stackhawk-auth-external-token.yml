@@ -1,6 +1,7 @@
 app:
-  env: External Token
-  api: /openapi
+  env: ${APP_ENV:External Token}
+  openApiConf:
+    path: /openapi
   authentication:
     external:
       type: TOKEN
@@ -11,9 +12,8 @@ app:
     testPath:
       path: /api/token/items/search/1
       success: ".*200.*"
-    loggedInIndicator: "Sign Out"
-    loggedOutIndicator: "wubba lubba dub dub"
-
+    loggedInIndicator: "\\QSign Out\\E"
+    loggedOutIndicator: ".*Location:.*/login.*"
 hawk:
   spider:
     base: false

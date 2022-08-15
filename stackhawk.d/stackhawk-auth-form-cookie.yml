@@ -1,5 +1,5 @@
 app:
-  env: Form Cookie
+  env: ${APP_ENV:Form Cookie}
   excludePaths:
     - "/logout"
   antiCsrfParam: "_csrf"
@@ -14,9 +14,10 @@ app:
       scanPassword: "password"
     cookieAuthorization:
       cookieNames:
+        - "derp"
         - "JSESSIONID"
     testPath:
       path: /search
       success: ".*200.*"
-    loggedInIndicator: "Sign Out"
-    loggedOutIndicator: "wubba lubba dub dub"
+    loggedInIndicator: "\\QSign Out\\E"
+    loggedOutIndicator: ".*Location:.*/login.*"

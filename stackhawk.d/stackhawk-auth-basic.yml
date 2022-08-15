@@ -1,4 +1,5 @@
 app:
+  env: ${APP_ENV:Basic Web Auth}
   authentication:
     external:
       type: TOKEN
@@ -11,5 +12,5 @@ app:
       path: /api/basic/items/search/1
       success: ".*200.*"
       requestMethod: GET
-    loggedInIndicator: "Sign Out"
-    loggedOutIndicator: "wubba lubba dub dub"
+    loggedInIndicator: "\\QSign Out\\E"
+    loggedOutIndicator: ".*Location:.*/login.*"

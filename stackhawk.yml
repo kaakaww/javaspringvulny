@@ -1,16 +1,13 @@
 app:
   applicationId: ${APP_ID:b04badbc-b0b9-4988-be65-2ebc25e507d5}
-  env: ${APP_ENV:dev}
   host: ${APP_HOST:https://localhost:9000}
-#  openApiConf:
-#    strict: true
-#    filePath: "tmp/test-openapi.json"
+  env: ${APP_ENV:Form Cookie}
   excludePaths:
     - "/logout"
   antiCsrfParam: "_csrf"
+  openApiConf:
+    path: /openapi
   authentication:
-    loggedInIndicator: "\\QSign Out\\E"
-    loggedOutIndicator: ".*Location:.*/login.*"
     usernamePassword:
       type: FORM
       loginPath: /login
@@ -24,7 +21,10 @@ app:
         - "JSESSIONID"
     testPath:
       path: /search
-      success: "HTTP.*200.*"
+      success: ".*200.*"
+    loggedInIndicator: "\\QSign Out\\E"
+    loggedOutIndicator: ".*Location:.*/login.*"
+
 hawk:
   spider:
     base: true
