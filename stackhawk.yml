@@ -2,8 +2,11 @@ app:
   applicationId: ${APP_ID:b04badbc-b0b9-4988-be65-2ebc25e507d5}
   host: ${APP_HOST:https://localhost:9000}
   env: ${APP_ENV:Form Cookie}
+  autoPolicy: true
+  autoInputVectors: true
   excludePaths:
     - "/logout"
+    # - /api/jwt.*
   antiCsrfParam: "_csrf"
   openApiConf:
     path: /openapi
