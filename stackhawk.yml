@@ -6,7 +6,7 @@ app:
   autoInputVectors: true
   excludePaths:
     - "/logout"
-    - /api/jwt.*
+    - "/api/jwt.*"
   antiCsrfParam: "_csrf"
   openApiConf:
     path: /openapi
