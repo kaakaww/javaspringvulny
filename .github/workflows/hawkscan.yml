@@ -1,4 +1,4 @@
-name: Build and Scan
+name: HawkScan
 on:
   push:
     branches:
@@ -8,6 +8,7 @@ on:
       - main
 jobs:
   build-and-scan:
+    name: Build and Scan
     runs-on: ubuntu-20.04
     steps:
       - name: Check out code
