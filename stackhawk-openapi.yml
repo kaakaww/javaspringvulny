@@ -28,3 +28,23 @@ app:
   openApiConf:
     # path: /openapi
     filePath: openapi.yaml
+    includeAllMethods: true
+    includedMethods:
+      - POST
+      - PUT
+    customVariables:
+      - field: text
+        values:
+          - "customTextValue1"
+          - "customTextValue2"
+          - "customTextValue3"
+      - field: searchText
+        values:
+          - "customSearchText1"
+          - "customSearchText2"
+          - "customSearchText3"
+      - field: username
+        values:
+          - "username1"
+          - "username2"
+          - "username3"
