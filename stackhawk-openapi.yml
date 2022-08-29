@@ -1,0 +1,50 @@
+app:
+  applicationId: ${APP_ID:dacc7d3e-babc-47d2-b040-ab117ab04526}
+  env: ${APP_ENV:dev-api}
+  host: ${APP_HOST:https://localhost:9000}
+  excludePaths:
+    - "/logout"
+  antiCsrfParam: "_csrf"
+  authentication:
+    loggedInIndicator: "HTTP.*200.*"
+    loggedOutIndicator: ".*Location:.*/login.*"
+    usernamePassword:
+      type: JSON
+      loginPath: /api/jwt/auth/signin
+      usernameField: username
+      passwordField: password
+      scanUsername: "user"
+      scanPassword: "password"
+    tokenAuthorization:
+      type: HEADER
+      value: Authorization
+      tokenType: Bearer
+    tokenExtraction:
+      type: TOKEN_PATH
+      value: "token"
+    testPath:
+      path: /api/jwt/items/search/i
+      success: "HTTP.*200.*"
+  openApiConf:
+    # path: /openapi
+    filePath: openapi.yaml
+    includeAllMethods: true
+    includedMethods:
+      - POST
+      - PUT
+    customVariables:
+      - field: text
+        values:
+          - "customTextValue1"
+          - "customTextValue2"
+          - "customTextValue3"
+      - field: searchText
+        values:
+          - "customSearchText1"
+          - "customSearchText2"
+          - "customSearchText3"
+      - field: username
+        values:
+          - "username1"
+          - "username2"
+          - "username3"

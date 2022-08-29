@@ -1,7 +1,7 @@
 .gradle/
 .idea/
 build/
-db/
+db
 bin/
 .classpath
 .project
