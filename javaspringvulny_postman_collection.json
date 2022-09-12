@@ -1,0 +1,723 @@
+{
+	"info": {
+		"_postman_id": "de483569-ba3b-449e-9688-e68dd4c2f743",
+		"name": "Postman Collection for JavaSpringVulny",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "305641"
+	},
+	"item": [
+		{
+			"name": "api",
+			"item": [
+				{
+					"name": "jwt",
+					"item": [
+						{
+							"name": "users/search",
+							"item": [
+								{
+									"name": "search All",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/jwt/users/search/",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"jwt",
+												"users",
+												"search",
+												""
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "default response",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/jwt/users/search/",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"jwt",
+														"users",
+														"search",
+														""
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "*/*"
+												}
+											],
+											"cookie": [],
+											"body": "ea nisi venia"
+										}
+									]
+								},
+								{
+									"name": "search",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/jwt/users/search/:text",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"jwt",
+												"users",
+												"search",
+												":text"
+											],
+											"variable": [
+												{
+													"key": "text",
+													"value": "ea nisi venia",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "default response",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/jwt/users/search/:text",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"jwt",
+														"users",
+														"search",
+														":text"
+													],
+													"variable": [
+														{
+															"key": "text",
+															"value": "ea nisi venia",
+															"description": "(Required) "
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "*/*"
+												}
+											],
+											"cookie": [],
+											"body": "ea nisi venia"
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "items/search",
+							"item": [
+								{
+									"name": "search 1",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"searchText\": \"des\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/jwt/items/search",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"jwt",
+												"items",
+												"search"
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "default response",
+											"originalRequest": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"searchText\": \"des\"\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/jwt/items/search",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"jwt",
+														"items",
+														"search"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "*/*"
+												}
+											],
+											"cookie": [],
+											"body": "ea nisi venia"
+										}
+									]
+								},
+								{
+									"name": "search All 1",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/jwt/items/search/",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"jwt",
+												"items",
+												"search",
+												""
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "default response",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/jwt/items/search/",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"jwt",
+														"items",
+														"search",
+														""
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "*/*"
+												}
+											],
+											"cookie": [],
+											"body": "ea nisi venia"
+										}
+									]
+								},
+								{
+									"name": "search 2",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/jwt/items/search/:text",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"jwt",
+												"items",
+												"search",
+												":text"
+											],
+											"variable": [
+												{
+													"key": "text",
+													"value": "ea nisi venia",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "default response",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/jwt/items/search/:text",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"jwt",
+														"items",
+														"search",
+														":text"
+													],
+													"variable": [
+														{
+															"key": "text",
+															"value": "ea nisi venia",
+															"description": "(Required) "
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "*/*"
+												}
+											],
+											"cookie": [],
+											"body": "ea nisi venia"
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "signin",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"username\": \"laborum dolore\",\n  \"password\": \"tempor ullamco\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/jwt/auth/signin",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"jwt",
+										"auth",
+										"signin"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "default response",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"username\": \"laborum dolore\",\n  \"password\": \"tempor ullamco\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/jwt/auth/signin",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"jwt",
+												"auth",
+												"signin"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "*/*"
+										}
+									],
+									"cookie": [],
+									"body": "ea nisi venia"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "basic/items/search",
+					"item": [
+						{
+							"name": "search 3",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/basic/items/search/",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"basic",
+										"items",
+										"search",
+										""
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "default response",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/basic/items/search/",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"basic",
+												"items",
+												"search",
+												""
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "*/*"
+										}
+									],
+									"cookie": [],
+									"body": "ea nisi venia"
+								}
+							]
+						},
+						{
+							"name": "search 4",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/basic/items/search/:text",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"basic",
+										"items",
+										"search",
+										":text"
+									],
+									"variable": [
+										{
+											"key": "text",
+											"value": "ea nisi venia",
+											"description": "(Required) "
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "default response",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/basic/items/search/:text",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"basic",
+												"items",
+												"search",
+												":text"
+											],
+											"variable": [
+												{
+													"key": "text",
+													"value": "ea nisi venia",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "*/*"
+										}
+									],
+									"cookie": [],
+									"body": "ea nisi venia"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "token/items/search",
+					"item": [
+						{
+							"name": "search 5",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/token/items/search/",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"token",
+										"items",
+										"search",
+										""
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "default response",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/token/items/search/",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"token",
+												"items",
+												"search",
+												""
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "*/*"
+										}
+									],
+									"cookie": [],
+									"body": "ea nisi venia"
+								}
+							]
+						},
+						{
+							"name": "search 6",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/token/items/search/:text",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"token",
+										"items",
+										"search",
+										":text"
+									],
+									"variable": [
+										{
+											"key": "text",
+											"value": "ea nisi venia",
+											"description": "(Required) "
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "default response",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/token/items/search/:text",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"token",
+												"items",
+												"search",
+												":text"
+											],
+											"variable": [
+												{
+													"key": "text",
+													"value": "ea nisi venia",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "*/*"
+										}
+									],
+									"cookie": [],
+									"body": "ea nisi venia"
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "https://localhost:9000",
+			"type": "string"
+		}
+	]
+}
