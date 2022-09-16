@@ -29,9 +29,6 @@ hawk:
     maxDurationMinutes: 5
     base: false
     custom:
-      command: curl -x $HTTP_PROXY 
       command: newman run javaspringvulny_postman_collection.json --verbose --global-var baseUrl=${APP_HOST:https://localhost:9000} --insecure
       logOutputToForeground: true
-      credentials:
-        SHOULD_BE_REDACTED: 'my-secret-password'
 

@@ -147,7 +147,8 @@ docker run --tty --rm --network host --volume $(pwd):/hawk \
 By default HawkScan will run with the `stackhawk.yml` file if it's defined and present, but can instead use named specs such as `hawk scan stackhawk.yml`
 
 `stackhawk-openapi.yml` - scan with OpenAPI configuration
-`stackhawk-custom-spider.yml` scan with Custom Discovery using newman
+`stackhawk-custom-spider-curl.yml` scan with custom discovery using curl
+`stackhawk-custom-spider-newman.yml` scan with custom discovery using newman
 `stackhawk-auth-script-form-multi.yml` scripted authentication 
 `stackhawk-jsv-form-cookie.yml` scan with form authentication and cookie authorization
 `stackhawk-jsv-json-token` scan with JSON authentication and token authorization
