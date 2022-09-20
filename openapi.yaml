@@ -1,6 +1,6 @@
 openapi: 3.0.1
 info:
-  title: OpenAPI definition
+  title: OpenAPI Specification for JavaSpringVulny
   version: v0
 servers:
 - url: https://localhost:9000
