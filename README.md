@@ -2,6 +2,14 @@
 
 Java Spring Vulny is a simple application that combines the power and sophistication of the Spring framework with some homegrown naïveté. Its purpose is to provide a target for web application security test scanners such as [OWASP ZAProxy](https://www.zaproxy.org/) and [StackHawk](https://www.stackhawk.com/).
 
+## Building and Running in IDE/commandline
+```shell script
+# run the postgreql db so you can have SQLi
+docker-compose up -d db
+# run the application in debug mode or run mode with the vm option to activate the profile
+# -Dspring.profiles.active=postgresql
+```
+
 ## Building and Running in Docker
 
 ### Build
