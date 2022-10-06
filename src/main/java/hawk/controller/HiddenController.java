@@ -14,10 +14,27 @@ public class HiddenController {
         return "hidden";
     }
 
-    @GetMapping("/hidden/{id}")
-    public String jwtAuth(Model model, @PathVariable("id") String id) {
-        String title = "Random hidden page : " + id;
-        model.addAttribute("title", title);
+    @GetMapping("/hidden/hidden2")
+    public String hidden(Model model) {
+        model.addAttribute("Rando hidden page");
         return "hidden2";
+    }
+
+    @GetMapping("/hidden/cypress")
+    public String cypress(Model model) {
+        model.addAttribute("title", "Hidden Page, found and tested with cypress tests");
+        return "hidden";
+    }
+
+    @GetMapping("/hidden/selenium")
+    public String selenium(Model model) {
+        model.addAttribute("title", "Hidden Page, found and tested with selenium tests");
+        return "hidden";
+    }
+
+    @GetMapping("/hidden/playwright")
+    public String playwright(Model model) {
+        model.addAttribute("title", "Hidden Page, found and tested with playwright tests");
+        return "hidden";
     }
 }
