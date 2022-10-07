@@ -2,6 +2,7 @@ FROM openjdk:11.0.10-jdk-slim
 
 RUN mkdir /javavulny /app
 COPY . /javavulny/
+RUN sed -i 's/localhost\:5432/db\:5432/' /javavulny/src/main/resources/application-postgresql.properties
 
 RUN cd /javavulny \
 && ./gradlew --no-daemon build \
