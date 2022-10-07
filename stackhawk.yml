@@ -1,5 +1,5 @@
 app:
-  applicationId: ${APP_ID:e8ce818e-b9a8-42f1-9944-47799acb8788}
+  applicationId: ${APP_ID:b04badbc-b0b9-4988-be65-2ebc25e507d5}
   host: ${APP_HOST:https://localhost:9000}
   env: ${APP_ENV:Form Cookie}
   autoPolicy: true
