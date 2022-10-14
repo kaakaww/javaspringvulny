@@ -1,0 +1,29 @@
+# This is a basic workflow to help you get started with Actions
+name: KAAKAWW
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the main branch
+  #push:
+  #  branches: [main]
+  pull_request:
+  #  branches: [main]
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  stackhawk-hawkscan:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out Repo!
+        uses: actions/checkout@v2
+      - name: Build and Run Vulny!
+        run: docker-compose build && docker-compose up -d
+      - name: HawkScan
+        uses: stackhawk/hawkscan-action@v2.0.0
+        with:
+          apiKey: ${{ secrets.HAWK_API_KEY }}
+          configurationFiles: stackhawk-actions.yml
+        env:
+          COMMIT_SHA: ${{ github.event.pull_request.head.sha }} # Get the commit SHA from GitHub -> needed for Actions
+          BRANCH_NAME: ${{ github.head_ref }} # Used to display Branch name in the UI
