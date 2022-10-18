@@ -28,5 +28,5 @@ jobs:
           version: ${{ github.event.client_payload.hawkscanVersion }}
           verbose: ${{ github.event.client_payload.verbose }}
         env:
-          # APPLICATION_ID: ${{ github.event.client_payload.appId }}
+          APPLICATION_ID: ${{ secrets.APP_ID }}
           APP_ID: ${{ github.event.client_payload.appId }}
