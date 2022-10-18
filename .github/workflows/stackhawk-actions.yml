@@ -1,0 +1,43 @@
+name: HawkScan
+on:
+  push:
+  #  branches:
+  #    - main
+  #    - actions
+  pull_request:
+    #branches:
+    #  - main
+    #  - actions
+jobs:
+  build-and-scan:
+    name: Build and Scan
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      - name: Setup Java and Gradle cache
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'adopt' # See 'Supported distributions' for available options
+          java-version: '11'
+          cache: gradle
+
+      - name: Build the app
+        run: ./gradlew build
+
+      - name: Test the app
+        run: ./gradlew test
+
+      - name: Run the app
+        run: ./gradlew bootRun &
+
+      - name: Test with HawkScan
+        uses: stackhawk/hawkscan-action@v2.0.0
+        with:
+          apiKey: ${{ secrets.HAWK_API_KEY }}
+          configurationFiles: stackhawk.d/stackhawk-openapi.yml
+        env:
+          APP_ID: ${{ secrets.APP_ID }}
+          COMMIT_SHA: ${{ github.event.pull_request.head.sha }} # Get the commit SHA from GitHub -> needed for Actions
+          BRANCH_NAME: ${{ github.head_ref }} # Used to display Branch name in the UI
