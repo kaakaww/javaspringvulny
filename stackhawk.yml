@@ -23,7 +23,12 @@ app:
         - "JSESSIONID"
     testPath:
       path: /search
-      success: "HTTP.*200.*"
+      success: "HTTP.*200.*"    
+ tags:
+  - name: _STACKHAWK_GIT_COMMIT_SHA
+    value: ${{ github.event.pull_request.head.sha }}
+  - name: _STACKHAWK_GIT_BRANCH
+    value: ${{ github.head_ref }}
 # hawk:
 #   spider:
 #     maxDurationMinutes: 5
