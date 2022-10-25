@@ -1,6 +1,7 @@
 app:
-  env: External Token
-  api: /openapi
+  env: ${APP_ENV:JWT Bearer Token}
+  openApiConf:
+    path: /openapi
   authentication:
     external:
       type: TOKEN
@@ -12,8 +13,8 @@ app:
     testPath:
       path: /api/jwt/items/search/
       success: ".*200.*"
-    loggedInIndicator: "Sign Out"
-    loggedOutIndicator: "wubba lubba dub dub"
+    loggedInIndicator: "\\QSign Out\\E"
+    loggedOutIndicator: ".*Location:.*/login.*"
 
 hawk:
   spider:
