@@ -1,0 +1,63 @@
+app:
+  # Update your applicationId
+  applicationId: ${APP_ID:8454c127-64aa-490e-a151-54ae287ee8f1}
+  env: ${APP_ENV:GitHub Actions}
+  host: ${APP_HOST:https://localhost:9000}
+  excludePaths:
+    - "/logout"
+  #    - "/login-form-multi"
+  #    - "/login-code"
+  antiCsrfParam: "_csrf"
+  # Configure Basic Authentication
+  authentication:
+    loggedInIndicator: "\\QSign Out\\E"
+    loggedOutIndicator: ".*Location:.*/login.*"
+    usernamePassword:
+      type: FORM
+      loginPath: /login
+      loginPagePath: /login
+      usernameField: username
+      passwordField: password
+      scanUsername: "user"
+      scanPassword: "password"
+    cookieAuthorization:
+      cookieNames:
+        - "JSESSIONID"
+    testPath:
+      path: /search
+      success: "HTTP.*200.*"
+    # Utilize OpenAPI Spec, Custom data & Faker
+    openApiConf:
+    # path: /openapi
+    filePath: openapi.yaml
+    fakerEnabled: true #default false
+    # includeAllMethods: true
+    includedMethods:
+      - POST
+      - PUT
+    customVariables:
+      - field: text
+        values:
+          - "$faker:uuid"
+      - field: searchText
+        values:
+          - "$faker:Crypto.sha512"
+          - "Donec ullamcorper nulla non metus auctor fringilla."
+      - field: username
+        values:
+          - "Andy Dwyer"
+      - field: password
+        values:
+          - "$faker:password"
+hawk:
+  spider:
+    maxDurationMinutes: 5
+#  config:
+#    - "scanner.analyser.redirectEqualsNotFound=false"
+#    - "scanner.analyser.followRedirect=true"
+# Grab Commit SHA and Branch name
+tags:
+  - name: _STACKHAWK_GIT_COMMIT_SHA
+    value: ${COMMIT_SHA:}
+  - name: _STACKHAWK_GIT_BRANCH
+    value: ${BRANCH_NAME:}
