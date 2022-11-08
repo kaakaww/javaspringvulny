@@ -1,0 +1,28 @@
+name: Build and Test
+on:
+  pull_request:
+
+jobs:
+  build-and-test:
+    name: Build and test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Install Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin' # See 'Supported distributions' for available options
+          java-version: '11'
+      - name: Build
+        run: ./gradlew build
+      - name: Run in background
+        run: ./gradlew bootRun &
+      - name: HawkScan
+        uses: stackhawk/hawkscan-action@v2.0.0
+        with:
+          apiKey: ${{ secrets.HAWK_API_KEY }}
+          configurationFiles: stackhawk.d/stackhawk-openapi.yml stackhawk-overrides.yml
+        env:
+          COMMIT_SHA: ${{ github.event.pull_request.head.sha }}
+          BRANCH_NAME: ${{ github.head_ref }}

@@ -1,0 +1,11 @@
+app:
+  applicationId: fdb65495-694e-47d3-bfb5-a634a289c079
+  env: dev
+  host: https://localhost:9000
+tags:
+  - name: _STACKHAWK_GIT_COMMIT_SHA
+    value: ${COMMIT_SHA:}
+  - name: _STACKHAWK_GIT_BRANCH
+    value: ${BRANCH_NAME:}
+hawk:
+  failureThreshold: high

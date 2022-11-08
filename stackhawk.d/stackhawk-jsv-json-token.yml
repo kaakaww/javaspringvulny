@@ -5,7 +5,6 @@ app:
   env: ${APP_ENV:dev}
   openApiConf:
     path: /openapi.yml
-  env: dev
   host: ${APP_HOST:https://localhost:9000}
   authentication:
     loggedInIndicator: "\\QSign Out\\E"
