@@ -9,8 +9,8 @@ jobs:
     services:
       postgres-db:
         image: postgres
-        ports:
-          - 5432:5432
+        #ports:
+        #  - 5432:5432
         env:
           POSTGRES_DB: postgresql
           POSTGRES_USER: postgresql
@@ -29,6 +29,7 @@ jobs:
         run: ./gradlew bootRun &
         env:
           SPRING_PROFILES_ACTIVE: postgresql
+          POSTGRES_HOST: postgres-db
       - name: HawkScan
         uses: stackhawk/hawkscan-action@v2.0.0
         with:
