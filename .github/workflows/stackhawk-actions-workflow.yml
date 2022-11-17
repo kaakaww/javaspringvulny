@@ -29,7 +29,7 @@ jobs:
       - name: HawkScan
         uses: stackhawk/hawkscan-action@v2.0.0
         with:
-          apiKey: $
+          apiKey: ${{ secrets.HAWK_API_KEY }}
           configurationFiles: stackhawk-actions.yml
         env:
           COMMIT_SHA: $ # Get the commit SHA from GitHub -> needed for Actions
