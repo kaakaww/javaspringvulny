@@ -34,4 +34,5 @@ jobs:
         env:
           COMMIT_SHA: ${{ github.event.pull_request.head.sha }}
           BRANCH_NAME: ${{ github.head_ref }}
+          APP_ID: ${{ secrets.APP_ID }}
     
