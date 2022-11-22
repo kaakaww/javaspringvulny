@@ -1,5 +1,5 @@
 app:
-  applicationId: 28d52a92-3cbb-45fd-bc23-2a677fed354a # (required)
+  applicationId: 9fe41c6b-6a52-461f-afd8-27b8530159fe # (required)
   env: ${APP_ENV:local}
   host: ${APP_HOST:https://localhost:9000}
   excludePaths:
