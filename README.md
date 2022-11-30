@@ -1,4 +1,4 @@
-# Java Spring Vulny
+# Java Spring Vulny 
 
 Java Spring Vulny is a simple application that combines the power and sophistication of the Spring framework with some homegrown naïveté. Its purpose is to provide a target for web application security test scanners such as [OWASP ZAProxy](https://www.zaproxy.org/) and [StackHawk](https://www.stackhawk.com/).
 
