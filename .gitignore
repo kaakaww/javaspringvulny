@@ -8,3 +8,5 @@ bin/
 .settings/
 .env
 .DS_Store
+api.key
+api_call.py
