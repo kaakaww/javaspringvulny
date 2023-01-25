@@ -28,5 +28,7 @@ jobs:
           githubToken: ${{ github.token }}
         env:
           # Use GitHub Actions workflow variables to populate these environment variables
+          SCANUSER: ${{ vars.SCANUSER }}
+          SCANPASS: ${{ vars.SCANPASS }}
           COMMIT_SHA: ${{ github.event.pull_request.head.sha }}
           BRANCH_NAME: ${{ github.head_ref }}
