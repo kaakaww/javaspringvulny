@@ -1,9 +1,11 @@
 app:
-  applicationId: ${APP_ID:9fe41c6b-6a52-461f-afd8-27b8530159fe}
-  env: ${APP_ENV:live-demo}
+  applicationId: ${APP_ID:28d52a92-3cbb-45fd-bc23-2a677fed354a}
+  env: ${APP_ENV:dev}
   host: ${APP_HOST:https://localhost:9000}
   excludePaths:
     - "/logout"
+#    - "/login-form-multi"
+#    - "/login-code"
   antiCsrfParam: "_csrf"
   authentication:
     loggedInIndicator: "\\QSign Out\\E"
@@ -14,8 +16,8 @@ app:
       loginPagePath: /login
       usernameField: username
       passwordField: password
-      scanUsername: ${SCANUSER}
-      scanPassword: ${SCANPASS}
+      scanUsername: "user"
+      scanPassword: "password"
     cookieAuthorization:
       cookieNames:
         - "JSESSIONID"
@@ -23,10 +25,10 @@ app:
       path: /search
       success: "HTTP.*200.*"
 hawk:
-  failureThreshold: high
-  #config:
-    #- "scanner.analyser.redirectEqualsNotFound=false"
-    #- "scanner.analyser.followRedirect=true"
-#    - "ajaxSpider.eventWait=20"
-#    - "ajaxSpider.reloadWait=70"
+  spider:
+    maxDurationMinutes: 5
+    base: false
+    postmanConfig:
+      filePath: "javaspringvulny_postman_collection.json"
+      logOutputToForeground: true
 

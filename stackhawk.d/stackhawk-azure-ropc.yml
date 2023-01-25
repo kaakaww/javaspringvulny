@@ -1,0 +1,45 @@
+app:
+  host: ${APP_HOST:http://localhost:9000}
+  openApiConf:
+    path: "/openapi.json"
+  autoPolicy: true
+  autoInputVectors: true
+  authentication:
+    loggedInIndicator: ".*" #Set to match all because API doesn't do trad login/logout
+    loggedOutIndicator: "^$" #Set to match none because API doesn't do trad login/logout. Works great as long as token lasts.
+    script:
+      name: azure-ropc.js
+      parameters:
+        # directory tenant to log into; can be GUID or friendly name format. May not be 'common' or 'consumers'
+        tenant: ${TENANT}
+        grant_type: password
+        # space separated list of scope names, ideally includes 'openid'
+        scope: ${SCOPE}
+      credentials:
+        client_id: ${YOUR_CLIENT_ID}
+        ## client_secret only used if client is confidential, which also requires a script change.
+        ## However, a confidential client would be better served using client_credentials auth flow.
+        # client_secret: ${YOUR_CLIENT_SECRET}
+        username: ${USERNAME}
+        password: ${PASSWORD}
+    # authZ
+    tokenAuthorization:
+      type: HEADER
+      value: Authorization
+      tokenType: Bearer # prepends token
+    tokenExtraction:
+      type: token
+      # this will extract the JWT named id_token from the JSON response
+      # if scope includes 'openid' which is a good/sane idea
+      value: "id_token"
+    testPath:
+      # path must be an API endpoint that requires auth. Default action is GET, but POST and body also supported.
+      # success is regex. Default behavior is to check success criteria against header content
+      path: /private
+      success: '.*200.*'
+hawkAddOn:
+  scripts:
+    - name: azure-ropc.js
+      language: JAVASCRIPT #supported options: JAVASCRIPT, KOTLIN
+      type: authentication
+      path: scripts

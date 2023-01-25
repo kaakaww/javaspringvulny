@@ -1,6 +1,6 @@
 app:
   applicationId: ${APP_ID:dacc7d3e-babc-47d2-b040-ab117ab04526}
-  env: ${APP_ENV2:dev-api}
+  env: ${APP_ENV:dev-api}
   host: ${APP_HOST:https://localhost:9000}
   excludePaths:
     - "/logout"
@@ -48,6 +48,3 @@ app:
           - "username1"
           - "username2"
           - "username3"
-#hawk:
-#  spider:
-#    base: false
