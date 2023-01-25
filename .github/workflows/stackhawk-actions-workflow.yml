@@ -35,4 +35,9 @@ jobs:
           COMMIT_SHA: ${{ github.event.pull_request.head.sha }}
           BRANCH_NAME: ${{ github.head_ref }}
           APP_ID: ${{ secrets.APP_ID }}
-    
+          ISSUER: ${{ secrets.ISSUER }}
+          API_AUDIENCE: ${{ secrets.API_AUDIENCE }}
+          CLIENT_ID: ${{ secrets.CLIENT_ID }}
+          CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
+          USERNAME: ${{ secrets.USERNAME }}
+          PASSWORD: ${{ secrets.PASSWORD }}
