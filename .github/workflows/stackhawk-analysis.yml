@@ -1,0 +1,32 @@
+name: "StackHawk"
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  # schedule:
+  #   - cron: '35 11 * * 5'
+
+jobs:
+  stackhawk:
+    name: StackHawk
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Start your service
+        run: docker-compose up -d                  # ✏️ Update this to run your own service to be scanned
+
+      - name: Run HawkScan
+        uses: stackhawk/hawkscan-action@v2.0.0
+        continue-on-error: true                   # ✏️ Set to false to break your build on scan errors
+        with:
+          apiKey: ${{ secrets.HAWK_API_KEY }}
+          codeScanningAlerts: true
+          githubToken: ${{ github.token }}
+        env:
+          # Use GitHub Actions workflow variables to populate these environment variables
+          COMMIT_SHA: ${{ github.event.pull_request.head.sha }}
+          BRANCH_NAME: ${{ github.head_ref }}

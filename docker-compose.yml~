@@ -22,14 +22,14 @@ services:
     depends_on:
       - db
 
-  # hawkscan:
-  #   image: stackhawk/hawkscan
-  #   environment:
-  #     API_KEY: "${HAWK_API_KEY}"
-  #   volumes:
-  #     - type: bind
-  #       source: .
-  #       target: /hawk
-  #   tty: true
-  #   depends_on:
-  #     - javavulny
+  hawkscan:
+    image: stackhawk/hawkscan
+    environment:
+      API_KEY: "${HAWK_API_KEY}"
+    volumes:
+      - type: bind
+        source: .
+        target: /hawk
+    tty: true
+    depends_on:
+      - javavulny

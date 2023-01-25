@@ -29,8 +29,4 @@ hawk:
     #- "scanner.analyser.followRedirect=true"
 #    - "ajaxSpider.eventWait=20"
 #    - "ajaxSpider.reloadWait=70"
-tags:
-  - name: _STACKHAWK_GIT_COMMIT_SHA
-    value: ${COMMIT_SHA:}
-  - name: _STACKHAWK_GIT_BRANCH
-    value: ${BRANCH_NAME:}
+

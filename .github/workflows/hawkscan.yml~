@@ -1,7 +1,7 @@
 name: HawkScan
-# on:
-#   push:
-#   pull_requests:
+on:
+  push:
+  pull_requests:
 jobs:
   hawkscan:
     name: HawkScan

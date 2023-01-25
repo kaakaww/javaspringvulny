@@ -1,0 +1,12 @@
+pool:
+  vmImage: 'ubuntu-latest'
+
+jobs:
+  - job: Docker_Compose_Scan
+    steps:
+      - script: docker-compose up --abort-on-container-exit
+        displayName: Docker Compose Scan
+        env:
+          HAWK_API_KEY: $(hawk_api_key)
+          APP_HOST: $(APP_HOST)
+          APP_ENV: $(APP_ENV)

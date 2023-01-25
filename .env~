@@ -1,0 +1,4 @@
+export APP_ID=9fe41c6b-6a52-461f-afd8-27b8530159fe
+export APP_ENV=live-demo
+export SCANUSER=user
+export SCANPASS=password
