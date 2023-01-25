@@ -23,7 +23,7 @@ app:
       path: /search
       success: "HTTP.*200.*"
 hawk:
-  failureThreshold: high
+  failureThreshold: medium
   #config:
     #- "scanner.analyser.redirectEqualsNotFound=false"
     #- "scanner.analyser.followRedirect=true"
