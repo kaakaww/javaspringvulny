@@ -1,7 +1,7 @@
 app:
   applicationId: ${APP_ID:9fe41c6b-6a52-461f-afd8-27b8530159fe}
-  env: ${APP_ENV:live-demo}
-  host: ${APP_HOST:https://localhost:9000}
+  env: ${APP_ENV:azure-demo}
+  host: ${APP_HOST:https://javavulny}
   excludePaths:
     - "/logout"
   antiCsrfParam: "_csrf"
