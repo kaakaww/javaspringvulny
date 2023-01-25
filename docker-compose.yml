@@ -29,7 +29,7 @@ services:
     volumes:
       - type: bind
         source: .
-        target: hawk
+        target: /hawk
     tty: true
     depends_on:
       - javavulny
