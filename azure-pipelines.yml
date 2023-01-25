@@ -10,3 +10,5 @@ jobs:
           HAWK_API_KEY: $(hawk_api_key)
           APP_HOST: $(APP_HOST)
           APP_ENV: $(APP_ENV)
+          SCANUSER: $(scanuser)
+          SCANPASS: $(scanpass)

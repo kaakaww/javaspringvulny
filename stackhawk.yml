@@ -14,8 +14,8 @@ app:
       loginPagePath: /login
       usernameField: username
       passwordField: password
-      scanUsername: user
-      scanPassword: password
+      scanUsername: ${SCANUSER}
+      scanPassword: ${SCANPASS}
     cookieAuthorization:
       cookieNames:
         - "JSESSIONID"
