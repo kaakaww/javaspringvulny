@@ -17,7 +17,7 @@ function authenticate(helper, paramsValues, credentials) {
 
     //build request body
 	var requestBody = "client_id=" + credentials.getParam('client_id') +
-		"&client_secret=" + credentials.getParam('client_secret') +
+		//"&client_secret=" + credentials.getParam('client_secret') +
 		"&grant_type=" + paramsValues.get('grant_type') +
 		"&username=" + credentials.getParam('username') +
 		"&audience=" + paramsValues.get('audience') +
@@ -33,8 +33,8 @@ function authenticate(helper, paramsValues, credentials) {
 
 	//send message
 	helper.sendAndReceive(msg);
-	print(msg.responseHeader)
-	print(msg.responseBody)
+	print("MSG response header: " + msg.responseHeader)
+	print("MSG response body: " + msg.responseBody)
 
 	return msg;
 }
@@ -49,5 +49,6 @@ function getOptionalParamsNames(){
 }
 
 function getCredentialsParamsNames(){
-	return ["client_id", "client_secret", "username", "password"];
+	return ["client_id", "username", "password"];
+	//return ["client_id", "client_secret", "username", "password"];
 }
