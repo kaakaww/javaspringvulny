@@ -33,6 +33,7 @@ function authenticate(helper, paramsValues, credentials) {
 
 	//send message
 	helper.sendAndReceive(msg);
+	print(msg.responseHeader)
 	print(msg.responseBody)
 
 	return msg;
