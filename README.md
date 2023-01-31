@@ -33,6 +33,25 @@ docker-compose up -d
 ```shell script
 ./gradlew --no-daemon bootRun
 ```
+## Building and Running on Windows
+
+### Build
+
+In PowerShell, with administrative privileges:
+
+1. [Install gradle](https://docs.gradle.org/current/userguide/installation.html#microsoft_windows_users)
+   1. unpack zip file
+   2. add the new gradle directory to `$env:PATH`
+2. Run the gradle build:
+   1. `.\gradlew.bat --no-daemon build`
+3. Update the `spring.datasource.url` in your local [application.properties](https://github.com/kaakaww/javaspringvulny/blob/main/src/main/resources/application.properties) file from `spring.datasource.url=jdbc:h2:file:${PWD}/db/vulny;DB_CLOSE_ON_EXIT=FALSE;AUTO_RECONNECT=TRUE` to an absolute path.
+   1. For instance: `spring.datasource.url=jdbc:h2:file:C:/Users/Dan/projects/javaspringvulny/db/vulny;DB_CLOSE_ON_EXIT=FALSE;AUTO_RECONNECT=TRUE`.
+
+### Run
+
+```shell script
+.\gradlew.bat --no-daemon bootRun
+```
 
 ## Using the Application
 
