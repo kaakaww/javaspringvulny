@@ -1,0 +1,23 @@
+{
+  "name": "integrations",
+  "version": "0.0.1",
+  "description": "Examples of StackHawk Integrations with Developer Tools",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "ci-cypress": "./node_modules/.bin/cypress run -s \"cypress/e2e/javaspringvulny/*\"",
+    "ci-playwright": "npm run pwtest",
+    "pwtest": "npm run pwtest:clean && playwright test -c playwright/out --config=playwright/playwright.config.ts",
+    "pwtest:clean": "mkdir -p playwright/out && rm -rf playwright/out && mkdir -p playwright/out && tsc --incremental -p playwright/tsconfig.json",
+    "pwtest:open": "PWDEBUG=1 npm run pwtest:clean && playwright test -c playwright/out --headed --config=playwright/playwright.config.ts"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.26.1",
+    "cypress": "^10.9.0",
+    "dotenv": "^16.0.3",
+    "typescript": "^4.8.4",
+    "uuid": "^9.0.0"
+  },
+  "author": "StackHawk",
+  "license": "ISC"
+}

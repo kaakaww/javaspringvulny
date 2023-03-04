@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "compilerOptions": {
+    "target": "es6",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "module": "esnext",
+    "moduleResolution": "node",
+    "rootDir": "./",
+    "sourceMap": true,
+    "outDir": "./out",
+    "noEmit": false
+  },
+  "include": ["javaspringvulny/**/*.ts"]
+}
