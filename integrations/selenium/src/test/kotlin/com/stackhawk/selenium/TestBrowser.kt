@@ -14,6 +14,7 @@ import org.openqa.selenium.chrome.ChromeDriver
 import org.openqa.selenium.chrome.ChromeOptions
 import org.openqa.selenium.firefox.FirefoxDriver
 import org.openqa.selenium.firefox.FirefoxOptions
+import org.openqa.selenium.firefox.FirefoxProfile
 import java.util.*
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
@@ -41,12 +42,14 @@ class TestBrowser {
                 ChromeDriver(options)
             } else {
                 val options: FirefoxOptions = FirefoxOptions()
+                val profile = FirefoxProfile()
+                profile.setPreference("network.proxy.allow_hijacking_localhost", true)
+                options.setHeadless(true)
+                options.profile = profile
                 val proxy: Proxy = Proxy()
+                proxy.httpProxy = System.getenv("HTTP_PROXY").replace("http://", "")
                 proxy.sslProxy = System.getenv("HTTP_PROXY").replace("http://", "")
-                proxy.httpProxy = System.getenv("HTTP_PROXY").replace("http://", "") // This is required for Selenium scan discovery!
-//                options.setHeadless(true)
                 options.setProxy(proxy)
-//                options.addArguments("--headless")
                 FirefoxDriverManager.getInstance().setup()
                 FirefoxDriver(options)
             }
@@ -62,10 +65,12 @@ class TestBrowser {
 
     @BeforeAll
     fun setUp() {
-        System.getenv().forEach { (key, value) ->
-            println("$key=$value")
-        }
+//        System.getenv().forEach { (key, value) ->
+//            println("$key=$value")
+//        }
+//        browser = getBrowser("firefox")
         browser = getBrowser("firefox")
+
     }
 
 //    @AfterEach
@@ -79,40 +84,40 @@ class TestBrowser {
         browser.quit()
     }
 
-//    @Test
-//    fun `can login with formAuth`() {
-//        formAuth(browser)
-//        val element = browser.findElement(By.xpath("//button[text()=\"Sign Out\"]"))
-//        Assertions.assertTrue(element.isDisplayed)
-//        Assertions.assertTrue(element.isEnabled)
-//    }
+    @Test
+    fun `can login with formAuth`() {
+        formAuth(browser)
+        val element = browser.findElement(By.xpath("//button[text()=\"Sign Out\"]"))
+        Assertions.assertTrue(element.isDisplayed)
+        Assertions.assertTrue(element.isEnabled)
+    }
 
-//    @Test
-//    fun `can login with tokenAuth`() {
-//        tokenAuth(browser)
-//        Thread.sleep(2000)
-//        attemptSearch(browser, value = "test")
-//        val resultsPane = browser.findElement(By.id("results")).getAttribute("class")
-//        Assertions.assertEquals(resultsPane, "alert-success")
-//    }
-//
-//    @Test
-//    fun `can login with basicAuth`() {
-//        basicAuth(browser)
-//        attemptSearch(browser, value = "test")
-//        val resultsPane = browser.findElement(By.id("results")).getAttribute("class")
-//        Assertions.assertEquals(resultsPane, "alert-success")
-//    }
-//
-//    @Test
-//    fun `can login with formMultiAuth`() {
-//        formMultiAuth(browser)
-//        val element = browser.currentUrl
-//        browser.navigate().to(element + "search")
-//        val search = browser.findElement(By.id("search"))
-//        Assertions.assertTrue(search.isDisplayed)
-//        Assertions.assertTrue(search.isEnabled)
-//    }
+    @Test
+    fun `can login with tokenAuth`() {
+        tokenAuth(browser)
+        Thread.sleep(2000)
+        attemptSearch(browser, value = "test")
+        val resultsPane = browser.findElement(By.id("results")).getAttribute("class")
+        Assertions.assertEquals(resultsPane, "alert-success")
+    }
+
+    @Test
+    fun `can login with basicAuth`() {
+        basicAuth(browser)
+        attemptSearch(browser, value = "test")
+        val resultsPane = browser.findElement(By.id("results")).getAttribute("class")
+        Assertions.assertEquals(resultsPane, "alert-success")
+    }
+
+    @Test
+    fun `can login with formMultiAuth`() {
+        formMultiAuth(browser)
+        val element = browser.currentUrl
+        browser.navigate().to(element + "search")
+        val search = browser.findElement(By.id("search"))
+        Assertions.assertTrue(search.isDisplayed)
+        Assertions.assertTrue(search.isEnabled)
+    }
 
 //    @Test
 //    fun `can login with jwtAuth`() {
@@ -126,7 +131,7 @@ class TestBrowser {
         browser.navigate().to("$URL/hidden/selenium")
         val element = browser.title
         Assertions.assertTrue(element.contains("selenium tests"))
-        Thread.sleep(300000)
+//        Thread.sleep(300000)
     }
 
     private fun attemptSearch(browser: WebDriver, value: String) {
