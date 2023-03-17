@@ -37,5 +37,9 @@ jobs:
     container:
       image: returntocorp/semgrep
     steps:
-    - uses: actions/checkout@v3
-    - run: semgrep ci
+      - uses: actions/checkout@v3
+      - name: Download artifact from previous job
+        uses: actions/download-artifact@v3
+        with:
+          name: gradlelockfile
+      - run: semgrep ci
