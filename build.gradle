@@ -1,41 +1,20 @@
-/*plugins {
-    id 'java'
-}
-
-group 'hawk'
-version '1.0-SNAPSHOT'
-
-sourceCompatibility = 1.8
-
-repositories {
-    mavenCentral()
-}
-
-dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.12'
-}*/
-
 buildscript {
     repositories {
         mavenCentral()
     }
     dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.1.6.RELEASE")
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.7.4")
+    }
+    configurations {
+        compileClasspath {
+            resolutionStrategy.activateDependencyLocking()
+        }
     }
 }
 
 apply plugin: 'java'
-//apply plugin: 'eclipse'
 apply plugin: 'idea'
-apply plugin: 'org.springframework.boot'
-apply plugin: 'io.spring.dependency-management'
 apply plugin: 'distribution'
-
-
-bootJar {
-    baseName = 'java-spring-vuly'
-    version =  '0.1.0'
-}
 
 repositories {
     mavenCentral()
@@ -46,14 +25,14 @@ targetCompatibility = 11
 
 dependencies {
 
-    implementation("org.springframework.boot:spring-boot-starter-web")
-    compileOnly("org.springframework.boot:spring-boot-devtools")
-    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-    implementation("org.springframework.boot:spring-boot-starter-security")
-    implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
-    implementation("org.thymeleaf.extras:thymeleaf-extras-springsecurity5")
-    implementation("com.h2database:h2")
-    runtimeOnly("org.postgresql:postgresql")
+    implementation("org.springframework.boot:spring-boot-starter-web:2.7.4")
+    compileOnly("org.springframework.boot:spring-boot-devtools:2.7.4")
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa:2.7.4")
+    implementation("org.springframework.boot:spring-boot-starter-security:2.7.4")
+    implementation("org.springframework.boot:spring-boot-starter-thymeleaf:2.7.4")
+    implementation("org.thymeleaf.extras:thymeleaf-extras-springsecurity5:3.0.4.RELEASE")
+    implementation("com.h2database:h2:1.4.200")
+    runtimeOnly("org.postgresql:postgresql:42.5.4")
     implementation("io.jsonwebtoken:jjwt-api:0.10.7")
     implementation("org.apache.logging.log4j:log4j-slf4j-impl:2.14.1")
 

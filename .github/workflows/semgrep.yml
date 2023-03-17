@@ -11,7 +11,25 @@ on:
   - cron: 5 5 * * *
 name: Semgrep
 jobs:
+  buildGradleLockFile: 
+      runs-on: ubuntu-latest
+      steps:
+      - uses: actions/checkout@v3
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+      - name: Build Dependency Tree
+        run: gradle dependencies --write-locks
+      - name: Upload Dependency Tree Artifact     
+        uses: actions/upload-artifact@v3
+        with:
+          name: gradlelockfile
+          path: gradle.lockfile
+jobs:
   semgrep:
+    needs: buildGradleLockFile
     name: Scan
     runs-on: ubuntu-20.04
     env:
