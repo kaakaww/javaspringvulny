@@ -27,7 +27,7 @@ jobs:
         with:
           name: gradlelockfile
           path: gradle.lockfile
-jobs:
+
   semgrep:
     needs: buildGradleLockFile
     name: Scan
