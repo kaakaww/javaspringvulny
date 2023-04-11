@@ -47,9 +47,12 @@ class TestBrowser {
                 options.setHeadless(true)
                 options.profile = profile
                 val proxy: Proxy = Proxy()
-                proxy.httpProxy = System.getenv("HTTP_PROXY").replace("http://", "")
-                proxy.sslProxy = System.getenv("HTTP_PROXY").replace("http://", "")
-                options.setProxy(proxy)
+                val httpProxy: String? = (System.getenv("HTTP_PROXY"))
+                if (httpProxy != null) {
+                    proxy.httpProxy = httpProxy.replace("http://", "")
+                    proxy.sslProxy = httpProxy.replace("http://", "")
+                    options.setProxy(proxy)
+                }
                 FirefoxDriverManager.getInstance().setup()
                 FirefoxDriver(options)
             }
