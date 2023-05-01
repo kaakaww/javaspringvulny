@@ -10,7 +10,15 @@ val hawkScriptSdkVersion = "3.0.11"
 kotlin {
     sourceSets {
         main {
-            kotlin { srcDirs("src") }
+            kotlin {
+                srcDirs(
+                    "authentication",
+                    "session",
+                    "httpsender",
+                    "active",
+                    "proxy",
+                )
+            }
         }
     }
 }
