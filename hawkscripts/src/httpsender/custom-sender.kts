@@ -1,17 +1,22 @@
+import com.stackhawk.zap.extension.talon.hawkscan.ExtensionTalonHawkscan
 import org.apache.log4j.LogManager
+import org.parosproxy.paros.control.Control
 import org.parosproxy.paros.network.HttpMessage
 import org.zaproxy.zap.extension.script.HttpSenderScriptHelper
-import org.zaproxy.zap.extension.script.ScriptVars
 
-val logger = LogManager.getLogger("sender1")
+val logger = LogManager.getLogger("custom-http-sender")
+
+val talon = Control
+    .getSingleton()
+    .extensionLoader
+    .getExtension(ExtensionTalonHawkscan::class.java)
 
 // modify a request before it's sent to the web application
 fun sendingRequest(msg: HttpMessage, initiator: Int, helper: HttpSenderScriptHelper) {
-    // logger.info("custom-sender script $initiator")
-    msg.requestHeader.setHeader("X-ZAP-Initiator", "$initiator")
+    logger.info("req ${msg.requestHeader.uri}")
+    msg.requestHeader.setHeader("X-HawkScanId", talon.talonHawkScanConf.scanId)
 }
 
 // modify the response from the web application before sending to the client
 fun responseReceived(msg: HttpMessage, initiator: Int, helper: HttpSenderScriptHelper) {
-    msg.responseHeader.setHeader("X-ZAP-Initiator", "$initiator")
 }

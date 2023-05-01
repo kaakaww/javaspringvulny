@@ -24,6 +24,10 @@ app:
     testPath:
       path: /search
       success: "HTTP.*200.*"
+  waitForAppTarget:
+    pollDelay: 1000
+    waitTimeoutMillis: 10000
+
 hawk:
   spider:
     maxDurationMinutes: 5

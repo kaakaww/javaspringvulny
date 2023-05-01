@@ -5,6 +5,10 @@ server:
     key-store: classpath:javavulny.p12
     key-store-password: stackhawk
     key-alias: JavaVulny
+  error:
+    whitelabel:
+      enabled: false
+    include-stacktrace: always
 
 spring:
   datasource:
