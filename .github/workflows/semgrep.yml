@@ -8,7 +8,7 @@ on:
     - .github/workflows/semgrep.yml
   schedule:
   # random HH:MM to avoid a load spike on GitHub Actions at 00:00
-  - cron: 5 5 * * *
+  - cron: 0 1 * * *
 name: Semgrep
 jobs:
   buildGradleLockFile: 
@@ -34,6 +34,8 @@ jobs:
     runs-on: ubuntu-20.04
     env:
       SEMGREP_APP_TOKEN: ${{ secrets.SEMGREP_APP_TOKEN }}
+      SEMGREP_REPO_NAME: 'from-github/javaspringvulny'
+      SEMGREP_REPO_URL: 'https://github.com/r2c-CSE/javaspringvulny'
     container:
       image: returntocorp/semgrep
     steps:
