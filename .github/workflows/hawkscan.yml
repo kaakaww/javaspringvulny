@@ -31,6 +31,6 @@ jobs:
         run: ./gradlew bootRun &
 
       - name: Test with HawkScan
-        uses: stackhawk/hawkscan-action@v2.0.0
+        uses: stackhawk/hawkscan-action@v2.0.3
         with:
           apiKey: ${{ secrets.HAWK_API_KEY }}
