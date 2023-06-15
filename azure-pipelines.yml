@@ -8,13 +8,20 @@ trigger:
 - azure-pipelines
 
 pool:
-  vmImage: ubuntu-latest
+  vmImage: windows-latest
 
 steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+- script: echo Azure Pipelines default build file!
+  displayName: '🦅'
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+- task: HawkScanInstall@1
+  inputs:
+    version: 'latest'
+
+- task: RunHawkScan@1
+  inputs:
+    configFile: 'stackhawk.yml'
+    version: 'latest'
+  env:
+    HAWK_API_KEY: $(HAWK_API_KEY) # the recommended way to map to an env variable
+    APP_ENV: azure-pipelines
