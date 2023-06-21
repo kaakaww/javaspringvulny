@@ -1,0 +1,37 @@
+# This is a basic workflow to help you get started with GitHub Actions
+name: StackHawk Actions
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the main branch
+  pull_request:
+    branches: [main]
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+   
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This is the job of running the Javaspringvulny application and then running HawkScan to test it
+  stackhawk-hawkscan:
+    # This is the OS we chose to run the project on
+    runs-on: ubuntu-latest
+    # These are the sequential steps for running the action
+    steps:
+      # First, the action checks out the repo to get the latest version
+      - name: Check out Repo!
+        uses: actions/checkout@v2
+      # Next, the action builds and runs the Javaspringvulny application in a Docker container
+      - name: Build and Run Vulny!
+        run: docker-compose build && docker-compose up -d
+      # Afterwards, the action pulls down the correct version of HawkScan, in this instance 2.0.0. Then it runs HawkScan
+      # against the application using the referenced API Key that was saved to the repo as a secret, and the HawkScan
+      # configuration file stackhawk-actions.yml. It also stores information about the pull request event including the
+      # commit SHA and branch name and stores them to the variable names COMMIT_SHA and BRANCH_NAME.
+      - name: HawkScan
+        uses: stackhawk/hawkscan-action@v2
+        with:
+          apiKey: ${{ secrets.HAWK_API_KEY }}
+          configurationFiles: stackhawk-actions.yml
+        env:
+          COMMIT_SHA: ${{ github.event.pull_request.head.sha }} # Get the commit SHA from GitHub -> needed for Actions
+          BRANCH_NAME: ${{ github.head_ref }} # Used to display Branch name in the StackHawk UI
+    
