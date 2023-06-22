@@ -169,6 +169,7 @@ docker run --tty --rm --network host --volume $(pwd):/hawk \
   stackhawk/hawkscan stackhawk.d/stackhawk.yml stackhawk.d/stackhawk-auth-basic.yml
 ```
 
+
 ### Example Specs
 
 By default HawkScan will run with the `stackhawk.yml` file if it's defined and present, but can instead use named specs such as `hawk scan stackhawk.yml`
