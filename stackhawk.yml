@@ -25,6 +25,7 @@ app:
       path: /search
       success: "HTTP.*200.*"
 hawk:
+  failureThreshold: "high"
   spider:
     maxDurationMinutes: 5
 #  config:
