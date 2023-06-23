@@ -1,0 +1,73 @@
+# HawkScan Scanning in Azure Pipelines
+# This is a demonstration of running JavaSpringVulny (a web applications) in azure-pipelines (a cicd pipeline) with the StackHawk extension (DAST testing)
+# https://marketplace.visualstudio.com/items?itemName=StackHawk.stackhawk-extensions
+# https://github.com/kaakaww/javaspringvulny
+# https://aka.ms/yaml
+
+# matrix builds for different build systems
+# use `condition: eq(variables['imageName'], 'ubuntu-latest')` property to filter tasks for specific operating systems
+strategy:
+  matrix:
+    windows:
+      imageName: 'windows-latest'
+    linux:
+      imageName: 'ubuntu-latest'
+
+pool:
+  vmImage: $(imageName)
+
+trigger:
+- main
+
+steps:
+- checkout: self
+
+- script: echo Azure Pipelines build for $(imageName)!
+  displayName: '🦅 $(imageName)'
+
+# install the latest version of hawkscan
+- task: HawkScanInstall@1
+  inputs:
+    version: 'latest'
+
+# docker-compose starts the postgres database on linux os's, not on windows
+- task: DockerCompose@0
+  displayName: Start JavaSpringVulny on linux with docker-compose
+  condition: eq(variables['imageName'], 'ubuntu-latest')
+  inputs:
+    containerregistrytype: 'Azure Container Registry'
+    dockerComposeFile: docker-compose.yml
+    action: Run services
+
+# specific path replacement for in-memory database on windows in azure-pipelines
+- powershell: |
+    $file = 'src/main/resources/application.properties'
+    $find = 'spring.datasource.url=jdbc:h2:file:${PWD}/db/vulny;'
+    $replace = "spring.datasource.url=jdbc:h2:file:D:\\a\\1\\db\\vulny;"
+    (Get-Content $file).replace($find, $replace) | Set-Content $file
+  condition: eq(variables['imageName'], 'windows-latest')
+  displayName: Configure JavaSpringVulny for windows
+
+# azure pipelines default jdk is 8, so we upgrade to 11 to run JavaSpringVulny
+# the hawkscan msi bundles java with it, so this step isn't necesarry for running HawkScan
+- task: JavaToolInstaller@0
+  inputs:
+    versionSpec: '11'
+    jdkArchitectureOption: 'x64'
+    jdkSourceOption: 'PreInstalled'
+
+# start javaspringVulny in the background
+- powershell: |
+    start-process ./gradlew.bat bootRun
+  displayName: Start JavaSpringVulny on windows with gradle in the background
+  condition: eq(variables['imageName'], 'windows-latest')
+  
+# run hawkscan with the StackHawk Azure Extension
+- task: RunHawkScan@1
+  inputs:
+    configFile: 'stackhawk.yml'
+    version: 'latest'
+  env:
+    HAWK_API_KEY: $(HAWK_API_KEY) # use variables in the azure devops ui to configure secrets and env vars
+    APP_ENV: $(imageName)
+    APP_ID: $(APP_ID) 
