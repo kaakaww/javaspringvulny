@@ -17,6 +17,7 @@ strategy:
     linux-zip:
       imageName: "ubuntu-latest"
       installerType: "zip"
+
 pool:
   vmImage: $(imageName)
 
@@ -33,13 +34,7 @@ steps:
   - task: HawkScanInstall@1
     inputs:
       version: "latest"
-      installerType: "auto"
-    condition: eq(variables['imageName'], 'ubuntu-latest')
-  - task: HawkScanInstall@1
-    inputs:
-      version: "latest"
-      installerType: "msi"
-    condition: eq(variables['imageName'], 'windows-latest')
+
   # docker-compose starts the postgres database on linux os's, not on windows
   - task: DockerCompose@0
     displayName: Start JavaSpringVulny on linux with docker-compose
