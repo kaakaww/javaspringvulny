@@ -105,4 +105,14 @@ public class LoginController {
         }
     }
 
+    @GetMapping("/login-multi-check")
+    public String loginCheck(HttpServletRequest req, HttpServletResponse resp, Model model, @CookieValue("XLOGINID") String xLoginId) {
+        String sessId = req.getSession().getId();
+        String loginCode = loginCodes.get("cookie-" + sessId);
+        if (loginCode == null || !loginCode.equals(xLoginId))
+            return "redirect:/login-form-multi";
+        model.addAttribute("title", "StackHawk Java Vulny Application");
+        return "index";
+    }
+
 }
