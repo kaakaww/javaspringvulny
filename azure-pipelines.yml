@@ -21,7 +21,7 @@ strategy:
       imageName: "windows-latest"
       installerType: "Auto"
     linux-auto:
-      imageName: "windows-latest"
+      imageName: "ubuntu-latest"
       installerType: "Auto"
 
 pool:
