@@ -10,13 +10,19 @@ strategy:
   matrix:
     windows-msi:
       imageName: "windows-latest"
-      installerType: "msi"
+      installerType: "Msi"
     windows-zip:
       imageName: "windows-latest"
-      installerType: "zip"
+      installerType: "Zip"
     linux-zip:
       imageName: "ubuntu-latest"
-      installerType: "zip"
+      installerType: "Zip"
+    windows-auto:
+      imageName: "windows-latest"
+      installerType: "Auto"
+    linux-auto:
+      imageName: "windows-latest"
+      installerType: "Auto"
 
 pool:
   vmImage: $(imageName)
@@ -34,6 +40,7 @@ steps:
   - task: HawkScanInstall@1
     inputs:
       version: "latest"
+      installerType: "$(installerType)"
 
   # docker-compose starts the postgres database on linux os's, not on windows
   - task: DockerCompose@0
