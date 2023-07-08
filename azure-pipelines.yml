@@ -10,19 +10,19 @@ strategy:
   matrix:
     windows-msi:
       imageName: "windows-latest"
-      installerType: "Msi"
+      installerType: "msi"
     windows-zip:
       imageName: "windows-latest"
-      installerType: "Zip"
+      installerType: "zip"
     linux-zip:
       imageName: "ubuntu-latest"
-      installerType: "Zip"
+      installerType: "zip"
     windows-auto:
       imageName: "windows-latest"
-      installerType: "Auto"
+      installerType: "auto"
     linux-auto:
       imageName: "ubuntu-latest"
-      installerType: "Auto"
+      installerType: "auto"
 
 pool:
   vmImage: $(imageName)
