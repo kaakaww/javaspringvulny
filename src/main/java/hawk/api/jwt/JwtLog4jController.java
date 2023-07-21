@@ -25,6 +25,7 @@ public class JwtLog4jController {
         }
         logger.info("Hitting Log4J route");
         logger.info(text);
+        logger.info("End print");
         return ResponseEntity.ok().build();
     }
 
