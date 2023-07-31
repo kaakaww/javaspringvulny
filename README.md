@@ -34,6 +34,9 @@ docker-compose up -d
 ./gradlew --no-daemon bootRun
 ```
 ## Building and Running on Windows
+```shell script
+./gradlew --no-daemon bootRun -Dspring.profiles.active=windows
+```
 
 ### Build
 
