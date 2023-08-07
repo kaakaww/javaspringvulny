@@ -1,7 +1,7 @@
 name: HawkScan
 on:
   workflow_dispatch:
-#   push:
+  push:
 #   pull_requests:
 jobs:
   hawkscan:
