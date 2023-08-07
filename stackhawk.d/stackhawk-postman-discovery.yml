@@ -1,6 +1,6 @@
 app:
-  applicationId: ${APP_ID:28d52a92-3cbb-45fd-bc23-2a677fed354a}
-  env: ${APP_ENV:dev}
+  applicationId: ${APP_ID:9fe41c6b-6a52-461f-afd8-27b8530159fe}
+  env: ${APP_ENV:gha-postman}
   host: ${APP_HOST:https://localhost:9000}
   excludePaths:
     - "/logout"
