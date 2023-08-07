@@ -14,7 +14,7 @@ jobs:
         run: docker-compose build && docker-compose up -d
       - name: Run HawkScan
         id: run-hawkscan
-        uses: stackhawk/hawkscan-action@v2.0.0
+        uses: stackhawk/hawkscan-action@v2
         with:
           apiKey: ${{ secrets.HAWK_API_KEY }}
           configurationFiles: stackhawk.d/stackhawk-postman-discovery.yml
