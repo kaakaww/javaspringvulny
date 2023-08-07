@@ -2,6 +2,10 @@ app:
   applicationId: ${APP_ID:9fe41c6b-6a52-461f-afd8-27b8530159fe}
   env: ${APP_ENV:github-demo}
   host: ${APP_HOST:https://localhost:9000}
+  waitForAppTarget:
+    path: /
+    waitTimeoutMillis: 200000
+    pollDelay: 6000
   excludePaths:
     - "/logout"
   antiCsrfParam: "_csrf"
