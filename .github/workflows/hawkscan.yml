@@ -2,8 +2,9 @@ name: HawkScan
 on:
   push:
     branches: [main]
+  pull_request:
+    branches: [main]
   workflow_dispatch:
-#   pull_requests:
 jobs:
   hawkscan:
     name: HawkScan
