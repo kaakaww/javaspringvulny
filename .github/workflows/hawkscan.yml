@@ -10,7 +10,7 @@ jobs:
     steps:
       - name: Stand up app 
         uses: actions/checkout@v2
-        run: docker-compose up -d
+        run: docker-compose build && docker-compose up -d
       - name: Run HawkScan
         id: run-hawkscan
         uses: stackhawk/hawkscan-action@v2.0.0
