@@ -1,0 +1,26 @@
+app:
+  applicationId: ${APP_ID:test-app}
+  env: ${APP_ENV:Multi Cookie Auth}
+  openApiConf:
+    path: /openapi
+  host: ${HOST:https://localhost:9000}
+  excludePaths:
+    - "/logout"
+    - "/login-form-multi"
+    - "/login-code"
+  authentication:
+    external:
+      values:
+      - type: COOKIE
+        value:
+          name: "XLOGINID"
+          val: ${XLOGINID}
+      - type: COOKIE
+        value:
+          name: "JSESSIONID"
+          val: ${JSESSIONID}
+    testPath:
+      path: /login-multi-check
+      success: ".*200.*"
+    loggedInIndicator: "\\QSign Out\\E"
+    loggedOutIndicator: ".*Location:.*/login.*"
