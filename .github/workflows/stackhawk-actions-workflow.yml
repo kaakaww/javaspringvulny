@@ -1,12 +1,12 @@
 # This is a basic workflow to help you get started with GitHub Actions
 name: StackHawk Actions
 # Controls when the workflow will run
-# on:
+  on:
 #   # Triggers the workflow on push or pull request events but only for the main branch
 #   pull_request:
 #     branches: [main]
 #   # Allows you to run this workflow manually from the Actions tab
-  # workflow_dispatch:
+    workflow_dispatch:
    
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -30,7 +30,7 @@ jobs:
         uses: stackhawk/hawkscan-action@v2.0.0
         with:
           apiKey: ${{ secrets.HAWK_API_KEY }}
-          configurationFiles: stackhawk-actions.yml
+          configurationFiles: stackhawk.d/stackhawk-postman-discovery.yml
         env:
           COMMIT_SHA: ${{ github.event.pull_request.head.sha }} # Get the commit SHA from GitHub -> needed for Actions
           BRANCH_NAME: ${{ github.head_ref }} # Used to display Branch name in the StackHawk UI
