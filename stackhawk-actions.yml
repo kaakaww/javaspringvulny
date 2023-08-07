@@ -6,7 +6,6 @@ app:
   excludePaths:
     - "/logout"
   #    - "/login-form-multi"
-  #    - "/login-code"
   antiCsrfParam: "_csrf"
   # Configure Basic Authentication
   authentication:
