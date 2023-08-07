@@ -16,3 +16,5 @@ jobs:
         uses: stackhawk/hawkscan-action@v2.0.0
         with:
           apiKey: ${{ secrets.HAWK_API_KEY }}
+          dryRun: true
+          configurationFiles: stackhawk.d/stackhawk-postman-discovery.yml
