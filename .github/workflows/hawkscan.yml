@@ -9,8 +9,9 @@ jobs:
     name: HawkScan
     runs-on: ubuntu-latest
     steps:
-      - name: Stand up app 
+      - name: Checkout app 
         uses: actions/checkout@v2
+      - name: Build and Run App
         run: docker-compose build && docker-compose up -d
       - name: Run HawkScan
         id: run-hawkscan
