@@ -39,7 +39,7 @@ hawkAddOn:
       language: KOTLIN
       type: authentication
       path: hawkscripts
-    - name: custom-sender.kts
-      language: KOTLIN
-      type: httpsender
-      path: hawkscripts
+#    - name: custom-sender.kts
+#      language: KOTLIN
+#      type: httpsender
+#      path: hawkscripts

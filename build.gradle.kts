@@ -34,6 +34,7 @@ dependencies {
 
     implementation("io.jsonwebtoken:jjwt-impl:0.10.7")
     implementation("io.jsonwebtoken:jjwt-jackson:0.10.7")
+    implementation("io.resurface:resurfaceio-logger:2.2.0")
 
     compileOnly("org.projectlombok:lombok:1.18.10")
     annotationProcessor("org.projectlombok:lombok:1.18.22")

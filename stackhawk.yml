@@ -4,7 +4,7 @@ app:
   host: ${APP_HOST:https://localhost:9000}
   excludePaths:
     - "/logout"
-#    - "/login-form-multi"
+    - "/login-form-multi"
 #    - "/login-code"
   antiCsrfParam: "_csrf"
   authentication:
@@ -25,13 +25,19 @@ app:
       path: /search
       success: "HTTP.*200.*"
   waitForAppTarget:
-    pollDelay: 1000
-    waitTimeoutMillis: 10000
+    pollDelay: 100
+    waitTimeoutMillis: 1000
 
 hawk:
+  scan:
+    concurrentRequests: 100
+    throttlePassiveBacklog: 10000000
   spider:
-    maxDurationMinutes: 5
-#  config:
+    maxDurationMinutes: 500
+  config:
+    - "database.request.bodysize=30000000"
+    - "database.response.bodysize=30000000"
+    - "spider.maxParseSizeBytes=30000000"
 #    - "scanner.analyser.redirectEqualsNotFound=false"
 #    - "scanner.analyser.followRedirect=true"
 

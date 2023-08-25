@@ -1,4 +1,5 @@
 import com.fasterxml.jackson.databind.ObjectMapper
+import com.stackhawk.Script
 import com.stackhawk.zap.extension.talon.HawkConfExtensions
 import com.stackhawk.zap.extension.talon.cleanHost
 import com.stackhawk.zap.extension.talon.hawkscan.ExtensionTalonHawkscan
@@ -18,8 +19,6 @@ val talon = Control
     .extensionLoader
     .getExtension(ExtensionTalonHawkscan::class.java)
 
-val mapper = ObjectMapper()
-
 fun hostUrl(path: String): String {
     return "${HawkConfExtensions.cleanHost(talon.talonHawkScanConf.hawkscanConf.app)}$path"
 }
@@ -34,6 +33,7 @@ fun authenticate(
     logger.info("TalonConf: ${talon.talonHawkScanConf}")
     logger.info("host ${talon.talonHawkScanConf.hawkscanConf.app.cleanHost()}")
 
+    val mapper = ObjectMapper()
     /*val payload = JSONObject().apply {
         put("username", credentials.getParam("username"))
         put("password", credentials.getParam("password"))
@@ -59,9 +59,14 @@ fun authenticate(
     logger.info("msg: ${msg.requestHeader} ${msg.requestBody} ${msg.requestHeader.headers.size}")
     msg.requestHeader.headers.forEach { println(it) }
     helper.sendAndReceive(msg)
+    logger.info("resp: ${msg.responseHeader} ${msg.responseBody} ")
 
-    val map = mapper.readValue(msg.responseBody.bytes, Map::class.java)
-    logger.info("map $map")
+    if (msg.responseBody.length() > 0) {
+        val map = mapper.readValue(msg.responseBody.bytes, Map::class.java)
+        logger.info("map $map")
+    } else {
+        logger.info("no body to parse")
+    }
     return msg
 }
 
