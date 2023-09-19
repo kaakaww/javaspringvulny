@@ -22,7 +22,7 @@ jobs:
           ref: refs/heads/main
       - name: Install HawkScan MSI
         shell: pwsh
-        run: msiexec.exe /i https://download.stackhawk.com/hawk/msi/integration-test/hawk-${{ inputs.version }}.msi INSTALLDIR="${{ github.workspace }}\hawk-${{ inputs.version }}" /passive
+        run: msiexec.exe /i https://download.stackhawk.com/hawk/msi/hawk-${{ inputs.version }}.msi INSTALLDIR="${{ github.workspace }}\hawk-${{ inputs.version }}" /passive
       - name: Start javaspringvulny
         shell: pwsh
         run: ./gradlew.bat bootRun --args='--spring.profiles.active=windows' &
