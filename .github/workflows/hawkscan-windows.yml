@@ -21,10 +21,10 @@ jobs:
         run: ./gradlew.bat bootRun --args='--spring.profiles.active=windows' &
       - name: Install HawkScan MSI
         shell: pwsh
-        run: msiexec.exe /i https://download.stackhawk.com/hawk/msi/hawk-${env:HAWK_VERSION}.msi INSTALLDIR="${{ github.workspace }}\hawk-${env:HAWK_VERSION}" /passive
+        run: msiexec.exe /i https://download.stackhawk.com/hawk/msi/hawk-$env:HAWK_VERSION.msi INSTALLDIR="${{ github.workspace }}\hawk-$env:HAWK_VERSION" /passive
       - name: Run HawkScan from MSI
         shell: pwsh
-        run: ./hawk-${env:HAWK_VERSION}/hawk.exe scan stackhawk.yml -e APP_ENV=windows-test
+        run: ./hawk-$env:HAWK_VERSION/hawk.exe scan stackhawk.yml -e APP_ENV=windows-test
   zip-test:
     runs-on: windows-2022
     steps:
@@ -39,12 +39,12 @@ jobs:
       - name: Install HawkScan from ZIP
         shell: pwsh
         run: |
-          curl -v https://download.stackhawk.com/dev/hawk/cli/hawk-${env:HAWK_VERSION}.zip -o hawk.zip
+          curl -v https://download.stackhawk.com/dev/hawk/cli/hawk-$env:HAWK_VERSION.zip -o hawk.zip
           unzip hawk.zip
       - name: Run HawkScan from CLI
         shell: pwsh
-        run: ./hawk-${env:HAWK_VERSION}/hawk.exe scan stackhawk.yml -e APP_ENV=windows-test
-            hawk-${env:HAWK_VERSION}/hawk.ps1 --api-key=${{ secrets.HAWK_API_KEY }} scan stackhawk.yml -e APP_ID=4030d674-88b7-4e07-8065-7761f9c63788 -e APP_ENV=windows-integration-test
+        run: ./hawk-$env:HAWK_VERSION/hawk.exe scan stackhawk.yml -e APP_ENV=windows-test
+            hawk-$env:HAWK_VERSION/hawk.ps1 --api-key=${{ secrets.HAWK_API_KEY }} scan stackhawk.yml -e APP_ID=4030d674-88b7-4e07-8065-7761f9c63788 -e APP_ENV=windows-integration-test
   action-test:
     runs-on: windows-2022
     steps:
