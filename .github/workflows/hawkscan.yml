@@ -35,7 +35,7 @@ jobs:
           APP_ID: ${{ github.event.client_payload.appId }}
 
   hawkscan-windows:
-    uses: ./.github/workflows/hawkscan-windows.yaml
+    uses: ./.github/workflows/hawkscan-windows.yml
     secrets:
       HAWK_API_KEY: ${{ secrets.HAWK_API_KEY }}
     with:
