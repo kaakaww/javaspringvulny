@@ -28,4 +28,4 @@ jobs:
         run: ./gradlew.bat bootRun --args='--spring.profiles.active=windows' &
       - name: Run HawkScan from MSI
         shell: pwsh
-        run: ./hawk-${version}/hawk.exe scan stackhawk.yml -e APP_ENV=windows-test
+        run: ./hawk-${{ inputs.version }}/hawk.exe scan stackhawk.yml -e APP_ENV=windows-test
