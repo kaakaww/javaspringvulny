@@ -10,7 +10,11 @@ jobs:
     name: HawkScan
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout repo
+        uses: actions/checkout@v3
+        with:
+          repository: kaakaww/javaspringvulny
+          ref: refs/heads/main
       - name: Create ${{ github.event.client_payload.repoName }} app directory
         run: mkdir -p common/build/integrationTests/hawkscan-action/apps/${{ github.event.client_payload.repoName }}
       - name: Navigate to ${{ github.event.client_payload.repoName }} app directory
