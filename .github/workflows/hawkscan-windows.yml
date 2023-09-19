@@ -1,18 +1,14 @@
-name: Windows Integration Tests
+name: Windows HawkScan Tests
 on:
-  workflow_call:
-    inputs:
-      version:
-        description: "Version of HawkScan to use"
-        required: true
-        type: string
-    secrets:
-      HAWK_API_KEY:
-        description: "API key for running the scans"
-        required: true
+  pull_request:
+    branches:
+      - more-cicd-tests
+
+env:
+  HAWK_VERSION: 3.3.0
 
 jobs:
-  windows-test:
+  msi-test:
     runs-on: windows-2022
     steps:
       - name: Checkout repo
@@ -20,12 +16,49 @@ jobs:
         with:
           repository: kaakaww/javaspringvulny
           ref: refs/heads/main
-      - name: Install HawkScan MSI
-        shell: pwsh
-        run: msiexec.exe /i https://download.stackhawk.com/hawk/msi/hawk-${{ inputs.version }}.msi INSTALLDIR="${{ github.workspace }}\hawk-${{ inputs.version }}" /passive
       - name: Start javaspringvulny
         shell: pwsh
         run: ./gradlew.bat bootRun --args='--spring.profiles.active=windows' &
+      - name: Install HawkScan MSI
+        shell: pwsh
+        run: msiexec.exe /i https://download.stackhawk.com/hawk/msi/hawk-${env:HAWK_VERSION}.msi INSTALLDIR="${{ github.workspace }}\hawk-${env:HAWK_VERSION}" /passive
       - name: Run HawkScan from MSI
         shell: pwsh
-        run: ./hawk-${{ inputs.version }}/hawk.exe scan stackhawk.yml -e APP_ENV=windows-test
+        run: ./hawk-${env:HAWK_VERSION}/hawk.exe scan stackhawk.yml -e APP_ENV=windows-test
+  zip-test:
+    runs-on: windows-2022
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+        with:
+          repository: kaakaww/javaspringvulny
+          ref: refs/heads/main
+      - name: Start javaspringvulny
+        shell: pwsh
+        run: ./gradlew.bat bootRun --args='--spring.profiles.active=windows' &
+      - name: Install HawkScan from ZIP
+        shell: pwsh
+        run: |
+          curl -v https://download.stackhawk.com/dev/hawk/cli/hawk-${env:HAWK_VERSION}.zip -o hawk.zip
+          unzip hawk.zip
+      - name: Run HawkScan from CLI
+        shell: pwsh
+        run: ./hawk-${env:HAWK_VERSION}/hawk.exe scan stackhawk.yml -e APP_ENV=windows-test
+            hawk-${env:HAWK_VERSION}/hawk.ps1 --api-key=${{ secrets.HAWK_API_KEY }} scan stackhawk.yml -e APP_ID=4030d674-88b7-4e07-8065-7761f9c63788 -e APP_ENV=windows-integration-test
+  action-test:
+    runs-on: windows-2022
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+        with:
+          repository: kaakaww/javaspringvulny
+          ref: refs/heads/main
+      - name: Start javaspringvulny
+        shell: pwsh
+        run: ./gradlew.bat bootRun --args='--spring.profiles.active=windows' &
+      - name: Run HawkScan
+        uses: stackhawk/hawkscan-action@main
+        with:
+          apiKey: ${{ secrets.HAWK_API_KEY }}
+        env:
+          APP_ID: 4030d674-88b7-4e07-8065-7761f9c63788

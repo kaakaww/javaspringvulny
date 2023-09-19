@@ -2,9 +2,7 @@ name: HawkScan
 on:
   repository_dispatch:
     types: [integration-initial-test]
-  push:
-    branches:
-      - more-cicd-tests
+
 jobs:
   hawkscan:
     name: HawkScan
@@ -37,10 +35,3 @@ jobs:
         env:
           # APPLICATION_ID: ${{ github.event.client_payload.appId }}
           APP_ID: ${{ github.event.client_payload.appId }}
-
-  hawkscan-windows:
-    uses: ./.github/workflows/hawkscan-windows.yml
-    secrets:
-      HAWK_API_KEY: ${{ secrets.HAWK_API_KEY }}
-    with:
-      version: 3.3.0
