@@ -15,7 +15,11 @@ jobs:
   windows-test:
     runs-on: windows-2022
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout repo
+        uses: actions/checkout@v3
+        with:
+          repository: kaakaww/javaspringvulny
+          ref: refs/heads/main
       - name: Install HawkScan MSI
         shell: pwsh
         run: msiexec.exe /i https://download.stackhawk.com/hawk/msi/integration-test/hawk-${{ inputs.version }}.msi INSTALLDIR="${{ github.workspace }}\hawk-${{ inputs.version }}" /passive
@@ -24,4 +28,4 @@ jobs:
         run: ./gradlew.bat bootRun --args='--spring.profiles.active=windows' &
       - name: Run HawkScan from MSI
         shell: pwsh
-        run: hawk-${version}\hawk.exe scan stackhawk.yml -e APP_ENV=windows-test
+        run: ./hawk-${version}/hawk.exe scan stackhawk.yml -e APP_ENV=windows-test
