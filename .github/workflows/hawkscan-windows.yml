@@ -1,6 +1,6 @@
 name: Windows HawkScan Tests
 on:
-  pull_request:
+  push:
     branches:
       - more-cicd-tests
 
