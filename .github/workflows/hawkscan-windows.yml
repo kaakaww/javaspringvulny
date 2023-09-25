@@ -23,10 +23,10 @@ jobs:
         shell: pwsh
         run: |
           echo "$Env:HAWK_VERSION"
-          msiexec.exe /i "https://download.stackhawk.com/hawk/msi/hawk-$Env:HAWK_VERSION.msi" INSTALLDIR="${{ github.workspace }}\hawk" /passive
+          Start-Process msiexec.exe -Wait -ArgumentList '/i "https://download.stackhawk.com/hawk/msi/hawk-$Env:HAWK_VERSION.msi" INSTALLDIR="${{ github.workspace }}\hawk" /passive';
       - name: Run HawkScan from MSI
         shell: pwsh
-        run: ./hawk/hawk.exe scan stackhawk.yml -e APP_ENV=windows-test
+        run: ./hawk/hawk.exe --api-key=${{ secrets.HAWK_API_KEY }} scan stackhawk.yml -e APP_ENV=windows-test
   zip-test:
     runs-on: windows-2022
     steps:
@@ -45,7 +45,7 @@ jobs:
           unzip hawk.zip
       - name: Run HawkScan from CLI
         shell: pwsh
-        run: hawk/hawk.ps1 --api-key=${{ secrets.HAWK_API_KEY }} scan stackhawk.yml -e APP_ID=4030d674-88b7-4e07-8065-7761f9c63788 -e APP_ENV=windows-test
+        run: ./hawk/hawk.ps1 --api-key=${{ secrets.HAWK_API_KEY }} scan stackhawk.yml -e APP_ID=4030d674-88b7-4e07-8065-7761f9c63788 -e APP_ENV=windows-test
   action-test:
     runs-on: ubuntu-latest
     steps:
