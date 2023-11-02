@@ -66,7 +66,11 @@ public class Application {
                     System.out.println(String.format("Adding user%d", i));
                     userRepo.save(new User(String.format("user%d", i), String.format("we have the best users, users%d", i), "1234567"));
                 });
+
+                // This should be removed once we confirm that all instances of "user" have been removed
                 userRepo.save(new User("user", "The auth user", "1234567"));
+
+                userRepo.save(new User("janesmith", "The auth user", "1234567"));
 
                 TenantContext.setCurrentTenant("12345678");
                 Stream.of(4, 5, 6).forEach(i -> {
