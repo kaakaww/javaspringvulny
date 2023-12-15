@@ -29,4 +29,6 @@ public class UserService {
     }
 
     public List<User> findUsersByName(String  name) { return this.userRepo.findAllByNameIsLike('%' + name + '%'); }
+
+    public User addUser(User user) {return this.userRepo.save(user); }
 }
