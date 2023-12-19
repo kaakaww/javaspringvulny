@@ -28,6 +28,3 @@ app:
     testPath:
       path: /search
       success: "HTTP.*200.*"
-  waitForAppTarget:
-    pollDelay: 500
-    waitTimeoutMillis: 5000

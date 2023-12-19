@@ -50,8 +50,8 @@ In PowerShell, with administrative privileges:
    2. add the new gradle directory to `$env:PATH`
 2. Run the gradle build:
    1. `.\gradlew.bat --no-daemon build`
-3. Update the `spring.datasource.url` in your local [application.properties](https://github.com/kaakaww/javaspringvulny/blob/main/src/main/resources/application.properties) file from `spring.datasource.url=jdbc:h2:file:${PWD}/db/vulny;DB_CLOSE_ON_EXIT=FALSE;AUTO_RECONNECT=TRUE` to an absolute path.
-   1. For instance: `spring.datasource.url=jdbc:h2:file:C:/Users/Dan/projects/javaspringvulny/db/vulny;DB_CLOSE_ON_EXIT=FALSE;AUTO_RECONNECT=TRUE`.
+3. Update the `spring.datasource.url` in your local [application.yaml](https://github.com/kaakaww/javaspringvulny/blob/main/src/main/resources/application.properties) file from `spring.datasource.url=jdbc:h2:file:${PWD}/db/vulny;DB_CLOSE_ON_EXIT=FALSE;AUTO_RECONNECT=TRUE` to an absolute path.
+   1. For instance: `spring.datasource.url: jdbc:h2:file:C:/Users/Dan/projects/javaspringvulny/db/vulny;DB_CLOSE_ON_EXIT=FALSE;AUTO_RECONNECT=TRUE`.
 
 ### Run
 
@@ -69,7 +69,7 @@ Once the app starts up, you can reach it at [https://localhost:9000](https://loc
 You can log in to the application with the following credentials:
 
 ```
-    username: user
+    username: janesmith
     password: password
 ```
 
