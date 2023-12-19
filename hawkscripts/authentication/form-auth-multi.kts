@@ -1,5 +1,4 @@
 import com.fasterxml.jackson.databind.ObjectMapper
-import com.stackhawk.Script
 import com.stackhawk.zap.extension.talon.HawkConfExtensions
 import com.stackhawk.zap.extension.talon.cleanHost
 import com.stackhawk.zap.extension.talon.hawkscan.ExtensionTalonHawkscan

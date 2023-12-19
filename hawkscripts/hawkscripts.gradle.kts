@@ -1,11 +1,11 @@
 import org.jetbrains.kotlin.konan.file.File.Companion.userHome
 
 plugins {
-    kotlin("jvm") version "1.7.20"
+    kotlin("jvm") version "1.8.22"
 }
 
 val kotlinVersion = "1.7.20"
-val hawkScriptSdkVersion = "3.1.12"
+val hawkScriptSdkVersion = "3.4.2"
 
 kotlin {
     sourceSets {

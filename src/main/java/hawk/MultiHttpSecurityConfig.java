@@ -119,7 +119,7 @@ public class MultiHttpSecurityConfig {
     }
 
     @Configuration
-    @Order(4)
+    @Order(5)
     public static class FormLoginWebSecurityConfigurerAdapter extends WebSecurityConfigurerAdapter {
         @Override
         protected void configure(HttpSecurity http) throws Exception {
@@ -162,5 +162,24 @@ public class MultiHttpSecurityConfig {
                         .build();
 
         return new InMemoryUserDetailsManager(user);
+    }
+
+    // "/api/okta/**"
+
+    @Configuration
+    @Order(4)
+    public static class OktaWebSecurityConfigurerAdapter extends WebSecurityConfigurerAdapter {
+        @Override
+        protected void configure(HttpSecurity http) throws Exception {
+            http.antMatcher("/api/okta/**")
+                    .httpBasic().disable()
+                    .csrf().disable()
+                    .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                    .and()
+                    .authorizeRequests()
+                    .antMatchers("/api/okta/**")
+                    .permitAll();
+            ;
+        }
     }
 }

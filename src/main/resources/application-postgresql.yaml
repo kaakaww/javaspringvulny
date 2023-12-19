@@ -32,10 +32,6 @@ springdoc:
   api-docs:
     path: /openapi
 
-payload:
-  start-size: 3096
-  count: 20
-
 logging:
   level:
     org.hibernate.SQL: debug
