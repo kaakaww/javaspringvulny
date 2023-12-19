@@ -15,6 +15,7 @@ services:
     container_name: javavulny
     environment:
       SPRING_PROFILES_ACTIVE: postgresql
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/postgres
     ports:
       - "9000:9000"
     links:

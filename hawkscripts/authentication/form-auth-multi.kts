@@ -33,11 +33,6 @@ fun authenticate(
     logger.info("host ${talon.talonHawkScanConf.hawkscanConf.app.cleanHost()}")
 
     val mapper = ObjectMapper()
-    /*val payload = JSONObject().apply {
-        put("username", credentials.getParam("username"))
-        put("password", credentials.getParam("password"))
-    }.toString()*/
-
     val payload = mapper.writeValueAsString(
         mapOf(
             "username" to credentials.getParam("username"),

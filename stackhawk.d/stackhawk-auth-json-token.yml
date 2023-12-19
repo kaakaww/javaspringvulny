@@ -10,7 +10,7 @@ app:
       loginPath: /api/jwt/auth/signin
       usernameField: username
       passwordField: password
-      scanUsername: "user"
+      scanUsername: "janesmith"
       scanPassword: "password"
     tokenExtraction:
       type: TOKEN_PATH
