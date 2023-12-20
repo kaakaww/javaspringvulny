@@ -27,8 +27,9 @@ strategy:
 pool:
   vmImage: $(imageName)
 
-#trigger:
-#  - main
+trigger:
+  #- main
+  - none
 
 steps:
   - checkout: self
