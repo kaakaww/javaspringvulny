@@ -23,7 +23,7 @@
                 "tags": [
                   "CWE-22"
                 ],
-                "security-severity": "Low"
+                "security-severity": 3
               }
             }
           ]
