@@ -7,7 +7,7 @@
         "driver": {
           "version" : "3.5.0",
           "name": "HawkScan",
-          "informationUri": "https://app.stackhawk.com/scans/4315d0a6-c1f9-4f9e-bbd0-1eb87b09264b",
+          "informationUri": "https://app.test.stackhawk.com/scans/4315d0a6-c1f9-4f9e-bbd0-1eb87b09264b",
           "properties": {
             "scanId": "<uuid>"
           },
@@ -18,10 +18,10 @@
               "shortDescription": {
                 "text": "Proxy Disclosure"
               },
-              "helpUri": "https://app.stackhawk.com/scans/4315d0a6-c1f9-4f9e-bbd0-1eb87b09264b/finding/6",
+              "helpUri": "https://app.test.stackhawk.com/scans/4315d0a6-c1f9-4f9e-bbd0-1eb87b09264b/finding/6",
               "help": {
-                "markdown": "\n## Heading\n\n* one\n* two\n\n[Proxy Disclosure log4j](https://app.stackhawk.com/scans/4315d0a6-c1f9-4f9e-bbd0-1eb87b09264b/finding/6)",
-                "text": "boring text link: https://app.stackhawk.com/scans/4315d0a6-c1f9-4f9e-bbd0-1eb87b09264b/finding/6"
+                "markdown": "\n## Heading\n\n* one\n* two\n\n[Proxy Disclosure log4j](https://app.test.stackhawk.com/scans/4315d0a6-c1f9-4f9e-bbd0-1eb87b09264b/finding/6)",
+                "text": "boring text link: https://app.test.stackhawk.com/scans/4315d0a6-c1f9-4f9e-bbd0-1eb87b09264b/finding/6"
               },
               "properties": {
                 "tags": [
@@ -52,7 +52,7 @@
           },
           "ruleId": "2771",
           "message": {
-            "text": "## big rule\n\n* one\n* two\n\n\n [stackhawk](https://app.stackhawk.com)"
+            "text": "[Proxy Disclosure @ https://localhost:9000/payload/3097](https://app.test.stackhawk.com/scans/4315d0a6-c1f9-4f9e-bbd0-1eb87b09264b/finding/40025/path/1299803/message/2780)"
           },
           "locations": [
             {
