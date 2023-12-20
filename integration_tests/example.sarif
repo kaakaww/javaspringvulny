@@ -50,10 +50,10 @@
           "analysisTarget": {
             "uri": "https://localhost:9000/"
           },
-          "ruleId": "2771",
+          "ruleId": "40025",
           "message": {
             "text": "[JavaSpringVulny/Development https://localhost:9000/payload/3097](https://app.test.stackhawk.com/scans/4315d0a6-c1f9-4f9e-bbd0-1eb87b09264b/finding/40025/path/1299803/message/2780)",
-            "markdown": "\n## Heading\n\n* one\n* two\n\n[Proxy Disclosure log4j](https://app.test.stackhawk.com/scans/4315d0a6-c1f9-4f9e-bbd0-1eb87b09264b/finding/40025)"
+            "markdown": "[JavaSpringVulny/Development https://localhost:9000/payload/3097](https://app.test.stackhawk.com/scans/4315d0a6-c1f9-4f9e-bbd0-1eb87b09264b/finding/40025/path/1299803/message/2780)"
           },
           "locations": [
             {
@@ -73,10 +73,10 @@
           "analysisTarget": {
             "uri": "https://localhost:9000/"
           },
-          "ruleId": "2771",
+          "ruleId": "40025",
           "message": {
             "text": "<evidence> or <other-info> or <just name>",
-            "markdown": "\n## Heading\n\n* one\n* two\n\n[Proxy Disclosure log4j](https://app.test.stackhawk.com/scans/4315d0a6-c1f9-4f9e-bbd0-1eb87b09264b/finding/40025)"
+            "markdown": "[JavaSpringVulny/Development https://localhost:9000/payload/3097](https://app.test.stackhawk.com/scans/4315d0a6-c1f9-4f9e-bbd0-1eb87b09264b/finding/40025/path/1299803/message/2780)"
           },
           "locations": [
             {
