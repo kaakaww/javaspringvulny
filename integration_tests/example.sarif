@@ -13,15 +13,15 @@
           },
           "rules": [
             {
-              "id": "2771",
+              "id": "40025",
               "name": "ProxyDisclosure",
               "shortDescription": {
                 "text": "Proxy Disclosure"
               },
-              "helpUri": "https://app.test.stackhawk.com/scans/4315d0a6-c1f9-4f9e-bbd0-1eb87b09264b/finding/6",
+              "helpUri": "https://app.test.stackhawk.com/scans/4315d0a6-c1f9-4f9e-bbd0-1eb87b09264b/finding/40025",
               "help": {
-                "markdown": "\n## Heading\n\n* one\n* two\n\n[Proxy Disclosure log4j](https://app.test.stackhawk.com/scans/4315d0a6-c1f9-4f9e-bbd0-1eb87b09264b/finding/6)",
-                "text": "boring text link: https://app.test.stackhawk.com/scans/4315d0a6-c1f9-4f9e-bbd0-1eb87b09264b/finding/6"
+                "markdown": "\n## Rule Heading\n\n* one\n* two\n\n[Proxy Disclosure log4j](https://app.test.stackhawk.com/scans/4315d0a6-c1f9-4f9e-bbd0-1eb87b09264b/finding/40025)",
+                "text": "boring text link: https://app.test.stackhawk.com/scans/4315d0a6-c1f9-4f9e-bbd0-1eb87b09264b/finding/40025"
               },
               "properties": {
                 "tags": [
@@ -52,7 +52,8 @@
           },
           "ruleId": "2771",
           "message": {
-            "text": "[Proxy Disclosure @ https://localhost:9000/payload/3097](https://app.test.stackhawk.com/scans/4315d0a6-c1f9-4f9e-bbd0-1eb87b09264b/finding/40025/path/1299803/message/2780)"
+            "text": "[JavaSpringVulny/Development https://localhost:9000/payload/3097](https://app.test.stackhawk.com/scans/4315d0a6-c1f9-4f9e-bbd0-1eb87b09264b/finding/40025/path/1299803/message/2780)",
+            "markdown": "\n## Heading\n\n* one\n* two\n\n[Proxy Disclosure log4j](https://app.test.stackhawk.com/scans/4315d0a6-c1f9-4f9e-bbd0-1eb87b09264b/finding/40025)"
           },
           "locations": [
             {
@@ -74,7 +75,8 @@
           },
           "ruleId": "2771",
           "message": {
-            "text": "<evidence> or <other-info> or <just name>"
+            "text": "<evidence> or <other-info> or <just name>",
+            "markdown": "\n## Heading\n\n* one\n* two\n\n[Proxy Disclosure log4j](https://app.test.stackhawk.com/scans/4315d0a6-c1f9-4f9e-bbd0-1eb87b09264b/finding/40025)"
           },
           "locations": [
             {
