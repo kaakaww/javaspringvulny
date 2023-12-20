@@ -54,7 +54,7 @@
             {
               "physicalLocation": {
                 "artifactLocation": {
-                  "uri": "file://https://localhost:9000/payload/3097",
+                  "uri": "localhost:9000/payload/3097",
                   "uriBaseId": "https://localhost:9000/"
                 },
                 "region": {
@@ -76,7 +76,7 @@
             {
               "physicalLocation": {
                 "artifactLocation": {
-                  "uri": "file://https://localhost:9000/jwt-auth",
+                  "uri": "localhost:9000/jwt-auth",
                   "uriBaseId": "https://localhost:9000/"
                 },
                 "region": {
