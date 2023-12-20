@@ -27,15 +27,8 @@ strategy:
 pool:
   vmImage: $(imageName)
 
-#trigger:
-#  - main
-
 trigger:
-  branches:
-    include:
-      - main
-    exclude:
-      - feature/scripting-yaml-config
+  - main
 
 steps:
   - checkout: self
