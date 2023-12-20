@@ -48,19 +48,17 @@
       "results": [
         {
           "analysisTarget": {
-            "uri": "https://localhost:9000/"
+            "uri": "https://localhost:9000/payload/3097"
           },
           "ruleId": "4315d0a6-c1f9-4f9e-bbd0-1eb87b09264b-40025",
           "message": {
-            "text": "[JavaSpringVulny/Development Proxy Disclosure](https://app.test.stackhawk.com/scans/4315d0a6-c1f9-4f9e-bbd0-1eb87b09264b/finding/40025/path/1299803/message/2780)",
-            "markdown": "[JavaSpringVulny/Development Proxy Disclosure](https://app.test.stackhawk.com/scans/4315d0a6-c1f9-4f9e-bbd0-1eb87b09264b/finding/40025/path/1299803/message/2780)"
+            "text": "[Proxy Disclosure https://localhost:9000/payload/3097](https://app.test.stackhawk.com/scans/4315d0a6-c1f9-4f9e-bbd0-1eb87b09264b/finding/40025/path/1299803/message/2780)"
           },
           "locations": [
             {
               "physicalLocation": {
                 "artifactLocation": {
-                  "uri": "payload/3097",
-                  "uriBaseId": "https://localhost:9000/"
+                  "uri": "JavaSpringVulny/Development"
                 },
                 "region": {
                   "startLine": 1
@@ -71,19 +69,17 @@
         },
         {
           "analysisTarget": {
-            "uri": "https://localhost:9000/"
+            "uri": "https://localhost:9000/jwt-auth"
           },
           "ruleId": "4315d0a6-c1f9-4f9e-bbd0-1eb87b09264b-40025",
           "message": {
-            "text": "evidence or other-info or <just name>",
-            "markdown": "[JavaSpringVulny/Development https://localhost:9000/payload/3097](https://app.test.stackhawk.com/scans/4315d0a6-c1f9-4f9e-bbd0-1eb87b09264b/finding/40025/path/1299803/message/2780)"
+            "text": "[JavaSpringVulny/Development https://localhost:9000/jwt-auth](https://app.test.stackhawk.com/scans/4315d0a6-c1f9-4f9e-bbd0-1eb87b09264b/finding/40025/path/1299803/message/2780)"
           },
           "locations": [
             {
               "physicalLocation": {
                 "artifactLocation": {
-                  "uri": "jwt-auth",
-                  "uriBaseId": "https://localhost:9000/"
+                  "uri": "jwt-auth"
                 },
                 "region": {
                   "startLine": 1
