@@ -48,7 +48,7 @@
           },
           "ruleId": "2771",
           "message": {
-            "text": "<evidence> or <other-info> or <just name>"
+            "text": "## big rule\n\n* one\n* two\n\n\n [stackhawk](https://app.stackhawk.com)"
           },
           "locations": [
             {
