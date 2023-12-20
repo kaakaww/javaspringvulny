@@ -71,7 +71,6 @@ tasks.register("download") {
                     while (c != -1) {
                         curLen += c
                         output.write(buf, 0, c)
-                        // buf = ByteArray(8192)
                         c = input.read(buf, 0, buf.size)
                         val pc = ((curLen.toDouble() / len.toDouble()) * 100).roundToLong()
                         if ((System.currentTimeMillis() % delay) == 0L && lastPct != pc) {
