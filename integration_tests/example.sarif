@@ -65,7 +65,13 @@
                 }
               }
             }
-          ]
+          ],
+          "properties": {
+            "tags": [
+              "CWE-22"
+            ],
+            "security-severity": "3.0"
+          }
         },
         {
           "analysisTarget": {
@@ -86,7 +92,13 @@
                 }
               }
             }
-          ]
+          ],
+          "properties": {
+            "tags": [
+              "CWE-22"
+            ],
+            "security-severity": "3.0"
+          }
         }
       ]
     }
