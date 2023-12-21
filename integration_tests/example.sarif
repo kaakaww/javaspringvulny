@@ -54,7 +54,7 @@
                 "tags": [
                   "CWE-89"
                 ],
-                "security-severity": "9.0"
+                "security-severity": "8.0"
               }
             }
           ]
