@@ -5,7 +5,7 @@
     {
       "tool": {
         "driver": {
-          "version" : "3.5.0",
+          "version": "3.5.0",
           "name": "HawkScan",
           "informationUri": "https://app.test.stackhawk.com/scans/4315d0a6-c1f9-4f9e-bbd0-1eb87b09264b",
           "properties": {
@@ -13,14 +13,11 @@
           },
           "rules": [
             {
-              "id": "40025",
+              "id": "4315d0a6-c1f9-4f9e-bbd0-1eb87b09264b-40025-0",
               "name": "ProxyDisclosure",
-              "shortDescription": {
-                "text": "Proxy Disclosure"
-              },
-              "helpUri": "https://app.test.stackhawk.com/scans/4315d0a6-c1f9-4f9e-bbd0-1eb87b09264b/finding/40025",
+              "helpUri": "https://app.test.stackhawk.com/scans/4315d0a6-c1f9-4f9e-bbd0-1eb87b09264b/finding/40025/path/1299803/message/2780",
               "help": {
-                "markdown": "\n## Rule Heading\n\n* one\n* two\n\n[Proxy Disclosure log4j](https://app.test.stackhawk.com/scans/4315d0a6-c1f9-4f9e-bbd0-1eb87b09264b/finding/40025)",
+                "markdown": "\n## Rule Heading\n\n* one\n* https://localhost:9000/payload/3099\n\nAll [Proxy Disclosure](https://app.test.stackhawk.com/scans/4315d0a6-c1f9-4f9e-bbd0-1eb87b09264b/finding/40025) findings",
                 "text": "boring text link: https://app.test.stackhawk.com/scans/4315d0a6-c1f9-4f9e-bbd0-1eb87b09264b/finding/40025"
               },
               "properties": {
@@ -29,6 +26,36 @@
                 ],
                 "security-severity": "3.0"
               }
+            },
+            {
+              "id": "4315d0a6-c1f9-4f9e-bbd0-1eb87b09264b-40025-1",
+              "name": "ProxyDisclosure",
+              "helpUri": "https://app.test.stackhawk.com/scans/4315d0a6-c1f9-4f9e-bbd0-1eb87b09264b/finding/40025/path/1299802/message/2776",
+              "help": {
+                "markdown": "\n## Rule Heading\n\n* one\n* https://localhost:9000/jwt-auth\n\nAll [Proxy Disclosure](https://app.test.stackhawk.com/scans/4315d0a6-c1f9-4f9e-bbd0-1eb87b09264b/finding/40025) findings",
+                "text": "boring text link: https://app.test.stackhawk.com/scans/4315d0a6-c1f9-4f9e-bbd0-1eb87b09264b/finding/40025"
+              },
+              "properties": {
+                "tags": [
+                  "CWE-22"
+                ],
+                "security-severity": "3.0"
+              }
+            },
+            {
+              "id": "4315d0a6-c1f9-4f9e-bbd0-1eb87b09264b-40018-0",
+              "name": "ProxyDisclosure",
+              "helpUri": "https://app.test.stackhawk.com/scans/4315d0a6-c1f9-4f9e-bbd0-1eb87b09264b/finding/40018/path/1299795/message/864",
+              "help": {
+                "markdown": "\n## Rule Heading\n\n* one\n* https://localhost:9000/search\n\nAll [SQL Injection](https://app.test.stackhawk.com/scans/4315d0a6-c1f9-4f9e-bbd0-1eb87b09264b/finding/40018) findings",
+                "text": "boring text link: https://app.test.stackhawk.com/scans/4315d0a6-c1f9-4f9e-bbd0-1eb87b09264b/finding/40018"
+              },
+              "properties": {
+                "tags": [
+                  "CWE-89"
+                ],
+                "security-severity": "9.0"
+              }
             }
           ]
         }
@@ -36,7 +63,7 @@
       "artifacts": [
         {
           "location": {
-            "uri": "https://localhost:9000/log4j?text=testValue"
+            "uri": "https://localhost:9000/payload/3099"
           }
         },
         {
@@ -47,58 +74,58 @@
       ],
       "results": [
         {
-          "analysisTarget": {
-            "uri": "https://localhost:9000/payload/3097"
-          },
-          "ruleId": "4315d0a6-c1f9-4f9e-bbd0-1eb87b09264b-40025",
+          "ruleId": "4315d0a6-c1f9-4f9e-bbd0-1eb87b09264b-40025-0",
           "message": {
-            "text": "[Proxy Disclosure https://localhost:9000/payload/3097](https://app.test.stackhawk.com/scans/4315d0a6-c1f9-4f9e-bbd0-1eb87b09264b/finding/40025/path/1299803/message/2780)"
+            "text": "Proxy Disclosure"
           },
           "locations": [
             {
               "physicalLocation": {
                 "artifactLocation": {
-                  "uri": "JavaSpringVulny/Development"
+                  "uri": "4315d0a6-c1f9-4f9e-bbd0-1eb87b09264b-40025/payload/3099"
                 },
                 "region": {
                   "startLine": 1
                 }
               }
             }
-          ],
-          "properties": {
-            "tags": [
-              "CWE-22"
-            ],
-            "security-severity": "3.0"
-          }
+          ]
         },
         {
-          "analysisTarget": {
-            "uri": "https://localhost:9000/jwt-auth"
-          },
-          "ruleId": "4315d0a6-c1f9-4f9e-bbd0-1eb87b09264b-40025",
+          "ruleId": "4315d0a6-c1f9-4f9e-bbd0-1eb87b09264b-40025-1",
           "message": {
-            "text": "[JavaSpringVulny/Development https://localhost:9000/jwt-auth](https://app.test.stackhawk.com/scans/4315d0a6-c1f9-4f9e-bbd0-1eb87b09264b/finding/40025/path/1299803/message/2780)"
+            "text": "Proxy Disclosure"
           },
           "locations": [
             {
               "physicalLocation": {
                 "artifactLocation": {
-                  "uri": "jwt-auth"
+                  "uri": "hawkscan/https://localhost:9000/jwt-auth"
                 },
                 "region": {
                   "startLine": 1
                 }
               }
             }
-          ],
-          "properties": {
-            "tags": [
-              "CWE-22"
-            ],
-            "security-severity": "3.0"
-          }
+          ]
+        },
+        {
+          "ruleId": "4315d0a6-c1f9-4f9e-bbd0-1eb87b09264b-40018-1",
+          "message": {
+            "text": "SQL Injection"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "hawkscan/https://localhost:9000/search"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ]
         }
       ]
     }
