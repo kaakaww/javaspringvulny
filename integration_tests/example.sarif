@@ -15,10 +15,10 @@
             {
               "id": "4315d0a6-c1f9-4f9e-bbd0-1eb87b09264b-40025-0",
               "name": "ProxyDisclosure",
-              "helpUri": "https://app.test.stackhawk.com/scans/4315d0a6-c1f9-4f9e-bbd0-1eb87b09264b/finding/40025/path/1299803/message/2780",
+              "helpUri": "https://app.test.stackhawk.com/scans/4315d0a6-c1f9-4f9e-bbd0-1eb87b09264b/finding/40025",
               "help": {
-                "markdown": "\n## Rule Heading\n\n* one\n* https://localhost:9000/payload/3099\n\nAll [Proxy Disclosure](https://app.test.stackhawk.com/scans/4315d0a6-c1f9-4f9e-bbd0-1eb87b09264b/finding/40025) findings",
-                "text": "boring text link: https://app.test.stackhawk.com/scans/4315d0a6-c1f9-4f9e-bbd0-1eb87b09264b/finding/40025"
+                "markdown": "\n# Proxy Disclosure\n## App: JavaSpringVulny\n## Environment: Development\n[Details for Proxy Disclosure](https://app.test.stackhawk.com/scans/4315d0a6-c1f9-4f9e-bbd0-1eb87b09264b/finding/40025/path/1299803/message/2780) at https://localhost:9000/payload/3099",
+                "text": ""
               },
               "properties": {
                 "tags": [
@@ -60,18 +60,6 @@
           ]
         }
       },
-      "artifacts": [
-        {
-          "location": {
-            "uri": "https://localhost:9000/payload/3099"
-          }
-        },
-        {
-          "location": {
-            "uri": "https://localhost:9000/jwt-auth"
-          }
-        }
-      ],
       "results": [
         {
           "ruleId": "4315d0a6-c1f9-4f9e-bbd0-1eb87b09264b-40025-0",
