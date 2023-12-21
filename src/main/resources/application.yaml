@@ -1,0 +1,33 @@
+server:
+  port: 9000
+  ssl:
+    enabled: true
+    key-store: classpath:javavulny.p12
+    key-store-password: stackhawk
+    key-alias: JavaVulny
+  error:
+    whitelabel:
+      enabled: false
+    include-stacktrace: always
+
+spring:
+  datasource:
+    url: jdbc:h2:file:${PWD}/db/vulny;DB_CLOSE_ON_EXIT=FALSE;AUTO_RECONNECT=TRUE
+    username: sa
+    password: password
+    driver-class-name: org.h2.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    generate-ddl: true
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate.jdbc.lob.non_contextual_creation: true
+
+springdoc:
+  api-docs:
+    path: /openapi
+
+payload:
+  start-size: 3096
+  count: 10

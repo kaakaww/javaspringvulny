@@ -16,7 +16,7 @@ app:
       loginPagePath: /login
       usernameField: username
       passwordField: password
-      scanUsername: "user"
+      scanUsername: "janesmith"
       scanPassword: "password"
     cookieAuthorization:
       cookieNames:

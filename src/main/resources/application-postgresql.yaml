@@ -1,0 +1,46 @@
+server:
+  port: 9000
+  ssl:
+    enabled: true
+    key-store: classpath:javavulny.p12
+    key-store-password: stackhawk
+    key-alias: JavaVulny
+  error:
+    whitelabel:
+      enabled: false
+    include-stacktrace: always
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+    platform: postgres
+    username: postgresql
+    password: postgresql
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    database: POSTGRESQL
+    generate-ddl: true
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate.jdbc.lob.non_contextual_creation: true
+      hibernate.use_sql_comments: false
+      hibernate.dialect: org.hibernate.dialect.PostgreSQL81Dialect
+    show-sql: false
+
+springdoc:
+  api-docs:
+    path: /openapi
+
+logging:
+  level:
+    org.hibernate.SQL: debug
+    org.hibernate.type: trace
+    org.hibernate.descriptor.sql: trace
+    org.springframework: info
+    org.baeldung: info
+
+management:
+  endpoints:
+    jmx.exposure.include: '*'
+    web.exposure.include: '*'

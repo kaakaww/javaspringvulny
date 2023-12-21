@@ -1,48 +1,19 @@
-/*plugins {
-    id 'java'
+import org.springframework.boot.gradle.tasks.bundling.BootJar
+
+plugins {
+    java
+    idea
+    distribution
+    id("org.springframework.boot") version "2.1.6.RELEASE"
 }
-
-group 'hawk'
-version '1.0-SNAPSHOT'
-
-sourceCompatibility = 1.8
+apply(plugin = "io.spring.dependency-management")
 
 repositories {
     mavenCentral()
 }
 
-dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.12'
-}*/
-
-buildscript {
-    repositories {
-        mavenCentral()
-    }
-    dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.1.6.RELEASE")
-    }
-}
-
-apply plugin: 'java'
-//apply plugin: 'eclipse'
-apply plugin: 'idea'
-apply plugin: 'org.springframework.boot'
-apply plugin: 'io.spring.dependency-management'
-apply plugin: 'distribution'
-
-
-bootJar {
-    baseName = 'java-spring-vuly'
-    version =  '0.1.0'
-}
-
-repositories {
-    mavenCentral()
-}
-
-sourceCompatibility = 11
-targetCompatibility = 11
+java.sourceCompatibility = JavaVersion.VERSION_11
+java.targetCompatibility = JavaVersion.VERSION_11
 
 dependencies {
 
@@ -63,12 +34,17 @@ dependencies {
 
     implementation("io.jsonwebtoken:jjwt-impl:0.10.7")
     implementation("io.jsonwebtoken:jjwt-jackson:0.10.7")
+    implementation("io.resurface:resurfaceio-logger:2.2.0")
 
     compileOnly("org.projectlombok:lombok:1.18.10")
     annotationProcessor("org.projectlombok:lombok:1.18.22")
 }
 
 configurations.implementation {
-    exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
+    exclude(group = "org.springframework.boot", module = "spring-boot-starter-logging")
 }
 
+tasks.named<BootJar>("bootJar") {
+    archiveBaseName.set("java-spring-vuly")
+    archiveVersion.set("0.1.0")
+}

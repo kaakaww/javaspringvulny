@@ -21,7 +21,7 @@ public class PayloadController {
     private static final char[] chars = new char[]{'a','b','c',' ','\n'};
     private static Map<Integer, byte[]> payloadCache = new ConcurrentHashMap();
 
-    @Value("${payload.startSize:2048}")
+    @Value("${payload.start-size:2048}")
     private int startPayloadSize = 2048;
 
     @Value("${payload.count:10}")

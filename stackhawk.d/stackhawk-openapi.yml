@@ -13,7 +13,7 @@ app:
       loginPath: /api/jwt/auth/signin
       usernameField: username
       passwordField: password
-      scanUsername: "user"
+      scanUsername: "janesmith"
       scanPassword: "password"
     tokenAuthorization:
       type: HEADER
@@ -25,6 +25,7 @@ app:
     testPath:
       path: /api/jwt/items/search/i
       success: "HTTP.*200.*"
+
   openApiConf:
     # path: /openapi
     filePath: openapi.yaml
