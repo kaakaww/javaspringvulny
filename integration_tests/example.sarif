@@ -64,7 +64,8 @@
         {
           "ruleId": "4315d0a6-c1f9-4f9e-bbd0-1eb87b09264b-40025-0",
           "message": {
-            "text": "Proxy Disclosure"
+            "text": "Proxy Disclosure",
+            "markdown": "[Proxy Disclosure](https://www.stackhawk.com)"
           },
           "locations": [
             {
