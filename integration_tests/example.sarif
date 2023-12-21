@@ -17,7 +17,7 @@
               "name": "ProxyDisclosure",
               "helpUri": "https://app.test.stackhawk.com/scans/4315d0a6-c1f9-4f9e-bbd0-1eb87b09264b/finding/40025",
               "help": {
-                "markdown": "\n# Proxy Disclosure\n## App: _JavaSpringVulny_\n## Environment: _Development_\n <a href=\"https://app.test.stackhawk.com/scans/4315d0a6-c1f9-4f9e-bbd0-1eb87b09264b/finding/40025/path/1299803/message/2780\" target=\"_blank\">Details of Proxy Disclosure</a> at `https://localhost:9000/payload/3099`",
+                "markdown": "\n## Proxy Disclosure\n### App: _JavaSpringVulny_\n### Environment: _Development_\n <a href=\"https://app.test.stackhawk.com/scans/4315d0a6-c1f9-4f9e-bbd0-1eb87b09264b/finding/40025/path/1299803/message/2780\" target=\"_blank\">Details of Proxy Disclosure</a> at `https://localhost:9000/payload/3099`",
                 "text": ""
               },
               "properties": {
