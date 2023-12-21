@@ -70,7 +70,7 @@
             {
               "physicalLocation": {
                 "artifactLocation": {
-                  "uri": "4315d0a6-c1f9-4f9e-bbd0-1eb87b09264b-40025/payload/3099"
+                  "uri": "hawkscan/https://localhost:9000/payload/3099"
                 },
                 "region": {
                   "startLine": 1
