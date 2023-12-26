@@ -8,8 +8,6 @@ app:
     pollDelay: 6000
   excludePaths:
     - "/logout"
-    - "/login-form-multi"
-    - "/login-code"
   antiCsrfParam: "_csrf"
   authentication:
     loggedInIndicator: "\\QSign Out\\E"
