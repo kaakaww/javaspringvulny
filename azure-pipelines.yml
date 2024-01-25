@@ -59,8 +59,9 @@ steps:
       jdkArchitectureOption: "x64"
       jdkSourceOption: "PreInstalled"
 
-  # start javaspringVulny in the background
+  # pre-build, then start javaspringVulny in the background
   - powershell: |
+      ./gradlew.bat build -x test
       $Env:SPRING_PROFILES_ACTIVE = 'windows'
       start-process ./gradlew.bat bootRun
     displayName: Start JavaSpringVulny on windows with gradle in the background
