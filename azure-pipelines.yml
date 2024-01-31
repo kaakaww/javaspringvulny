@@ -28,11 +28,6 @@ strategy:
 pool:
   vmImage: $(imageName)
 
-trigger:
-  branches:
-    include:
-      - main
-
 steps:
   - checkout: self
 
