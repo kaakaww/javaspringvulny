@@ -1,5 +1,8 @@
 name: Release Tag
-on: push
+on:
+  push:
+    branches:
+      - main
 
 jobs:
   release:
@@ -10,6 +13,7 @@ jobs:
       - name: Gradle assemble
         run: './gradlew :assemble'
       - uses: softprops/action-gh-release@v1
+        name: release files
         with:
           files: |
             build/libs/java-spring-vuly-0.1.0.jar
