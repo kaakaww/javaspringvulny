@@ -1,7 +1,5 @@
-name:  Release
-on:
-  workflow_dispatch:
-    branches: [ main ]
+name: Release Tag
+on: push
 
 jobs:
   release:
