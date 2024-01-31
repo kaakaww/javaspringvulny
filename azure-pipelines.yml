@@ -42,13 +42,6 @@ steps:
       version: "latest"
       installerType: "$(installerType)"
 
-  # build and run the app
-  - script: |
-      ./gradlew :build -x test
-      ./gradlew :bootRun &
-    displayName: Start JavaSpringVulny on linux
-    condition: eq(variables['imageName'], 'ubuntu-latest')
-
   # azure pipelines default jdk is 8, so we upgrade to 11 to run JavaSpringVulny
   # the hawkscan msi bundles java with it, so this step isn't necesarry for running HawkScan
   - task: JavaToolInstaller@0
@@ -56,6 +49,16 @@ steps:
       versionSpec: "17"
       jdkArchitectureOption: "x64"
       jdkSourceOption: "PreInstalled"
+
+  # build and run the app
+#  - script: |
+#      ./gradlew :build -x test
+#      ./gradlew :bootRun &
+  - script: |
+      curl -Lv https://github.com/kaakaww/javaspringvulny/releases/download/0.1.0/java-spring-vuly-0.1.0.jar -o ./java-spring-vuly-0.1.0.jar
+      java -jar ./java-spring-vuly-0.1.0.jar &
+    displayName: Start JavaSpringVulny on linux
+    condition: eq(variables['imageName'], 'ubuntu-latest')
 
   # pre-build, then start javaspringVulny in the background
   - powershell: |
