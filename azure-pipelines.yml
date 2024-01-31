@@ -6,6 +6,7 @@
 
 # matrix builds for different build systems
 # use `condition: eq(variables['imageName'], 'ubuntu-latest')` property to filter tasks for specific operating systems
+
 strategy:
   matrix:
     windows-msi:
@@ -28,7 +29,9 @@ pool:
   vmImage: $(imageName)
 
 trigger:
-  - main
+  branches:
+    include:
+      - main
 
 steps:
   - checkout: self
@@ -42,26 +45,24 @@ steps:
       version: "latest"
       installerType: "$(installerType)"
 
-  # docker-compose starts the postgres database on linux os's, not on windows
-  - task: DockerCompose@0
-    displayName: Start JavaSpringVulny on linux with docker-compose
+  # build and run the app
+  - script: |
+      ./gradlew :build -x test
+      ./gradlew :bootRun &
+    displayName: Start JavaSpringVulny on linux
     condition: eq(variables['imageName'], 'ubuntu-latest')
-    inputs:
-      containerregistrytype: "Azure Container Registry"
-      dockerComposeFile: docker-compose.yml
-      action: Run services
 
   # azure pipelines default jdk is 8, so we upgrade to 11 to run JavaSpringVulny
   # the hawkscan msi bundles java with it, so this step isn't necesarry for running HawkScan
   - task: JavaToolInstaller@0
     inputs:
-      versionSpec: "11"
+      versionSpec: "17"
       jdkArchitectureOption: "x64"
       jdkSourceOption: "PreInstalled"
 
   # pre-build, then start javaspringVulny in the background
   - powershell: |
-      ./gradlew.bat build -x test
+      ./gradlew.bat :build -x test
       $Env:SPRING_PROFILES_ACTIVE = 'windows'
       start-process ./gradlew.bat bootRun
     displayName: Start JavaSpringVulny on windows with gradle in the background
@@ -75,4 +76,4 @@ steps:
     env:
       HAWK_API_KEY: $(HAWK_API_KEY) # use variables in the azure devops ui to configure secrets and env vars
       APP_ENV: $(imageName)
-      APP_ID: $(APP_ID)
+      APP_ID: $(appId2)
