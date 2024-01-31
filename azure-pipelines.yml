@@ -28,6 +28,8 @@ strategy:
 pool:
   vmImage: $(imageName)
 
+trigger: none
+
 steps:
   - checkout: self
 
