@@ -1,17 +1,24 @@
 name:  Release
 on:
   workflow_dispatch:
+    inputs:
+      tag_name:
+        type: string
+        required: true
+        description: 'the release name, use sem ver'
     branches: [ main ]
 
 jobs:
-
-  build:
+  release:
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v2
       - name: Gradle assemble
         run: './gradlew :assemble'
-
+      - name: Tag
+        run: |
+          git tag ${{ inputs.tag_name }}
+          git push origin ${{ inputs.tag_name }}
       - uses: softprops/action-gh-release@v1
         with:
           files: |
