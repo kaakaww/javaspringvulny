@@ -50,21 +50,17 @@ steps:
       jdkArchitectureOption: "x64"
       jdkSourceOption: "PreInstalled"
 
-  # build and run the app
-#  - script: |
-#      ./gradlew :build -x test
-#      ./gradlew :bootRun &
+  # download, then start javaspringVulny in the background
   - script: |
-      curl -Lv https://github.com/kaakaww/javaspringvulny/releases/download/0.1.0/java-spring-vuly-0.1.0.jar -o ./java-spring-vuly-0.1.0.jar
+      curl -Ls https://github.com/kaakaww/javaspringvulny/releases/download/0.1.0/java-spring-vuly-0.1.0.jar -o ./java-spring-vuly-0.1.0.jar
       java -jar ./java-spring-vuly-0.1.0.jar &
     displayName: Start JavaSpringVulny on linux
     condition: eq(variables['imageName'], 'ubuntu-latest')
 
-  # pre-build, then start javaspringVulny in the background
+  # download, then start javaspringVulny in the background
   - powershell: |
-      ./gradlew.bat :build -x test
-      $Env:SPRING_PROFILES_ACTIVE = 'windows'
-      start-process ./gradlew.bat bootRun
+      Invoke-WebRequest -Uri "https://github.com/kaakaww/javaspringvulny/releases/download/0.1.0/java-spring-vuly-0.1.0.jar" -OutFile "java-spring-vuly-0.1.0.jar"
+      start-process java -jar ./java-spring-vuly-0.1.0.jar
     displayName: Start JavaSpringVulny on windows with gradle in the background
     condition: eq(variables['imageName'], 'windows-latest')
 
