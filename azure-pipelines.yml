@@ -28,7 +28,11 @@ strategy:
 pool:
   vmImage: $(imageName)
 
-trigger: none
+#trigger: none
+trigger:
+  branches:
+    include:
+      - bugfix/ps-cmds
 
 steps:
   - checkout: self
