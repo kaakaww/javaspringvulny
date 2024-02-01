@@ -60,8 +60,8 @@ steps:
   # download, then start javaspringVulny in the background
   - powershell: |
       Invoke-WebRequest -Uri "https://github.com/kaakaww/javaspringvulny/releases/download/0.1.0/java-spring-vuly-0.1.0.jar" -OutFile "java-spring-vuly-0.1.0.jar"
-      Get-JavaHome
-      Start-Process java -Wait -ArgumentList "-jar", "java-spring-vuly-0.1.0.jar"
+      java --version
+      Start-Process java -ArgumentList "-jar","java-spring-vuly-0.1.0.jar","--spring.profiles.active=windows"
     displayName: Start JavaSpringVulny on windows with gradle in the background
     condition: eq(variables['imageName'], 'windows-latest')
 
