@@ -37,7 +37,7 @@ steps:
     displayName: "🦅 $(imageName)"
 
   # install the latest version of hawkscan
-  - task: HawkScanInstall@1
+  - task: StackHawk.install-hawkscan-task-test.HawkScanInstall@1
     inputs:
       version: "latest"
       installerType: "$(installerType)"
@@ -66,7 +66,7 @@ steps:
     condition: eq(variables['imageName'], 'windows-latest')
 
   # run hawkscan with the StackHawk Azure Extension
-  - task: RunHawkScan@1
+  - task: StackHawk.run-hawkscan-task-test.RunHawkScan@1
     inputs:
       configFile: "stackhawk.yml"
       version: "latest"
