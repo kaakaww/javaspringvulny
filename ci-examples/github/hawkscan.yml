@@ -1,0 +1,26 @@
+name: HawkScan
+
+jobs:
+  hawkscan:
+    name: HawkScan
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Download and run JavaSpringVulny release jar
+        run: |
+          curl -Ls https://github.com/kaakaww/javaspringvulny/releases/download/0.1.0/java-spring-vuly-0.1.0.jar -o ./java-spring-vuly-0.1.0.jar
+          java -jar ./java-spring-vuly-0.1.0.jar &
+#      - name: Build and run JavaSpringVulny (slower)
+#        run: |
+#          ./gradlew build
+#          ./gradlew bootRun &
+      - name: Run HawkScan
+        id: run-hawkscan
+        uses: stackhawk/hawkscan-action@main
+        with:
+          apiKey: ${{ secrets.HAWK_API_KEY }}
+          sourceURL: https://download.stackhawk.com/dev/hawk/cli
+          version: 3.5.28
+        env:
+          APP_ID: ${{ secrets.appId }}
+          SARIF_ARTIFACT: true

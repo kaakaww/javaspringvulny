@@ -39,7 +39,7 @@ steps:
   # install the latest version of hawkscan
   - task: HawkScanInstall@1
     inputs:
-      version: "latest"
+      version: "3.5.28"
       installerType: "$(installerType)"
 
   # azure pipelines default jdk is 8, so we upgrade to 11 to run JavaSpringVulny
@@ -69,8 +69,9 @@ steps:
   - task: RunHawkScan@1
     inputs:
       configFile: "stackhawk.yml"
-      version: "latest"
+      version: "3.5.28"
     env:
       HAWK_API_KEY: $(HAWK_API_KEY) # use variables in the azure devops ui to configure secrets and env vars
       APP_ENV: $(imageName)
       APP_ID: $(appId2)
+      SARIF_ARTIFACT: true
