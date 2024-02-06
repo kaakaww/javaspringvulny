@@ -1,0 +1,3 @@
+hawk:
+  scan:
+    policyName: OPEN_API_TESTER
