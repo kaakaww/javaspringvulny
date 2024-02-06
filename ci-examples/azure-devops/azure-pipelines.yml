@@ -33,7 +33,9 @@ steps:
       configFile: "stackhawk.yml"
       version: "3.5.28"
     env:
-      HAWK_API_KEY: $(HAWK_API_KEY) # use variables in the azure devops ui to configure secrets and env vars
       APP_ENV: 'Azure Pipeline'
-      APP_ID: $(appId2)
+      # use variables in the azure devops ui to configure secrets and env vars
+      # specifying HAWK_API_KEY and APP_ID here are redundant but they MUST be set in the azure devops variables
+      HAWK_API_KEY: $(HAWK_API_KEY)
+      APP_ID: $(APP_ID)
       SARIF_ARTIFACT: true
