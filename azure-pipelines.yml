@@ -41,6 +41,14 @@ steps:
     inputs:
       version: "3.7.0"
       installerType: "$(installerType)"
+    condition: not(and(eq(variables['installerType'], 'auto'), eq(variables['imageName'], 'ubuntu-latest')))
+
+  - task: HawkScanInstall@1
+    inputs:
+      version: "3.7.0"
+      installerType: "$(installerType)"
+      installPath: '/home/vsts/custom'
+    condition: and(eq(variables['installerType'], 'auto'), eq(variables['imageName'], 'ubuntu-latest'))
 
   # azure pipelines default jdk is 8, so we upgrade to 11 to run JavaSpringVulny
   # the hawkscan msi bundles java with it, so this step isn't necesarry for running HawkScan
