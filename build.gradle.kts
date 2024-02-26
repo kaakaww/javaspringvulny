@@ -46,5 +46,5 @@ configurations.implementation {
 
 tasks.named<BootJar>("bootJar") {
     archiveBaseName.set("java-spring-vuly")
-    archiveVersion.set("0.1.0")
+    archiveVersion.set("0.2.0")
 }
