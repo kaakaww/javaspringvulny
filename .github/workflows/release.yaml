@@ -16,4 +16,4 @@ jobs:
         name: release files
         with:
           files: |
-            build/libs/java-spring-vuly-0.1.0.jar
+            build/libs/java-spring-vuly-0.2.0.jar
