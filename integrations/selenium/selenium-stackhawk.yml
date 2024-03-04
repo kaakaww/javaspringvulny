@@ -1,0 +1,31 @@
+app:
+  applicationId: ${APP_ID}
+  env: ${APP_ENV:selenium}
+  host: ${APP_HOST:https://localhost:9000}
+  excludePaths:
+    - "/logout"
+  antiCsrfParam: "_csrf"
+  authentication:
+    loggedInIndicator: "\\QSign Out\\E"
+    loggedOutIndicator: ".*Location:.*/login.*"
+    usernamePassword:
+      type: FORM
+      loginPath: /login
+      loginPagePath: /login
+      usernameField: username
+      passwordField: password
+      scanUsername: "user"
+      scanPassword: "password"
+    cookieAuthorization:
+      cookieNames:
+        - "JSESSIONID"
+    testPath:
+      path: /search
+      success: "HTTP.*200.*"
+hawk:
+  spider:
+    maxDurationMinutes: 5
+    base: false
+    custom:
+      command: './gradlew :test --rerun-tasks'
+      logOutputToForeground: true

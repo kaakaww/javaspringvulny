@@ -1,17 +1,13 @@
 app:
-  applicationId: ${APP_ID:dacc7d3e-babc-47d2-b040-ab117ab04526}
-  env: ${APP_ENV:Development}
+  applicationId: ${APP_ID}
+  env: ${APP_ENV:cypress}
   host: ${APP_HOST:https://localhost:9000}
-  waitForAppTarget:
-    path: /
-    waitTimeoutMillis: 200000
-    pollDelay: 500
   excludePaths:
     - "/logout"
   antiCsrfParam: "_csrf"
-  openApiConf:
-    path: /openapi
   authentication:
+    loggedInIndicator: "\\QSign Out\\E"
+    loggedOutIndicator: ".*Location:.*/login.*"
     usernamePassword:
       type: FORM
       loginPath: /login
@@ -25,16 +21,15 @@ app:
         - "JSESSIONID"
     testPath:
       path: /search
-      success: ".*200.*"
-    loggedInIndicator: "\\QSign Out\\E"
-    loggedOutIndicator: ".*Location:.*/login.*"
-
+      success: "HTTP.*200.*"
 hawk:
   spider:
-    base: true
     maxDurationMinutes: 5
-#  config:
-#    - "scanner.analyser.redirectEqualsNotFound=false"
-#    - "scanner.analyser.followRedirect=true"
-  failureThreshold: high
+    base: false
+    custom:
+      command: npx cypress run --config-file cypress/cypress.config.js
+      logOutputToForeground: true
+      environment:
+        NO_PROXY: "<-loopback>" # This is required for Cypress scan discovery!
+        NO_COLOR: 1
 
