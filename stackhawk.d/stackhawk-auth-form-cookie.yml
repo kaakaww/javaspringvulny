@@ -2,8 +2,6 @@ app:
   env: ${APP_ENV:Form Cookie}
   excludePaths:
     - "/logout"
-  openApiConf:
-    path: /openapi 
   antiCsrfParam: "_csrf"
   authentication:
     usernamePassword:
@@ -22,5 +20,3 @@ app:
       success: ".*200.*"
     loggedInIndicator: "\\QSign Out\\E"
     loggedOutIndicator: ".*Location:.*/login.*"
-hawk:
-  failureThreshold: high

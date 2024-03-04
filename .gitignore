@@ -9,7 +9,3 @@ bin/
 .env
 .DS_Store
 *.iml
-=======
-tmp
-.vscode
-

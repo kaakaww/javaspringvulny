@@ -1,36 +1,32 @@
 name: HawkScan
 on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
+  repository_dispatch:
+    types: [integration-initial-test]
 jobs:
-  build-and-scan:
-    name: Build and Scan
-    runs-on: ubuntu-20.04
+  hawkscan:
+    name: HawkScan
+    runs-on: ubuntu-latest
     steps:
-      - name: Check out code
-        uses: actions/checkout@v2
-
-      - name: Setup Java and Gradle cache
-        uses: actions/setup-java@v2
-        with:
-          distribution: 'adopt' # See 'Supported distributions' for available options
-          java-version: '11'
-          cache: gradle
-
-      - name: Build the app
-        run: ./gradlew build
-
-      - name: Test the app
-        run: ./gradlew test
-
-      - name: Run the app
-        run: ./gradlew bootRun &
-
-      - name: Test with HawkScan
-        uses: stackhawk/hawkscan-action@v2.0.3
+      - uses: actions/checkout@v2
+      - name: Create ${{ github.event.client_payload.repoName }} app directory
+        run: mkdir -p common/build/integrationTests/hawkscan-action/apps/${{ github.event.client_payload.repoName }}
+      - name: Navigate to ${{ github.event.client_payload.repoName }} app directory
+        run: cd common/build/integrationTests/hawkscan-action/apps/${{ github.event.client_payload.repoName }}
+      - name: Checkout vulny repo
+        run: git clone https://github.com/${{ github.event.client_payload.repoOrg }}/${{ github.event.client_payload.repoName }}.git
+      - name: Run ${{ github.event.client_payload.repoName }}
+        run: docker-compose up -d
+      - name: Navigate to repo root directory
+        run: cd /home/runner/work/${{ github.event.client_payload.repoName }}/${{ github.event.client_payload.repoName }}
+      - name: Run HawkScan
+        id: run-hawkscan
+        uses: stackhawk/hawkscan-action@main
         with:
           apiKey: ${{ secrets.HAWK_API_KEY }}
+          configurationFiles: ${{ github.event.client_payload.configFile }}
+          sourceURL: ${{ github.event.client_payload.hawkscanSourceUrl }}
+          version: ${{ github.event.client_payload.hawkscanVersion }}
+          verbose: ${{ github.event.client_payload.verbose }}
+        env:
+          # APPLICATION_ID: ${{ github.event.client_payload.appId }}
+          APP_ID: ${{ github.event.client_payload.appId }}

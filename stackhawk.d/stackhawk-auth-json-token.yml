@@ -24,5 +24,3 @@ app:
       success: ".*200.*"
     loggedInIndicator: "\\QSign Out\\E"
     loggedOutIndicator: ".*Location:.*/login.*"
-hawk:
-  failureThreshold: high

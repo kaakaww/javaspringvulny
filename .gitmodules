@@ -1,3 +1,0 @@
-[submodule "stackhawk-configs"]
-	path = stackhawk-configs
-	url = git@github.com:zconger/stackhawk-configs.git
