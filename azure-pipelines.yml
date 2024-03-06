@@ -60,16 +60,16 @@ steps:
 
   # download, then start javaspringVulny in the background
   - script: |
-      curl -Ls https://github.com/kaakaww/javaspringvulny/releases/download/0.1.0/java-spring-vuly-0.1.0.jar -o ./java-spring-vuly-0.1.0.jar
-      java -jar ./java-spring-vuly-0.1.0.jar &
+      curl -Ls https://github.com/kaakaww/javaspringvulny/releases/download/0.2.0/java-spring-vuly-0.2.0.jar -o ./java-spring-vuly-0.2.0.jar
+      java -jar ./java-spring-vuly-0.2.0.jar &
     displayName: Start JavaSpringVulny on linux
     condition: eq(variables['imageName'], 'ubuntu-latest')
 
   # download, then start javaspringVulny in the background
   - powershell: |
-      Invoke-WebRequest -Uri "https://github.com/kaakaww/javaspringvulny/releases/download/0.1.0/java-spring-vuly-0.1.0.jar" -OutFile "java-spring-vuly-0.1.0.jar"
+      Invoke-WebRequest -Uri "https://github.com/kaakaww/javaspringvulny/releases/download/0.2.0/java-spring-vuly-0.2.0.jar" -OutFile "java-spring-vuly-0.2.0.jar"
       java --version
-      Start-Process java -ArgumentList "-jar","java-spring-vuly-0.1.0.jar","--spring.profiles.active=windows"
+      Start-Process java -ArgumentList "-jar","java-spring-vuly-0.2.0.jar","--spring.profiles.active=windows"
     displayName: Start JavaSpringVulny on windows with gradle in the background
     env:
       SPRING_DATASOURCE_URL: 'jdbc:h2:file:D:\\a\\1\\db\\vulny;DB_CLOSE_ON_EXIT=FALSE;AUTO_RECONNECT=TRUE'

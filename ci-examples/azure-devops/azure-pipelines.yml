@@ -23,8 +23,8 @@ steps:
 
   # download, then start javaspringVulny in the background
   - script: |
-      curl -Ls https://github.com/kaakaww/javaspringvulny/releases/download/0.1.0/java-spring-vuly-0.1.0.jar -o ./java-spring-vuly-0.1.0.jar
-      java -jar ./java-spring-vuly-0.1.0.jar &
+      curl -Ls https://github.com/kaakaww/javaspringvulny/releases/download/0.2.0/java-spring-vuly-0.2.0.jar -o ./java-spring-vuly-0.2.0.jar
+      java -jar ./java-spring-vuly-0.2.0.jar &
     displayName: Download and Start JavaSpringVulny
 
   # run hawkscan with the StackHawk Azure Extension
