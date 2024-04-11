@@ -67,7 +67,7 @@ public class Application {
                     userRepo.save(new User(String.format("user%d", i), String.format("we have the best users, users%d", i), "1234567"));
                 });
 
-                // This should be removed once we confirm that all instances of "user" have been removed
+                // This should be removed once we eneconfirm that all instances of "user" have been removed
                 userRepo.save(new User("user", "The auth user", "1234567"));
 
                 userRepo.save(new User("janesmith", "The auth user", "1234567"));
