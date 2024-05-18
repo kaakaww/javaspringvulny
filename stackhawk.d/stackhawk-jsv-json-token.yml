@@ -3,7 +3,7 @@ hawk:
     maxDurationMinutes: 2
 app:
   openApiConf:
-    path: /openapi.yml
+    path: /openapi
   authentication:
     loggedInIndicator: "\\QSign Out\\E"
     loggedOutIndicator: ".*Location:.*/login.*"
