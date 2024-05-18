@@ -19,3 +19,4 @@ jobs:
         env:
           APP_ID: fe3b8948-0edb-4fa4-a3b7-6fa200461f78
           ENV: action-scan
+          SARIF_ARTIFACT: true
