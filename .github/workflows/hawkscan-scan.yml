@@ -16,6 +16,7 @@ jobs:
         with:
           apiKey: ${{ secrets.HAWK_API_KEY }}
           configurationFiles: stackhawk.d/stackhawk.yml stackhawk.d/stackhawk-jsv-json-token.yml
+          sarif_file: stackhawk.sarif
         env:
           APP_ID: fe3b8948-0edb-4fa4-a3b7-6fa200461f78
           ENV: action-scan
