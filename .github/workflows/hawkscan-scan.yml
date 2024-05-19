@@ -7,8 +7,8 @@ jobs:
     name: Java Spring Vulny Test
     runs-on: ubuntu-latest
     steps:
-#      - name: Checkout javaspringvulny repository
-#        uses: actions/checkout@v4
+      - name: Checkout javaspringvulny repository
+        uses: actions/checkout@v4
 #      - name: Run javaspringvulny
 #        run:  docker-compose up -d
 #      - name: Run Hawkscan
