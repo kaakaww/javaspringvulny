@@ -2,6 +2,9 @@ hawk:
   spider:
     maxDurationMinutes: 2
     base: false
+  scan:
+    includedPlugins:
+      - 40018
 app:
   openApiConf:
     path: /openapi
