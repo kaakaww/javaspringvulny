@@ -1,6 +1,8 @@
 name: "action-tests"
 on:
   pull_request:
+    branches:
+      - main
 
 jobs:
   javaspringvulny-test:
