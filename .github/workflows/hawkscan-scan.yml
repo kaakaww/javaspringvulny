@@ -14,26 +14,24 @@ jobs:
     steps:
       - name: Checkout javaspringvulny repository
         uses: actions/checkout@v4
-#      - name: Run javaspringvulny
-#        run:  docker-compose up -d
-#      - name: Run Hawkscan
-#        uses: stackhawk/hawkscan-action@v2.1.3
-#        with:
-#          apiKey: ${{ secrets.HAWK_API_KEY }}
-#          configurationFiles: stackhawk.d/stackhawk.yml stackhawk.d/stackhawk-jsv-json-token.yml stackhawk.d/github-tags.yml
-#        env:
-#          APP_ID: fe3b8948-0edb-4fa4-a3b7-6fa200461f78
-#          ENV: action-scan
-#          SARIF_ARTIFACT: true
-#          COMMIT_SHA: ${{ github.event.pull_request.head.sha }}
-#          BRANCH_NAME: ${{ github.head_ref }}
-      - name: Generate sarif example
-        run: cp integration_tests/example.sarif stackhawk-scan-results.sarif
+      - name: Run javaspringvulny
+        run:  docker-compose up -d
+      - name: Run Hawkscan
+        uses: stackhawk/hawkscan-action@v2.1.3
+        with:
+          apiKey: ${{ secrets.HAWK_API_KEY }}
+          configurationFiles: stackhawk.d/stackhawk.yml stackhawk.d/stackhawk-jsv-json-token.yml stackhawk.d/github-tags.yml
+        env:
+          APP_ID: fe3b8948-0edb-4fa4-a3b7-6fa200461f78
+          ENV: action-scan
+          SARIF_ARTIFACT: true
+          COMMIT_SHA: ${{ github.event.pull_request.head.sha }}
+          BRANCH_NAME: ${{ github.head_ref }}
       - name: Upload SARIF file
         uses: github/codeql-action/upload-sarif@v3
         with:
           # Path to SARIF file relative to the root of the repository
-          sarif_file: stackhawk-scan-results.sarif
+          sarif_file: stackhawk.sarif
           # Optional category for the results
           # Used to differentiate multiple results for one commit
           category: StackHawk
