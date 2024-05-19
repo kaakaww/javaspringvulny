@@ -22,27 +22,13 @@ jobs:
 #          SARIF_ARTIFACT: true
 #          COMMIT_SHA: ${{ github.event.pull_request.head.sha }}
 #          BRANCH_NAME: ${{ github.head_ref }}
+      - name: Generate sarif example
+        run: cp integration_tests/example.sarif stackhawk-scan-results.sarif
       - name: Upload SARIF file
         uses: github/codeql-action/upload-sarif@v3
         with:
           # Path to SARIF file relative to the root of the repository
           sarif_file: ./stackhawk.sarif
-          # Optional category for the results
-          # Used to differentiate multiple results for one commit
-          category: StackHawk
-      - name: Upload 2 wheraver
-        uses: github/codeql-action/upload-sarif@v3
-        with:
-          # Path to SARIF file relative to the root of the repository
-          sarif_file: /integration_tests/stackhawk.sarif
-          # Optional category for the results
-          # Used to differentiate multiple results for one commit
-          category: StackHawk
-      - name: Upload SARIF file
-        uses: github/codeql-action/upload-sarif@v3
-        with:
-          # Path to SARIF file relative to the root of the repository
-          sarif_file: ${{ github.workspace }}/stackhawk.sarif
           # Optional category for the results
           # Used to differentiate multiple results for one commit
           category: StackHawk
