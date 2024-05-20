@@ -8,9 +8,19 @@ on:
       - main
 
 jobs:
-  javaspringvulny-test:
+  hawkscan:
     name: Java Spring Vulny Test
     runs-on: ubuntu-latest
+    permissions:
+      # required for all workflows
+      security-events: write
+
+      # required to fetch internal or private CodeQL packs
+      packages: read
+
+      # only required for workflows in private repositories
+      actions: read
+      contents: read
     steps:
       - name: Checkout javaspringvulny repository
         uses: actions/checkout@v4
@@ -27,14 +37,6 @@ jobs:
           SARIF_ARTIFACT: true
           COMMIT_SHA: ${{ github.event.pull_request.head.sha }}
           BRANCH_NAME: ${{ github.head_ref }}
-#      - name: Upload SARIF 2
-#        uses: github/codeql-action/upload-sarif@v3
-#        with:
-#          # Path to SARIF file relative to the root of the repository
-#          sarif_file: stackhawk_test.sarif
-#          # Optional category for the results
-#          # Used to differentiate multiple results for one commit
-#          category: StackHawk
       - name: Upload SARIF file
         uses: github/codeql-action/upload-sarif@v3
         with:
