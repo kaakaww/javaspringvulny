@@ -3,9 +3,9 @@ on:
   pull_request:
     branches:
       - main
-#  push:
-#    branches:
-#      - feature/codql
+  push:
+    branches:
+      - main
 
 jobs:
   javaspringvulny-test:
