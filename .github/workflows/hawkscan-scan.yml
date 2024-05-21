@@ -43,7 +43,7 @@ jobs:
           SARIF_ARTIFACT: true
           COMMIT_SHA: ${{ github.event.pull_request.head.sha }}
           BRANCH_NAME: ${{ github.head_ref }}
-          JAVA_HOME: ${{JAVA_HOME_17_X64}}
+          JAVA_HOME: ${{ JAVA_HOME_17_X64 }}
       - name: Upload SARIF file
         uses: github/codeql-action/upload-sarif@v3
         with:
