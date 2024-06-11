@@ -1,0 +1,50 @@
+name: Snyk container scans
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+  workflow_dispatch:  # This line adds manual trigger capability
+
+jobs:
+  snyk:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build a Docker image
+      run: docker build -t "${{ github.event.repository.name }}/local" .
+    - name: Run Snyk monitor
+      continue-on-error: true
+      uses: snyk/actions/docker@master
+      env:
+        SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+      with:
+        image: "${{ github.event.repository.name }}/local"
+        args: --file=Dockerfile
+        json: true
+        command: monitor
+    - name: Run Snyk tests
+      id: scan_image
+      continue-on-error: true
+      uses: snyk/actions/docker@master
+      env:
+        SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+      with:
+        image: "${{ github.event.repository.name }}/local"
+        args: --file=Dockerfile
+        json: true
+        command: test
+    - name: Parse results
+      id: snyk_results
+      uses: b4den/snyk-to-markdown-action@master
+      with:
+        file-name: snyk.json
+    - name: Comment PR
+      uses: b4den/comment-pr-action@master
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        message: "${{ steps.snyk_results.outputs.vuln_text }}"
