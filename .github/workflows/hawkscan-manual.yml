@@ -1,0 +1,32 @@
+name: HawkScan Example
+on:
+  workflow_dispatch:
+
+jobs:
+  hawkscan:
+    name: HawkScan
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+#      - name: Download and run JavaSpringVulny release jar
+#        run: |
+#          curl -Ls https://github.com/kaakaww/javaspringvulny/releases/download/0.2.0/java-spring-vuly-0.2.0.jar -o ./java-spring-vuly-0.2.0.jar
+#          java -jar ./java-spring-vuly-0.2.0.jar &
+      - name: Build and run JavaSpringVulny (slower)
+        run: |
+          ./gradlew build
+          ./gradlew bootRun &
+      - name: Run HawkScan
+        id: run-hawkscan
+        uses: stackhawk/hawkscan-action@main
+        with:
+          apiKey: ${{ secrets.HAWK_API_KEY }}
+          sourceURL: https://download.stackhawk.com/dev/hawk/cli
+          version: 3.9.12
+        env:
+          APP_ID: ${{ secrets.appId }}
+          NO_PROGRESS: true

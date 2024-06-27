@@ -18,7 +18,7 @@ app:
       loginPagePath: /login
       usernameField: username
       passwordField: password
-      scanUsername: "user"
+      scanUsername: "janesmith"
       scanPassword: "password"
     cookieAuthorization:
       cookieNames:
@@ -26,3 +26,5 @@ app:
     testPath:
       path: /search
       success: "HTTP.*200.*"
+hawk:
+  failureThreshold: high

@@ -1,4 +1,6 @@
-name: HawkScan
+name: HawkScan Example
+on:
+  workflow_dispatch:
 
 jobs:
   hawkscan:
@@ -20,7 +22,7 @@ jobs:
         with:
           apiKey: ${{ secrets.HAWK_API_KEY }}
           sourceURL: https://download.stackhawk.com/dev/hawk/cli
-          version: 3.5.28
+          version: 3.9.12
         env:
           APP_ID: ${{ secrets.appId }}
           SARIF_ARTIFACT: true
