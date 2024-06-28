@@ -12,8 +12,8 @@ import org.parosproxy.paros.network.HtmlParameter
 import org.parosproxy.paros.network.HttpHeader
 import org.parosproxy.paros.network.HttpMessage
 import org.parosproxy.paros.network.HttpRequestHeader
-import org.zaproxy.zap.authentication.AuthenticationHelper
-import org.zaproxy.zap.authentication.GenericAuthenticationCredentials
+import com.stackhawk.hste.authentication.AuthenticationHelper
+import com.stackhawk.hste.authentication.GenericAuthenticationCredentials
 
 val logger = LogManager.getLogger("okta-auth")
 val mapper = ObjectMapper()

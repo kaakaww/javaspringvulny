@@ -4,8 +4,8 @@ import com.nimbusds.jwt.JWTClaimsSet
 import com.nimbusds.jwt.SignedJWT
 import java.time.Instant
 import org.apache.log4j.LogManager
-import org.zaproxy.zap.session.ScriptBasedSessionManagementMethodType
-import org.zaproxy.zap.extension.script.ScriptVars
+import com.stackhawk.hste.session.ScriptBasedSessionManagementMethodType
+import com.stackhawk.hste.extension.script.ScriptVars
 
 val logger = LogManager.getLogger("okta-json-to-token")
 val mapper = ObjectMapper()

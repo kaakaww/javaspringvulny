@@ -2,7 +2,7 @@ import com.stackhawk.zap.extension.talon.hawkscan.ExtensionTalonHawkscan
 import org.apache.log4j.LogManager
 import org.parosproxy.paros.control.Control
 import org.parosproxy.paros.network.HttpMessage
-import org.zaproxy.zap.extension.script.HttpSenderScriptHelper
+import com.stackhawk.hste.extension.script.HttpSenderScriptHelper
 
 val logger = LogManager.getLogger("custom-http-sender")
 
