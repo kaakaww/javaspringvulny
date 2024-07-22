@@ -37,8 +37,6 @@ jobs:
       - name: Run Hawkscan
         uses: stackhawk/hawkscan-action@v2.1.3
         with:
-          sourceUrl: https://download.stackhawk.com/dev/hawk/cli
-          version: 3.9.4
           apiKey: ${{ secrets.HAWK_API_KEY }}
           configurationFiles: stackhawk.d/stackhawk.yml stackhawk.d/stackhawk-jsv-json-token.yml stackhawk.d/github-tags.yml
         env:
