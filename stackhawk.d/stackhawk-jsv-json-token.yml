@@ -1,15 +1,11 @@
 hawk:
   spider:
     maxDurationMinutes: 2
+    base: false
 app:
-  env: ${APP_ENV:dev}
   openApiConf:
-    path: /openapi.yml
-  env: dev
-  host: ${APP_HOST:https://localhost:9000}
+    path: /openapi
   authentication:
-    loggedInIndicator: "\\QSign Out\\E"
-    loggedOutIndicator: ".*Location:.*/login.*"
     usernamePassword:
       type: JSON
       loginPath: /api/jwt/auth/signin
@@ -21,6 +17,7 @@ app:
       type: HEADER
       value: Authorization
       tokenType: Bearer
+      isJWT: true
     tokenExtraction:
       type: TOKEN_PATH
       value: "token"
