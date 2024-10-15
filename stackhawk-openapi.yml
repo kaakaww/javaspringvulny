@@ -1,0 +1,17 @@
+app:
+  env: OpenAPI
+  openApiConf:
+    path: /openapi
+    customVariables:
+      - field: text
+        values:
+          - "customTextValue1"
+      - field: searchText
+        values:
+          - "customSearchText1"
+      - field: username
+        values:
+          - "username1"
+hawk:
+  spider:
+    base: false

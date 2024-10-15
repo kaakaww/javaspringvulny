@@ -1,0 +1,1135 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://json.schemastore.org/sarif-2.1.0",
+  "runs": [{
+    "tool": {
+      "driver": {
+        "version": "4.0.0",
+        "name": "StackHawk",
+        "informationUri": "https://app.stackhawk.com/scans/512062fd-edd6-4718-b03f-dac6c49fc0d8",
+        "properties": {
+          "scanId": "512062fd-edd6-4718-b03f-dac6c49fc0d8"
+        },
+        "rules": [{
+          "id": "512062fd-edd6-4718-b03f-dac6c49fc0d8-10038-8",
+          "name": "ContentSecurityPolicyCSPHeaderNotSet",
+          "helpUri": "https://app.stackhawk.com/scans/512062fd-edd6-4718-b03f-dac6c49fc0d8/finding/10038-1",
+          "help": {
+            "text": "Details for Content Security Policy (CSP) Header Not Set at https://localhost:9000/token-auth can be found here: https://app.stackhawk.com/scans/512062fd-edd6-4718-b03f-dac6c49fc0d8/finding/10038-1",
+            "markdown": "Details for [Content Security Policy (CSP) Header Not Set](https://app.stackhawk.com/scans/512062fd-edd6-4718-b03f-dac6c49fc0d8/finding/10038-1) at `https://localhost:9000/token-auth`"
+          },
+          "properties": {
+            "tags": ["CWE-693", "WASC-15"],
+            "security-severity": "5.0"
+          },
+          "shortDescription": {
+            "text": "Content Security Policy (CSP) Header Not Set"
+          },
+          "fullDescription": {
+            "text": "Content Security Policy (CSP) Header Not Set"
+          }
+        }, {
+          "id": "512062fd-edd6-4718-b03f-dac6c49fc0d8-10038-5",
+          "name": "ContentSecurityPolicyCSPHeaderNotSet",
+          "helpUri": "https://app.stackhawk.com/scans/512062fd-edd6-4718-b03f-dac6c49fc0d8/finding/10038-1",
+          "help": {
+            "text": "Details for Content Security Policy (CSP) Header Not Set at https://localhost:9000/basic-auth can be found here: https://app.stackhawk.com/scans/512062fd-edd6-4718-b03f-dac6c49fc0d8/finding/10038-1",
+            "markdown": "Details for [Content Security Policy (CSP) Header Not Set](https://app.stackhawk.com/scans/512062fd-edd6-4718-b03f-dac6c49fc0d8/finding/10038-1) at `https://localhost:9000/basic-auth`"
+          },
+          "properties": {
+            "tags": ["CWE-693", "WASC-15"],
+            "security-severity": "5.0"
+          },
+          "shortDescription": {
+            "text": "Content Security Policy (CSP) Header Not Set"
+          },
+          "fullDescription": {
+            "text": "Content Security Policy (CSP) Header Not Set"
+          }
+        }, {
+          "id": "512062fd-edd6-4718-b03f-dac6c49fc0d8-10038-6",
+          "name": "ContentSecurityPolicyCSPHeaderNotSet",
+          "helpUri": "https://app.stackhawk.com/scans/512062fd-edd6-4718-b03f-dac6c49fc0d8/finding/10038-1",
+          "help": {
+            "text": "Details for Content Security Policy (CSP) Header Not Set at https://localhost:9000/search can be found here: https://app.stackhawk.com/scans/512062fd-edd6-4718-b03f-dac6c49fc0d8/finding/10038-1",
+            "markdown": "Details for [Content Security Policy (CSP) Header Not Set](https://app.stackhawk.com/scans/512062fd-edd6-4718-b03f-dac6c49fc0d8/finding/10038-1) at `https://localhost:9000/search`"
+          },
+          "properties": {
+            "tags": ["CWE-693", "WASC-15"],
+            "security-severity": "5.0"
+          },
+          "shortDescription": {
+            "text": "Content Security Policy (CSP) Header Not Set"
+          },
+          "fullDescription": {
+            "text": "Content Security Policy (CSP) Header Not Set"
+          }
+        }, {
+          "id": "512062fd-edd6-4718-b03f-dac6c49fc0d8-10038-2",
+          "name": "ContentSecurityPolicyCSPHeaderNotSet",
+          "helpUri": "https://app.stackhawk.com/scans/512062fd-edd6-4718-b03f-dac6c49fc0d8/finding/10038-1",
+          "help": {
+            "text": "Details for Content Security Policy (CSP) Header Not Set at https://localhost:9000 can be found here: https://app.stackhawk.com/scans/512062fd-edd6-4718-b03f-dac6c49fc0d8/finding/10038-1",
+            "markdown": "Details for [Content Security Policy (CSP) Header Not Set](https://app.stackhawk.com/scans/512062fd-edd6-4718-b03f-dac6c49fc0d8/finding/10038-1) at `https://localhost:9000`"
+          },
+          "properties": {
+            "tags": ["CWE-693", "WASC-15"],
+            "security-severity": "5.0"
+          },
+          "shortDescription": {
+            "text": "Content Security Policy (CSP) Header Not Set"
+          },
+          "fullDescription": {
+            "text": "Content Security Policy (CSP) Header Not Set"
+          }
+        }, {
+          "id": "512062fd-edd6-4718-b03f-dac6c49fc0d8-10038-0",
+          "name": "ContentSecurityPolicyCSPHeaderNotSet",
+          "helpUri": "https://app.stackhawk.com/scans/512062fd-edd6-4718-b03f-dac6c49fc0d8/finding/10038-1",
+          "help": {
+            "text": "Details for Content Security Policy (CSP) Header Not Set at https://localhost:9000/jwt-auth can be found here: https://app.stackhawk.com/scans/512062fd-edd6-4718-b03f-dac6c49fc0d8/finding/10038-1",
+            "markdown": "Details for [Content Security Policy (CSP) Header Not Set](https://app.stackhawk.com/scans/512062fd-edd6-4718-b03f-dac6c49fc0d8/finding/10038-1) at `https://localhost:9000/jwt-auth`"
+          },
+          "properties": {
+            "tags": ["CWE-693", "WASC-15"],
+            "security-severity": "5.0"
+          },
+          "shortDescription": {
+            "text": "Content Security Policy (CSP) Header Not Set"
+          },
+          "fullDescription": {
+            "text": "Content Security Policy (CSP) Header Not Set"
+          }
+        }, {
+          "id": "512062fd-edd6-4718-b03f-dac6c49fc0d8-10038-7",
+          "name": "ContentSecurityPolicyCSPHeaderNotSet",
+          "helpUri": "https://app.stackhawk.com/scans/512062fd-edd6-4718-b03f-dac6c49fc0d8/finding/10038-1",
+          "help": {
+            "text": "Details for Content Security Policy (CSP) Header Not Set at https://localhost:9000/payload/3103 can be found here: https://app.stackhawk.com/scans/512062fd-edd6-4718-b03f-dac6c49fc0d8/finding/10038-1",
+            "markdown": "Details for [Content Security Policy (CSP) Header Not Set](https://app.stackhawk.com/scans/512062fd-edd6-4718-b03f-dac6c49fc0d8/finding/10038-1) at `https://localhost:9000/payload/3103`"
+          },
+          "properties": {
+            "tags": ["CWE-693", "WASC-15"],
+            "security-severity": "5.0"
+          },
+          "shortDescription": {
+            "text": "Content Security Policy (CSP) Header Not Set"
+          },
+          "fullDescription": {
+            "text": "Content Security Policy (CSP) Header Not Set"
+          }
+        }, {
+          "id": "512062fd-edd6-4718-b03f-dac6c49fc0d8-10038-4",
+          "name": "ContentSecurityPolicyCSPHeaderNotSet",
+          "helpUri": "https://app.stackhawk.com/scans/512062fd-edd6-4718-b03f-dac6c49fc0d8/finding/10038-1",
+          "help": {
+            "text": "Details for Content Security Policy (CSP) Header Not Set at https://localhost:9000/login can be found here: https://app.stackhawk.com/scans/512062fd-edd6-4718-b03f-dac6c49fc0d8/finding/10038-1",
+            "markdown": "Details for [Content Security Policy (CSP) Header Not Set](https://app.stackhawk.com/scans/512062fd-edd6-4718-b03f-dac6c49fc0d8/finding/10038-1) at `https://localhost:9000/login`"
+          },
+          "properties": {
+            "tags": ["CWE-693", "WASC-15"],
+            "security-severity": "5.0"
+          },
+          "shortDescription": {
+            "text": "Content Security Policy (CSP) Header Not Set"
+          },
+          "fullDescription": {
+            "text": "Content Security Policy (CSP) Header Not Set"
+          }
+        }, {
+          "id": "512062fd-edd6-4718-b03f-dac6c49fc0d8-10038-9",
+          "name": "ContentSecurityPolicyCSPHeaderNotSet",
+          "helpUri": "https://app.stackhawk.com/scans/512062fd-edd6-4718-b03f-dac6c49fc0d8/finding/10038-1",
+          "help": {
+            "text": "Details for Content Security Policy (CSP) Header Not Set at https://localhost:9000/payloads can be found here: https://app.stackhawk.com/scans/512062fd-edd6-4718-b03f-dac6c49fc0d8/finding/10038-1",
+            "markdown": "Details for [Content Security Policy (CSP) Header Not Set](https://app.stackhawk.com/scans/512062fd-edd6-4718-b03f-dac6c49fc0d8/finding/10038-1) at `https://localhost:9000/payloads`"
+          },
+          "properties": {
+            "tags": ["CWE-693", "WASC-15"],
+            "security-severity": "5.0"
+          },
+          "shortDescription": {
+            "text": "Content Security Policy (CSP) Header Not Set"
+          },
+          "fullDescription": {
+            "text": "Content Security Policy (CSP) Header Not Set"
+          }
+        }, {
+          "id": "512062fd-edd6-4718-b03f-dac6c49fc0d8-10038-3",
+          "name": "ContentSecurityPolicyCSPHeaderNotSet",
+          "helpUri": "https://app.stackhawk.com/scans/512062fd-edd6-4718-b03f-dac6c49fc0d8/finding/10038-1",
+          "help": {
+            "text": "Details for Content Security Policy (CSP) Header Not Set at https://localhost:9000/search can be found here: https://app.stackhawk.com/scans/512062fd-edd6-4718-b03f-dac6c49fc0d8/finding/10038-1",
+            "markdown": "Details for [Content Security Policy (CSP) Header Not Set](https://app.stackhawk.com/scans/512062fd-edd6-4718-b03f-dac6c49fc0d8/finding/10038-1) at `https://localhost:9000/search`"
+          },
+          "properties": {
+            "tags": ["CWE-693", "WASC-15"],
+            "security-severity": "5.0"
+          },
+          "shortDescription": {
+            "text": "Content Security Policy (CSP) Header Not Set"
+          },
+          "fullDescription": {
+            "text": "Content Security Policy (CSP) Header Not Set"
+          }
+        }, {
+          "id": "512062fd-edd6-4718-b03f-dac6c49fc0d8-10038-1",
+          "name": "ContentSecurityPolicyCSPHeaderNotSet",
+          "helpUri": "https://app.stackhawk.com/scans/512062fd-edd6-4718-b03f-dac6c49fc0d8/finding/10038-1",
+          "help": {
+            "text": "Details for Content Security Policy (CSP) Header Not Set at https://localhost:9000/ can be found here: https://app.stackhawk.com/scans/512062fd-edd6-4718-b03f-dac6c49fc0d8/finding/10038-1",
+            "markdown": "Details for [Content Security Policy (CSP) Header Not Set](https://app.stackhawk.com/scans/512062fd-edd6-4718-b03f-dac6c49fc0d8/finding/10038-1) at `https://localhost:9000/`"
+          },
+          "properties": {
+            "tags": ["CWE-693", "WASC-15"],
+            "security-severity": "5.0"
+          },
+          "shortDescription": {
+            "text": "Content Security Policy (CSP) Header Not Set"
+          },
+          "fullDescription": {
+            "text": "Content Security Policy (CSP) Header Not Set"
+          }
+        }, {
+          "id": "512062fd-edd6-4718-b03f-dac6c49fc0d8-10038-10",
+          "name": "ContentSecurityPolicyCSPHeaderNotSet",
+          "helpUri": "https://app.stackhawk.com/scans/512062fd-edd6-4718-b03f-dac6c49fc0d8/finding/10038-1",
+          "help": {
+            "text": "Details for Content Security Policy (CSP) Header Not Set at https://localhost:9000/payload/3101 can be found here: https://app.stackhawk.com/scans/512062fd-edd6-4718-b03f-dac6c49fc0d8/finding/10038-1",
+            "markdown": "Details for [Content Security Policy (CSP) Header Not Set](https://app.stackhawk.com/scans/512062fd-edd6-4718-b03f-dac6c49fc0d8/finding/10038-1) at `https://localhost:9000/payload/3101`"
+          },
+          "properties": {
+            "tags": ["CWE-693", "WASC-15"],
+            "security-severity": "5.0"
+          },
+          "shortDescription": {
+            "text": "Content Security Policy (CSP) Header Not Set"
+          },
+          "fullDescription": {
+            "text": "Content Security Policy (CSP) Header Not Set"
+          }
+        }, {
+          "id": "512062fd-edd6-4718-b03f-dac6c49fc0d8-10038-11",
+          "name": "ContentSecurityPolicyCSPHeaderNotSet",
+          "helpUri": "https://app.stackhawk.com/scans/512062fd-edd6-4718-b03f-dac6c49fc0d8/finding/10038-1",
+          "help": {
+            "text": "Details for Content Security Policy (CSP) Header Not Set at https://localhost:9000/payload/3099 can be found here: https://app.stackhawk.com/scans/512062fd-edd6-4718-b03f-dac6c49fc0d8/finding/10038-1",
+            "markdown": "Details for [Content Security Policy (CSP) Header Not Set](https://app.stackhawk.com/scans/512062fd-edd6-4718-b03f-dac6c49fc0d8/finding/10038-1) at `https://localhost:9000/payload/3099`"
+          },
+          "properties": {
+            "tags": ["CWE-693", "WASC-15"],
+            "security-severity": "5.0"
+          },
+          "shortDescription": {
+            "text": "Content Security Policy (CSP) Header Not Set"
+          },
+          "fullDescription": {
+            "text": "Content Security Policy (CSP) Header Not Set"
+          }
+        }, {
+          "id": "512062fd-edd6-4718-b03f-dac6c49fc0d8-10038-12",
+          "name": "ContentSecurityPolicyCSPHeaderNotSet",
+          "helpUri": "https://app.stackhawk.com/scans/512062fd-edd6-4718-b03f-dac6c49fc0d8/finding/10038-1",
+          "help": {
+            "text": "Details for Content Security Policy (CSP) Header Not Set at https://localhost:9000/payload/3097 can be found here: https://app.stackhawk.com/scans/512062fd-edd6-4718-b03f-dac6c49fc0d8/finding/10038-1",
+            "markdown": "Details for [Content Security Policy (CSP) Header Not Set](https://app.stackhawk.com/scans/512062fd-edd6-4718-b03f-dac6c49fc0d8/finding/10038-1) at `https://localhost:9000/payload/3097`"
+          },
+          "properties": {
+            "tags": ["CWE-693", "WASC-15"],
+            "security-severity": "5.0"
+          },
+          "shortDescription": {
+            "text": "Content Security Policy (CSP) Header Not Set"
+          },
+          "fullDescription": {
+            "text": "Content Security Policy (CSP) Header Not Set"
+          }
+        }, {
+          "id": "512062fd-edd6-4718-b03f-dac6c49fc0d8-10038-13",
+          "name": "ContentSecurityPolicyCSPHeaderNotSet",
+          "helpUri": "https://app.stackhawk.com/scans/512062fd-edd6-4718-b03f-dac6c49fc0d8/finding/10038-1",
+          "help": {
+            "text": "Details for Content Security Policy (CSP) Header Not Set at https://localhost:9000/payload/3105 can be found here: https://app.stackhawk.com/scans/512062fd-edd6-4718-b03f-dac6c49fc0d8/finding/10038-1",
+            "markdown": "Details for [Content Security Policy (CSP) Header Not Set](https://app.stackhawk.com/scans/512062fd-edd6-4718-b03f-dac6c49fc0d8/finding/10038-1) at `https://localhost:9000/payload/3105`"
+          },
+          "properties": {
+            "tags": ["CWE-693", "WASC-15"],
+            "security-severity": "5.0"
+          },
+          "shortDescription": {
+            "text": "Content Security Policy (CSP) Header Not Set"
+          },
+          "fullDescription": {
+            "text": "Content Security Policy (CSP) Header Not Set"
+          }
+        }, {
+          "id": "512062fd-edd6-4718-b03f-dac6c49fc0d8-10010-14",
+          "name": "CookieNoHttpOnlyFlag",
+          "helpUri": "https://app.stackhawk.com/scans/512062fd-edd6-4718-b03f-dac6c49fc0d8/finding/10010",
+          "help": {
+            "text": "Details for Cookie No HttpOnly Flag at https://localhost:9000/login-code can be found here: https://app.stackhawk.com/scans/512062fd-edd6-4718-b03f-dac6c49fc0d8/finding/10010",
+            "markdown": "Details for [Cookie No HttpOnly Flag](https://app.stackhawk.com/scans/512062fd-edd6-4718-b03f-dac6c49fc0d8/finding/10010) at `https://localhost:9000/login-code`"
+          },
+          "properties": {
+            "tags": ["CWE-1004", "WASC-13"],
+            "security-severity": "3.0"
+          },
+          "shortDescription": {
+            "text": "Cookie No HttpOnly Flag"
+          },
+          "fullDescription": {
+            "text": "Cookie No HttpOnly Flag"
+          }
+        }, {
+          "id": "512062fd-edd6-4718-b03f-dac6c49fc0d8-10054-15",
+          "name": "CookiewithoutSameSiteAttribute",
+          "helpUri": "https://app.stackhawk.com/scans/512062fd-edd6-4718-b03f-dac6c49fc0d8/finding/10054",
+          "help": {
+            "text": "Details for Cookie without SameSite Attribute at https://localhost:9000/login-code can be found here: https://app.stackhawk.com/scans/512062fd-edd6-4718-b03f-dac6c49fc0d8/finding/10054",
+            "markdown": "Details for [Cookie without SameSite Attribute](https://app.stackhawk.com/scans/512062fd-edd6-4718-b03f-dac6c49fc0d8/finding/10054) at `https://localhost:9000/login-code`"
+          },
+          "properties": {
+            "tags": ["CWE-1275", "WASC-13"],
+            "security-severity": "3.0"
+          },
+          "shortDescription": {
+            "text": "Cookie without SameSite Attribute"
+          },
+          "fullDescription": {
+            "text": "Cookie without SameSite Attribute"
+          }
+        }, {
+          "id": "512062fd-edd6-4718-b03f-dac6c49fc0d8-10011-16",
+          "name": "CookieWithoutSecureFlag",
+          "helpUri": "https://app.stackhawk.com/scans/512062fd-edd6-4718-b03f-dac6c49fc0d8/finding/10011",
+          "help": {
+            "text": "Details for Cookie Without Secure Flag at https://localhost:9000/login-code can be found here: https://app.stackhawk.com/scans/512062fd-edd6-4718-b03f-dac6c49fc0d8/finding/10011",
+            "markdown": "Details for [Cookie Without Secure Flag](https://app.stackhawk.com/scans/512062fd-edd6-4718-b03f-dac6c49fc0d8/finding/10011) at `https://localhost:9000/login-code`"
+          },
+          "properties": {
+            "tags": ["CWE-614", "WASC-13"],
+            "security-severity": "3.0"
+          },
+          "shortDescription": {
+            "text": "Cookie Without Secure Flag"
+          },
+          "fullDescription": {
+            "text": "Cookie Without Secure Flag"
+          }
+        }, {
+          "id": "512062fd-edd6-4718-b03f-dac6c49fc0d8-40012-17",
+          "name": "CrossSiteScriptingReflected",
+          "helpUri": "https://app.stackhawk.com/scans/512062fd-edd6-4718-b03f-dac6c49fc0d8/finding/40012",
+          "help": {
+            "text": "Details for Cross Site Scripting (Reflected) at https://localhost:9000/search can be found here: https://app.stackhawk.com/scans/512062fd-edd6-4718-b03f-dac6c49fc0d8/finding/40012",
+            "markdown": "Details for [Cross Site Scripting (Reflected)](https://app.stackhawk.com/scans/512062fd-edd6-4718-b03f-dac6c49fc0d8/finding/40012) at `https://localhost:9000/search`"
+          },
+          "properties": {
+            "tags": ["CWE-79", "WASC-8"],
+            "security-severity": "8.0"
+          },
+          "shortDescription": {
+            "text": "Cross Site Scripting (Reflected)"
+          },
+          "fullDescription": {
+            "text": "Cross Site Scripting (Reflected)"
+          }
+        }, {
+          "id": "512062fd-edd6-4718-b03f-dac6c49fc0d8-40018-18",
+          "name": "SqlInjectionPostgreSql",
+          "helpUri": "https://app.stackhawk.com/scans/512062fd-edd6-4718-b03f-dac6c49fc0d8/finding/40018",
+          "help": {
+            "text": "Details for SQL Injection - PostgreSQL at https://localhost:9000/search can be found here: https://app.stackhawk.com/scans/512062fd-edd6-4718-b03f-dac6c49fc0d8/finding/40018",
+            "markdown": "Details for [SQL Injection - PostgreSQL](https://app.stackhawk.com/scans/512062fd-edd6-4718-b03f-dac6c49fc0d8/finding/40018) at `https://localhost:9000/search`"
+          },
+          "properties": {
+            "tags": ["CWE-89", "WASC-19"],
+            "security-severity": "8.0"
+          },
+          "shortDescription": {
+            "text": "SQL Injection - PostgreSQL"
+          },
+          "fullDescription": {
+            "text": "SQL Injection - PostgreSQL"
+          }
+        }, {
+          "id": "512062fd-edd6-4718-b03f-dac6c49fc0d8-40008-19",
+          "name": "ParameterTampering",
+          "helpUri": "https://app.stackhawk.com/scans/512062fd-edd6-4718-b03f-dac6c49fc0d8/finding/40008",
+          "help": {
+            "text": "Details for Parameter Tampering at https://localhost:9000/search can be found here: https://app.stackhawk.com/scans/512062fd-edd6-4718-b03f-dac6c49fc0d8/finding/40008",
+            "markdown": "Details for [Parameter Tampering](https://app.stackhawk.com/scans/512062fd-edd6-4718-b03f-dac6c49fc0d8/finding/40008) at `https://localhost:9000/search`"
+          },
+          "properties": {
+            "tags": ["CWE-472", "WASC-20"],
+            "security-severity": "5.0"
+          },
+          "shortDescription": {
+            "text": "Parameter Tampering"
+          },
+          "fullDescription": {
+            "text": "Parameter Tampering"
+          }
+        }, {
+          "id": "512062fd-edd6-4718-b03f-dac6c49fc0d8-40025-20",
+          "name": "ProxyDisclosure",
+          "helpUri": "https://app.stackhawk.com/scans/512062fd-edd6-4718-b03f-dac6c49fc0d8/finding/40025",
+          "help": {
+            "text": "Details for Proxy Disclosure at https://localhost:9000/payload/3099 can be found here: https://app.stackhawk.com/scans/512062fd-edd6-4718-b03f-dac6c49fc0d8/finding/40025",
+            "markdown": "Details for [Proxy Disclosure](https://app.stackhawk.com/scans/512062fd-edd6-4718-b03f-dac6c49fc0d8/finding/40025) at `https://localhost:9000/payload/3099`"
+          },
+          "properties": {
+            "tags": ["CWE-200", "WASC-45"],
+            "security-severity": "5.0"
+          },
+          "shortDescription": {
+            "text": "Proxy Disclosure"
+          },
+          "fullDescription": {
+            "text": "Proxy Disclosure"
+          }
+        }, {
+          "id": "512062fd-edd6-4718-b03f-dac6c49fc0d8-40025-21",
+          "name": "ProxyDisclosure",
+          "helpUri": "https://app.stackhawk.com/scans/512062fd-edd6-4718-b03f-dac6c49fc0d8/finding/40025",
+          "help": {
+            "text": "Details for Proxy Disclosure at https://localhost:9000/jwt-auth can be found here: https://app.stackhawk.com/scans/512062fd-edd6-4718-b03f-dac6c49fc0d8/finding/40025",
+            "markdown": "Details for [Proxy Disclosure](https://app.stackhawk.com/scans/512062fd-edd6-4718-b03f-dac6c49fc0d8/finding/40025) at `https://localhost:9000/jwt-auth`"
+          },
+          "properties": {
+            "tags": ["CWE-200", "WASC-45"],
+            "security-severity": "5.0"
+          },
+          "shortDescription": {
+            "text": "Proxy Disclosure"
+          },
+          "fullDescription": {
+            "text": "Proxy Disclosure"
+          }
+        }, {
+          "id": "512062fd-edd6-4718-b03f-dac6c49fc0d8-40025-22",
+          "name": "ProxyDisclosure",
+          "helpUri": "https://app.stackhawk.com/scans/512062fd-edd6-4718-b03f-dac6c49fc0d8/finding/40025",
+          "help": {
+            "text": "Details for Proxy Disclosure at https://localhost:9000/login-form-multi can be found here: https://app.stackhawk.com/scans/512062fd-edd6-4718-b03f-dac6c49fc0d8/finding/40025",
+            "markdown": "Details for [Proxy Disclosure](https://app.stackhawk.com/scans/512062fd-edd6-4718-b03f-dac6c49fc0d8/finding/40025) at `https://localhost:9000/login-form-multi`"
+          },
+          "properties": {
+            "tags": ["CWE-200", "WASC-45"],
+            "security-severity": "5.0"
+          },
+          "shortDescription": {
+            "text": "Proxy Disclosure"
+          },
+          "fullDescription": {
+            "text": "Proxy Disclosure"
+          }
+        }, {
+          "id": "512062fd-edd6-4718-b03f-dac6c49fc0d8-40025-23",
+          "name": "ProxyDisclosure",
+          "helpUri": "https://app.stackhawk.com/scans/512062fd-edd6-4718-b03f-dac6c49fc0d8/finding/40025",
+          "help": {
+            "text": "Details for Proxy Disclosure at https://localhost:9000/payload/3105 can be found here: https://app.stackhawk.com/scans/512062fd-edd6-4718-b03f-dac6c49fc0d8/finding/40025",
+            "markdown": "Details for [Proxy Disclosure](https://app.stackhawk.com/scans/512062fd-edd6-4718-b03f-dac6c49fc0d8/finding/40025) at `https://localhost:9000/payload/3105`"
+          },
+          "properties": {
+            "tags": ["CWE-200", "WASC-45"],
+            "security-severity": "5.0"
+          },
+          "shortDescription": {
+            "text": "Proxy Disclosure"
+          },
+          "fullDescription": {
+            "text": "Proxy Disclosure"
+          }
+        }, {
+          "id": "512062fd-edd6-4718-b03f-dac6c49fc0d8-40025-24",
+          "name": "ProxyDisclosure",
+          "helpUri": "https://app.stackhawk.com/scans/512062fd-edd6-4718-b03f-dac6c49fc0d8/finding/40025",
+          "help": {
+            "text": "Details for Proxy Disclosure at https://localhost:9000/payload/3097 can be found here: https://app.stackhawk.com/scans/512062fd-edd6-4718-b03f-dac6c49fc0d8/finding/40025",
+            "markdown": "Details for [Proxy Disclosure](https://app.stackhawk.com/scans/512062fd-edd6-4718-b03f-dac6c49fc0d8/finding/40025) at `https://localhost:9000/payload/3097`"
+          },
+          "properties": {
+            "tags": ["CWE-200", "WASC-45"],
+            "security-severity": "5.0"
+          },
+          "shortDescription": {
+            "text": "Proxy Disclosure"
+          },
+          "fullDescription": {
+            "text": "Proxy Disclosure"
+          }
+        }, {
+          "id": "512062fd-edd6-4718-b03f-dac6c49fc0d8-40025-25",
+          "name": "ProxyDisclosure",
+          "helpUri": "https://app.stackhawk.com/scans/512062fd-edd6-4718-b03f-dac6c49fc0d8/finding/40025",
+          "help": {
+            "text": "Details for Proxy Disclosure at https://localhost:9000/payload can be found here: https://app.stackhawk.com/scans/512062fd-edd6-4718-b03f-dac6c49fc0d8/finding/40025",
+            "markdown": "Details for [Proxy Disclosure](https://app.stackhawk.com/scans/512062fd-edd6-4718-b03f-dac6c49fc0d8/finding/40025) at `https://localhost:9000/payload`"
+          },
+          "properties": {
+            "tags": ["CWE-200", "WASC-45"],
+            "security-severity": "5.0"
+          },
+          "shortDescription": {
+            "text": "Proxy Disclosure"
+          },
+          "fullDescription": {
+            "text": "Proxy Disclosure"
+          }
+        }, {
+          "id": "512062fd-edd6-4718-b03f-dac6c49fc0d8-40025-26",
+          "name": "ProxyDisclosure",
+          "helpUri": "https://app.stackhawk.com/scans/512062fd-edd6-4718-b03f-dac6c49fc0d8/finding/40025",
+          "help": {
+            "text": "Details for Proxy Disclosure at https://localhost:9000/basic-auth can be found here: https://app.stackhawk.com/scans/512062fd-edd6-4718-b03f-dac6c49fc0d8/finding/40025",
+            "markdown": "Details for [Proxy Disclosure](https://app.stackhawk.com/scans/512062fd-edd6-4718-b03f-dac6c49fc0d8/finding/40025) at `https://localhost:9000/basic-auth`"
+          },
+          "properties": {
+            "tags": ["CWE-200", "WASC-45"],
+            "security-severity": "5.0"
+          },
+          "shortDescription": {
+            "text": "Proxy Disclosure"
+          },
+          "fullDescription": {
+            "text": "Proxy Disclosure"
+          }
+        }, {
+          "id": "512062fd-edd6-4718-b03f-dac6c49fc0d8-40025-27",
+          "name": "ProxyDisclosure",
+          "helpUri": "https://app.stackhawk.com/scans/512062fd-edd6-4718-b03f-dac6c49fc0d8/finding/40025",
+          "help": {
+            "text": "Details for Proxy Disclosure at https://localhost:9000/ can be found here: https://app.stackhawk.com/scans/512062fd-edd6-4718-b03f-dac6c49fc0d8/finding/40025",
+            "markdown": "Details for [Proxy Disclosure](https://app.stackhawk.com/scans/512062fd-edd6-4718-b03f-dac6c49fc0d8/finding/40025) at `https://localhost:9000/`"
+          },
+          "properties": {
+            "tags": ["CWE-200", "WASC-45"],
+            "security-severity": "5.0"
+          },
+          "shortDescription": {
+            "text": "Proxy Disclosure"
+          },
+          "fullDescription": {
+            "text": "Proxy Disclosure"
+          }
+        }, {
+          "id": "512062fd-edd6-4718-b03f-dac6c49fc0d8-40025-28",
+          "name": "ProxyDisclosure",
+          "helpUri": "https://app.stackhawk.com/scans/512062fd-edd6-4718-b03f-dac6c49fc0d8/finding/40025",
+          "help": {
+            "text": "Details for Proxy Disclosure at https://localhost:9000/payload/3103 can be found here: https://app.stackhawk.com/scans/512062fd-edd6-4718-b03f-dac6c49fc0d8/finding/40025",
+            "markdown": "Details for [Proxy Disclosure](https://app.stackhawk.com/scans/512062fd-edd6-4718-b03f-dac6c49fc0d8/finding/40025) at `https://localhost:9000/payload/3103`"
+          },
+          "properties": {
+            "tags": ["CWE-200", "WASC-45"],
+            "security-severity": "5.0"
+          },
+          "shortDescription": {
+            "text": "Proxy Disclosure"
+          },
+          "fullDescription": {
+            "text": "Proxy Disclosure"
+          }
+        }, {
+          "id": "512062fd-edd6-4718-b03f-dac6c49fc0d8-40025-29",
+          "name": "ProxyDisclosure",
+          "helpUri": "https://app.stackhawk.com/scans/512062fd-edd6-4718-b03f-dac6c49fc0d8/finding/40025",
+          "help": {
+            "text": "Details for Proxy Disclosure at https://localhost:9000 can be found here: https://app.stackhawk.com/scans/512062fd-edd6-4718-b03f-dac6c49fc0d8/finding/40025",
+            "markdown": "Details for [Proxy Disclosure](https://app.stackhawk.com/scans/512062fd-edd6-4718-b03f-dac6c49fc0d8/finding/40025) at `https://localhost:9000`"
+          },
+          "properties": {
+            "tags": ["CWE-200", "WASC-45"],
+            "security-severity": "5.0"
+          },
+          "shortDescription": {
+            "text": "Proxy Disclosure"
+          },
+          "fullDescription": {
+            "text": "Proxy Disclosure"
+          }
+        }],
+        "fullName": "HawkScan 4.0.0"
+      }
+    },
+    "results": [{
+      "ruleId": "512062fd-edd6-4718-b03f-dac6c49fc0d8-10038-8",
+      "message": {
+        "text": "Content Security Policy (CSP) Header Not Set",
+        "markdown": "Content Security Policy (CSP) Header Not Set"
+      },
+      "locations": [{
+        "physicalLocation": {
+          "artifactLocation": {
+            "uri": "hawkscan/https://localhost:9000/token-auth"
+          },
+          "region": {
+            "startLine": 1
+          }
+        }
+      }],
+      "partialFingerprints": {
+        "4.0.0": "512062fd-edd6-4718-b03f-dac6c49fc0d8-10038-8"
+      }
+    }, {
+      "ruleId": "512062fd-edd6-4718-b03f-dac6c49fc0d8-10038-5",
+      "message": {
+        "text": "Content Security Policy (CSP) Header Not Set",
+        "markdown": "Content Security Policy (CSP) Header Not Set"
+      },
+      "locations": [{
+        "physicalLocation": {
+          "artifactLocation": {
+            "uri": "hawkscan/https://localhost:9000/basic-auth"
+          },
+          "region": {
+            "startLine": 1
+          }
+        }
+      }],
+      "partialFingerprints": {
+        "4.0.0": "512062fd-edd6-4718-b03f-dac6c49fc0d8-10038-5"
+      }
+    }, {
+      "ruleId": "512062fd-edd6-4718-b03f-dac6c49fc0d8-10038-6",
+      "message": {
+        "text": "Content Security Policy (CSP) Header Not Set",
+        "markdown": "Content Security Policy (CSP) Header Not Set"
+      },
+      "locations": [{
+        "physicalLocation": {
+          "artifactLocation": {
+            "uri": "hawkscan/https://localhost:9000/search"
+          },
+          "region": {
+            "startLine": 1
+          }
+        }
+      }],
+      "partialFingerprints": {
+        "4.0.0": "512062fd-edd6-4718-b03f-dac6c49fc0d8-10038-6"
+      }
+    }, {
+      "ruleId": "512062fd-edd6-4718-b03f-dac6c49fc0d8-10038-2",
+      "message": {
+        "text": "Content Security Policy (CSP) Header Not Set",
+        "markdown": "Content Security Policy (CSP) Header Not Set"
+      },
+      "locations": [{
+        "physicalLocation": {
+          "artifactLocation": {
+            "uri": "hawkscan/https://localhost:9000"
+          },
+          "region": {
+            "startLine": 1
+          }
+        }
+      }],
+      "partialFingerprints": {
+        "4.0.0": "512062fd-edd6-4718-b03f-dac6c49fc0d8-10038-2"
+      }
+    }, {
+      "ruleId": "512062fd-edd6-4718-b03f-dac6c49fc0d8-10038-0",
+      "message": {
+        "text": "Content Security Policy (CSP) Header Not Set",
+        "markdown": "Content Security Policy (CSP) Header Not Set"
+      },
+      "locations": [{
+        "physicalLocation": {
+          "artifactLocation": {
+            "uri": "hawkscan/https://localhost:9000/jwt-auth"
+          },
+          "region": {
+            "startLine": 1
+          }
+        }
+      }],
+      "partialFingerprints": {
+        "4.0.0": "512062fd-edd6-4718-b03f-dac6c49fc0d8-10038-0"
+      }
+    }, {
+      "ruleId": "512062fd-edd6-4718-b03f-dac6c49fc0d8-10038-7",
+      "message": {
+        "text": "Content Security Policy (CSP) Header Not Set",
+        "markdown": "Content Security Policy (CSP) Header Not Set"
+      },
+      "locations": [{
+        "physicalLocation": {
+          "artifactLocation": {
+            "uri": "hawkscan/https://localhost:9000/payload/3103"
+          },
+          "region": {
+            "startLine": 1
+          }
+        }
+      }],
+      "partialFingerprints": {
+        "4.0.0": "512062fd-edd6-4718-b03f-dac6c49fc0d8-10038-7"
+      }
+    }, {
+      "ruleId": "512062fd-edd6-4718-b03f-dac6c49fc0d8-10038-4",
+      "message": {
+        "text": "Content Security Policy (CSP) Header Not Set",
+        "markdown": "Content Security Policy (CSP) Header Not Set"
+      },
+      "locations": [{
+        "physicalLocation": {
+          "artifactLocation": {
+            "uri": "hawkscan/https://localhost:9000/login"
+          },
+          "region": {
+            "startLine": 1
+          }
+        }
+      }],
+      "partialFingerprints": {
+        "4.0.0": "512062fd-edd6-4718-b03f-dac6c49fc0d8-10038-4"
+      }
+    }, {
+      "ruleId": "512062fd-edd6-4718-b03f-dac6c49fc0d8-10038-9",
+      "message": {
+        "text": "Content Security Policy (CSP) Header Not Set",
+        "markdown": "Content Security Policy (CSP) Header Not Set"
+      },
+      "locations": [{
+        "physicalLocation": {
+          "artifactLocation": {
+            "uri": "hawkscan/https://localhost:9000/payloads"
+          },
+          "region": {
+            "startLine": 1
+          }
+        }
+      }],
+      "partialFingerprints": {
+        "4.0.0": "512062fd-edd6-4718-b03f-dac6c49fc0d8-10038-9"
+      }
+    }, {
+      "ruleId": "512062fd-edd6-4718-b03f-dac6c49fc0d8-10038-3",
+      "message": {
+        "text": "Content Security Policy (CSP) Header Not Set",
+        "markdown": "Content Security Policy (CSP) Header Not Set"
+      },
+      "locations": [{
+        "physicalLocation": {
+          "artifactLocation": {
+            "uri": "hawkscan/https://localhost:9000/search"
+          },
+          "region": {
+            "startLine": 1
+          }
+        }
+      }],
+      "partialFingerprints": {
+        "4.0.0": "512062fd-edd6-4718-b03f-dac6c49fc0d8-10038-3"
+      }
+    }, {
+      "ruleId": "512062fd-edd6-4718-b03f-dac6c49fc0d8-10038-1",
+      "message": {
+        "text": "Content Security Policy (CSP) Header Not Set",
+        "markdown": "Content Security Policy (CSP) Header Not Set"
+      },
+      "locations": [{
+        "physicalLocation": {
+          "artifactLocation": {
+            "uri": "hawkscan/https://localhost:9000/"
+          },
+          "region": {
+            "startLine": 1
+          }
+        }
+      }],
+      "partialFingerprints": {
+        "4.0.0": "512062fd-edd6-4718-b03f-dac6c49fc0d8-10038-1"
+      }
+    }, {
+      "ruleId": "512062fd-edd6-4718-b03f-dac6c49fc0d8-10038-10",
+      "message": {
+        "text": "Content Security Policy (CSP) Header Not Set",
+        "markdown": "Content Security Policy (CSP) Header Not Set"
+      },
+      "locations": [{
+        "physicalLocation": {
+          "artifactLocation": {
+            "uri": "hawkscan/https://localhost:9000/payload/3101"
+          },
+          "region": {
+            "startLine": 1
+          }
+        }
+      }],
+      "partialFingerprints": {
+        "4.0.0": "512062fd-edd6-4718-b03f-dac6c49fc0d8-10038-10"
+      }
+    }, {
+      "ruleId": "512062fd-edd6-4718-b03f-dac6c49fc0d8-10038-11",
+      "message": {
+        "text": "Content Security Policy (CSP) Header Not Set",
+        "markdown": "Content Security Policy (CSP) Header Not Set"
+      },
+      "locations": [{
+        "physicalLocation": {
+          "artifactLocation": {
+            "uri": "hawkscan/https://localhost:9000/payload/3099"
+          },
+          "region": {
+            "startLine": 1
+          }
+        }
+      }],
+      "partialFingerprints": {
+        "4.0.0": "512062fd-edd6-4718-b03f-dac6c49fc0d8-10038-11"
+      }
+    }, {
+      "ruleId": "512062fd-edd6-4718-b03f-dac6c49fc0d8-10038-12",
+      "message": {
+        "text": "Content Security Policy (CSP) Header Not Set",
+        "markdown": "Content Security Policy (CSP) Header Not Set"
+      },
+      "locations": [{
+        "physicalLocation": {
+          "artifactLocation": {
+            "uri": "hawkscan/https://localhost:9000/payload/3097"
+          },
+          "region": {
+            "startLine": 1
+          }
+        }
+      }],
+      "partialFingerprints": {
+        "4.0.0": "512062fd-edd6-4718-b03f-dac6c49fc0d8-10038-12"
+      }
+    }, {
+      "ruleId": "512062fd-edd6-4718-b03f-dac6c49fc0d8-10038-13",
+      "message": {
+        "text": "Content Security Policy (CSP) Header Not Set",
+        "markdown": "Content Security Policy (CSP) Header Not Set"
+      },
+      "locations": [{
+        "physicalLocation": {
+          "artifactLocation": {
+            "uri": "hawkscan/https://localhost:9000/payload/3105"
+          },
+          "region": {
+            "startLine": 1
+          }
+        }
+      }],
+      "partialFingerprints": {
+        "4.0.0": "512062fd-edd6-4718-b03f-dac6c49fc0d8-10038-13"
+      }
+    }, {
+      "ruleId": "512062fd-edd6-4718-b03f-dac6c49fc0d8-10010-14",
+      "message": {
+        "text": "Cookie No HttpOnly Flag",
+        "markdown": "Cookie No HttpOnly Flag"
+      },
+      "locations": [{
+        "physicalLocation": {
+          "artifactLocation": {
+            "uri": "hawkscan/https://localhost:9000/login-code"
+          },
+          "region": {
+            "startLine": 1
+          }
+        }
+      }],
+      "partialFingerprints": {
+        "4.0.0": "512062fd-edd6-4718-b03f-dac6c49fc0d8-10010-14"
+      }
+    }, {
+      "ruleId": "512062fd-edd6-4718-b03f-dac6c49fc0d8-10054-15",
+      "message": {
+        "text": "Cookie without SameSite Attribute",
+        "markdown": "Cookie without SameSite Attribute"
+      },
+      "locations": [{
+        "physicalLocation": {
+          "artifactLocation": {
+            "uri": "hawkscan/https://localhost:9000/login-code"
+          },
+          "region": {
+            "startLine": 1
+          }
+        }
+      }],
+      "partialFingerprints": {
+        "4.0.0": "512062fd-edd6-4718-b03f-dac6c49fc0d8-10054-15"
+      }
+    }, {
+      "ruleId": "512062fd-edd6-4718-b03f-dac6c49fc0d8-10011-16",
+      "message": {
+        "text": "Cookie Without Secure Flag",
+        "markdown": "Cookie Without Secure Flag"
+      },
+      "locations": [{
+        "physicalLocation": {
+          "artifactLocation": {
+            "uri": "hawkscan/https://localhost:9000/login-code"
+          },
+          "region": {
+            "startLine": 1
+          }
+        }
+      }],
+      "partialFingerprints": {
+        "4.0.0": "512062fd-edd6-4718-b03f-dac6c49fc0d8-10011-16"
+      }
+    }, {
+      "ruleId": "512062fd-edd6-4718-b03f-dac6c49fc0d8-40012-17",
+      "message": {
+        "text": "Cross Site Scripting (Reflected)",
+        "markdown": "Cross Site Scripting (Reflected)"
+      },
+      "locations": [{
+        "physicalLocation": {
+          "artifactLocation": {
+            "uri": "hawkscan/https://localhost:9000/search"
+          },
+          "region": {
+            "startLine": 1
+          }
+        }
+      }],
+      "partialFingerprints": {
+        "4.0.0": "512062fd-edd6-4718-b03f-dac6c49fc0d8-40012-17"
+      }
+    }, {
+      "ruleId": "512062fd-edd6-4718-b03f-dac6c49fc0d8-40018-18",
+      "message": {
+        "text": "SQL Injection - PostgreSQL",
+        "markdown": "SQL Injection - PostgreSQL"
+      },
+      "locations": [{
+        "physicalLocation": {
+          "artifactLocation": {
+            "uri": "hawkscan/https://localhost:9000/search"
+          },
+          "region": {
+            "startLine": 1
+          }
+        }
+      }],
+      "partialFingerprints": {
+        "4.0.0": "512062fd-edd6-4718-b03f-dac6c49fc0d8-40018-18"
+      }
+    }, {
+      "ruleId": "512062fd-edd6-4718-b03f-dac6c49fc0d8-40008-19",
+      "message": {
+        "text": "Parameter Tampering",
+        "markdown": "Parameter Tampering"
+      },
+      "locations": [{
+        "physicalLocation": {
+          "artifactLocation": {
+            "uri": "hawkscan/https://localhost:9000/search"
+          },
+          "region": {
+            "startLine": 1
+          }
+        }
+      }],
+      "partialFingerprints": {
+        "4.0.0": "512062fd-edd6-4718-b03f-dac6c49fc0d8-40008-19"
+      }
+    }, {
+      "ruleId": "512062fd-edd6-4718-b03f-dac6c49fc0d8-40025-20",
+      "message": {
+        "text": "Proxy Disclosure",
+        "markdown": "Proxy Disclosure"
+      },
+      "locations": [{
+        "physicalLocation": {
+          "artifactLocation": {
+            "uri": "hawkscan/https://localhost:9000/payload/3099"
+          },
+          "region": {
+            "startLine": 1
+          }
+        }
+      }],
+      "partialFingerprints": {
+        "4.0.0": "512062fd-edd6-4718-b03f-dac6c49fc0d8-40025-20"
+      }
+    }, {
+      "ruleId": "512062fd-edd6-4718-b03f-dac6c49fc0d8-40025-21",
+      "message": {
+        "text": "Proxy Disclosure",
+        "markdown": "Proxy Disclosure"
+      },
+      "locations": [{
+        "physicalLocation": {
+          "artifactLocation": {
+            "uri": "hawkscan/https://localhost:9000/jwt-auth"
+          },
+          "region": {
+            "startLine": 1
+          }
+        }
+      }],
+      "partialFingerprints": {
+        "4.0.0": "512062fd-edd6-4718-b03f-dac6c49fc0d8-40025-21"
+      }
+    }, {
+      "ruleId": "512062fd-edd6-4718-b03f-dac6c49fc0d8-40025-22",
+      "message": {
+        "text": "Proxy Disclosure",
+        "markdown": "Proxy Disclosure"
+      },
+      "locations": [{
+        "physicalLocation": {
+          "artifactLocation": {
+            "uri": "hawkscan/https://localhost:9000/login-form-multi"
+          },
+          "region": {
+            "startLine": 1
+          }
+        }
+      }],
+      "partialFingerprints": {
+        "4.0.0": "512062fd-edd6-4718-b03f-dac6c49fc0d8-40025-22"
+      }
+    }, {
+      "ruleId": "512062fd-edd6-4718-b03f-dac6c49fc0d8-40025-23",
+      "message": {
+        "text": "Proxy Disclosure",
+        "markdown": "Proxy Disclosure"
+      },
+      "locations": [{
+        "physicalLocation": {
+          "artifactLocation": {
+            "uri": "hawkscan/https://localhost:9000/payload/3105"
+          },
+          "region": {
+            "startLine": 1
+          }
+        }
+      }],
+      "partialFingerprints": {
+        "4.0.0": "512062fd-edd6-4718-b03f-dac6c49fc0d8-40025-23"
+      }
+    }, {
+      "ruleId": "512062fd-edd6-4718-b03f-dac6c49fc0d8-40025-24",
+      "message": {
+        "text": "Proxy Disclosure",
+        "markdown": "Proxy Disclosure"
+      },
+      "locations": [{
+        "physicalLocation": {
+          "artifactLocation": {
+            "uri": "hawkscan/https://localhost:9000/payload/3097"
+          },
+          "region": {
+            "startLine": 1
+          }
+        }
+      }],
+      "partialFingerprints": {
+        "4.0.0": "512062fd-edd6-4718-b03f-dac6c49fc0d8-40025-24"
+      }
+    }, {
+      "ruleId": "512062fd-edd6-4718-b03f-dac6c49fc0d8-40025-25",
+      "message": {
+        "text": "Proxy Disclosure",
+        "markdown": "Proxy Disclosure"
+      },
+      "locations": [{
+        "physicalLocation": {
+          "artifactLocation": {
+            "uri": "hawkscan/https://localhost:9000/payload"
+          },
+          "region": {
+            "startLine": 1
+          }
+        }
+      }],
+      "partialFingerprints": {
+        "4.0.0": "512062fd-edd6-4718-b03f-dac6c49fc0d8-40025-25"
+      }
+    }, {
+      "ruleId": "512062fd-edd6-4718-b03f-dac6c49fc0d8-40025-26",
+      "message": {
+        "text": "Proxy Disclosure",
+        "markdown": "Proxy Disclosure"
+      },
+      "locations": [{
+        "physicalLocation": {
+          "artifactLocation": {
+            "uri": "hawkscan/https://localhost:9000/basic-auth"
+          },
+          "region": {
+            "startLine": 1
+          }
+        }
+      }],
+      "partialFingerprints": {
+        "4.0.0": "512062fd-edd6-4718-b03f-dac6c49fc0d8-40025-26"
+      }
+    }, {
+      "ruleId": "512062fd-edd6-4718-b03f-dac6c49fc0d8-40025-27",
+      "message": {
+        "text": "Proxy Disclosure",
+        "markdown": "Proxy Disclosure"
+      },
+      "locations": [{
+        "physicalLocation": {
+          "artifactLocation": {
+            "uri": "hawkscan/https://localhost:9000/"
+          },
+          "region": {
+            "startLine": 1
+          }
+        }
+      }],
+      "partialFingerprints": {
+        "4.0.0": "512062fd-edd6-4718-b03f-dac6c49fc0d8-40025-27"
+      }
+    }, {
+      "ruleId": "512062fd-edd6-4718-b03f-dac6c49fc0d8-40025-28",
+      "message": {
+        "text": "Proxy Disclosure",
+        "markdown": "Proxy Disclosure"
+      },
+      "locations": [{
+        "physicalLocation": {
+          "artifactLocation": {
+            "uri": "hawkscan/https://localhost:9000/payload/3103"
+          },
+          "region": {
+            "startLine": 1
+          }
+        }
+      }],
+      "partialFingerprints": {
+        "4.0.0": "512062fd-edd6-4718-b03f-dac6c49fc0d8-40025-28"
+      }
+    }, {
+      "ruleId": "512062fd-edd6-4718-b03f-dac6c49fc0d8-40025-29",
+      "message": {
+        "text": "Proxy Disclosure",
+        "markdown": "Proxy Disclosure"
+      },
+      "locations": [{
+        "physicalLocation": {
+          "artifactLocation": {
+            "uri": "hawkscan/https://localhost:9000"
+          },
+          "region": {
+            "startLine": 1
+          }
+        }
+      }],
+      "partialFingerprints": {
+        "4.0.0": "512062fd-edd6-4718-b03f-dac6c49fc0d8-40025-29"
+      }
+    }],
+    "automationDetails": {
+      "id": "HawkScan 512062fd-edd6-4718-b03f-dac6c49fc0d8",
+      "description": {
+        "text": "This is a Scan 512062fd-edd6-4718-b03f-dac6c49fc0d8 of Application: b04badbc-b0b9-4988-be65-2ebc25e507d5"
+      }
+    }
+  }]
+}
