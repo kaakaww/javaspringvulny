@@ -2,6 +2,7 @@ package hawk.api.jwt;
 
 import hawk.api.SearchResult;
 import hawk.form.Search;
+import hawk.repos.ItemsRepo;
 import hawk.service.SearchService;
 import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/jwt/items")
 public class JwtItemController {
+
+    @Autowired
+    ItemsRepo repo;
 
     private final SearchService searchService;
 
@@ -41,5 +45,12 @@ public class JwtItemController {
     public ResponseEntity search(@RequestBody Search search) {
         SearchResult result = new SearchResult(search.getSearchText(), searchService.search(search));
         return ResponseEntity.ok(result);
+    }
+
+    // @PathVariable("id") String id should be types correctly as a Long. eg: @PathVariable("id") Long id
+    @GetMapping("/{id}")
+    public ResponseEntity getById(@PathVariable("id") String id) {
+        val item = repo.findById(Long.getLong(id));
+        return ResponseEntity.ok(item);
     }
 }

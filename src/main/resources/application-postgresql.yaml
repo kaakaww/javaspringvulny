@@ -44,3 +44,9 @@ management:
   endpoints:
     jmx.exposure.include: '*'
     web.exposure.include: '*'
+
+payload:
+  count: 50
+  start-size: 10240
+  delayStart: 0
+  delayEnd: 0

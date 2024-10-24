@@ -5,6 +5,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Map;
+import java.util.Random;
 import java.util.concurrent.ConcurrentHashMap;
 import org.apache.commons.compress.utils.IOUtils;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -27,10 +28,29 @@ public class PayloadController {
     @Value("${payload.count:10}")
     private int payloadCount = 20;
 
+    @Value("${payload.delayStart:0}")
+    private int payloadDelayStart = 0;
+
+    @Value("${payload.delayEnd:0}")
+    private int payloadDelayEnd = 0;
+
+    public void sleepy() {
+        if ((payloadDelayStart > 0 || payloadDelayEnd > 0) && payloadDelayEnd > payloadDelayStart) {
+            Random random = new Random();
+            Long sleepFor = random.nextLong(payloadDelayStart, payloadDelayEnd);
+            try {
+                Thread.sleep(sleepFor);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
     @GetMapping(value={"/payload/{size}","/admin/payload/{size}"})
     public String getPayload(Model model,
                              @PathVariable("size") Integer size) {
 
+        sleepy();
         if(payloadCache.containsKey(size)){
             model.addAttribute("payload", new String( payloadCache.get(size)));
         }else {
@@ -57,7 +77,7 @@ public class PayloadController {
     @GetMapping(value={"/payload/stream/{size}", "/admin/payload/stream/{size}"})
     public StreamingResponseBody getPayloadStream(@PathVariable("size") Integer size) {
         String tmpData = "mobile: 555-678-5343 ";
-
+        sleepy();
         return new StreamingResponseBody() {
             Integer cnt = 0;
             @Override

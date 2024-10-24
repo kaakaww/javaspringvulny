@@ -1,0 +1,25 @@
+app:
+  inputVectors:
+    injectableParam:
+      urlPath: true
+      urlQuery: true
+      urlQueryParam: true
+      # httpHeaders: true
+hawk:
+  scan:
+    policyName: CUSTOM_SCRIPTS
+
+hawkAddOn:
+  scripts:
+    - name: fuzzer.kts
+      type: active
+      path: hawkscripts
+      id: 1000063 # Replace with your own registered plugin ID
+      language: KOTLIN
+      vars:
+        - name: iterations
+          val: 10
+        - name: stringStartLength
+          val: 50
+        - name: stringEndLength
+          val: 10_000

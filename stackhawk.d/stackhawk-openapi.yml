@@ -27,6 +27,10 @@ app:
       success: "HTTP.*200.*"
 
   openApiConf:
+    forbiddenVariables:
+      - field: zone_id
+        values:
+          - "<zone-id that shouldn't have access>"
     # path: /openapi
     filePath: openapi.yaml
     includeAllMethods: true
@@ -39,6 +43,12 @@ app:
           - "customTextValue1"
           - "customTextValue2"
           - "customTextValue3"
+      - field: Dana
+        values:
+          - "no judgment!"
+          - "quiet you!"
+          - "shoosh!"
+          - "something something... your face!"
       - field: searchText
         values:
           - "customSearchText1"

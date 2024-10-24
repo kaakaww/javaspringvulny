@@ -1,4 +1,3 @@
----
 openapi: 3.0.1
 info:
   title: OpenAPI definition
@@ -7,37 +6,25 @@ servers:
   - url: https://localhost:9000
     description: Generated server url
 paths:
-  "/api/token/items/search/":
-    get:
+  /api/jwt/items/search:
+    post:
       tags:
-        - token-item-controller
+        - jwt-item-controller
       operationId: search
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Search'
+        required: true
       responses:
         '200':
-          description: default response
+          description: OK
           content:
-            "*/*":
+            '*/*':
               schema:
                 type: string
-  "/api/token/items/search/{text}":
-    get:
-      tags:
-        - token-item-controller
-      operationId: search_1
-      parameters:
-        - name: text
-          in: path
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          description: default response
-          content:
-            "*/*":
-              schema:
-                type: string
-  "/api/jwt/auth/signin":
+  /api/jwt/auth/signin:
     post:
       tags:
         - jwt-auth-controller
@@ -46,35 +33,75 @@ paths:
         content:
           application/json:
             schema:
-              "$ref": "#/components/schemas/AuthenticationRequest"
+              $ref: '#/components/schemas/AuthenticationRequest'
+        required: true
       responses:
         '200':
-          description: default response
+          description: OK
           content:
-            "*/*":
+            '*/*':
               schema:
                 type: string
-  "/api/jwt/items/search":
-    post:
-      tags:
-        - jwt-item-controller
-      operationId: search_2
-      requestBody:
-        content:
-          application/json:
-            schema:
-              "$ref": "#/components/schemas/Search"
-      responses:
-        '200':
-          description: default response
-          content:
-            "*/*":
-              schema:
-                type: string
-  "/api/jwt/items/search/{text}":
+  /api/token/items/search/:
     get:
       tags:
-        - jwt-item-controller
+        - token-item-controller
+      operationId: search_1
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+  /api/token/items/search/{text}:
+    get:
+      tags:
+        - token-item-controller
+      operationId: search_2
+      parameters:
+        - name: text
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+  /api/okta/me/token:
+    get:
+      tags:
+        - okta-controller
+      operationId: me
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/OktaIdInfo'
+  /api/jwt/users/search/:
+    get:
+      tags:
+        - jwt-user-controller
+      operationId: searchAll
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+  /api/jwt/users/search/{text}:
+    get:
+      tags:
+        - jwt-user-controller
       operationId: search_3
       parameters:
         - name: text
@@ -84,42 +111,12 @@ paths:
             type: string
       responses:
         '200':
-          description: default response
+          description: OK
           content:
-            "*/*":
+            '*/*':
               schema:
                 type: string
-  "/api/jwt/items/search/":
-    get:
-      tags:
-        - jwt-item-controller
-      operationId: searchAll
-      responses:
-        '200':
-          description: default response
-          content:
-            "*/*":
-              schema:
-                type: string
-  "/api/jwt/users/search/{text}":
-    get:
-      tags:
-        - jwt-user-controller
-      operationId: search_4
-      parameters:
-        - name: text
-          in: path
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          description: default response
-          content:
-            "*/*":
-              schema:
-                type: string
-  "/api/jwt/users/search/bad/{text}":
+  /api/jwt/users/search/bad/{text}:
     get:
       tags:
         - jwt-user-controller
@@ -132,36 +129,72 @@ paths:
             type: string
       responses:
         '200':
-          description: default response
+          description: OK
           content:
-            "*/*":
+            '*/*':
               schema:
                 type: string
-  "/api/jwt/users/search/":
+  /api/jwt/items/{id}:
     get:
       tags:
-        - jwt-user-controller
+        - jwt-item-controller
+      operationId: getById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+  /api/jwt/items/search/:
+    get:
+      tags:
+        - jwt-item-controller
       operationId: searchAll_1
       responses:
         '200':
-          description: default response
+          description: OK
           content:
-            "*/*":
+            '*/*':
               schema:
                 type: string
-  "/api/basic/items/search/":
+  /api/jwt/items/search/{text}:
+    get:
+      tags:
+        - jwt-item-controller
+      operationId: search_4
+      parameters:
+        - name: text
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+  /api/basic/items/search/:
     get:
       tags:
         - basic-auth-item-controller
       operationId: search_5
       responses:
         '200':
-          description: default response
+          description: OK
           content:
-            "*/*":
+            '*/*':
               schema:
                 type: string
-  "/api/basic/items/search/{text}":
+  /api/basic/items/search/{text}:
     get:
       tags:
         - basic-auth-item-controller
@@ -174,13 +207,18 @@ paths:
             type: string
       responses:
         '200':
-          description: default response
+          description: OK
           content:
-            "*/*":
+            '*/*':
               schema:
                 type: string
 components:
   schemas:
+    Search:
+      type: object
+      properties:
+        searchText:
+          type: string
     AuthenticationRequest:
       type: object
       properties:
@@ -190,8 +228,20 @@ components:
           type: string
         tenant:
           type: string
-    Search:
+    OktaIdInfo:
       type: object
       properties:
-        searchText:
+        token:
+          type: string
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        description:
+          type: string
+        tenantId:
           type: string
