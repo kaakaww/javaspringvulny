@@ -17,7 +17,7 @@ fun alert(activeScanner: ScriptsActiveScanner, msg: HttpMessage, evidence: Strin
     val solution = "Handle bad input and never throw a 5xx error"
     val reference = ""
     val otherInfo = "fuzzed param: $param=$fuzzedParam"
-    val pluginId = 10_00_063; //Custom Plugin ID
+    val pluginId = 1000000; //Custom Plugin ID
 
     activeScanner.newAlert()
         .setPluginId(pluginId)
