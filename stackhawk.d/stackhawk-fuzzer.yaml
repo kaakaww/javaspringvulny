@@ -5,16 +5,16 @@ app:
       urlQuery: true
       urlQueryParam: true
       # httpHeaders: true
-hawk:
-  scan:
-    policyName: CUSTOM_SCRIPTS
+#hawk:
+#  scan:
+#    policyName: CUSTOM_SCRIPTS
 
 hawkAddOn:
   scripts:
     - name: fuzzer.kts
       type: active
       path: hawkscripts
-      id: 1000063 # Replace with your own registered plugin ID
+      id: 1000000 # Replace with your own registered plugin ID
       language: KOTLIN
       vars:
         - name: iterations
