@@ -7,7 +7,7 @@ plugins {
     kotlin("jvm") version "1.8.22"
 }
 
-val kotlinVersion = "1.7.20"
+val kotlinVersion = "1.8.22"
 val hawkScriptSdkVersion = lazy { sdkVersion() }
 val sdkZipName = lazy {  "hawkscript-sdk-${hawkScriptSdkVersion.value}.zip" }
 val hawkScriptSDKZip = lazy { "$buildDir/${sdkZipName.value}" }

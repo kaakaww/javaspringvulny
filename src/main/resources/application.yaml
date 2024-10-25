@@ -31,3 +31,5 @@ springdoc:
 payload:
   start-size: 3096
   count: 10
+  delayStart: 0
+  delayEnd: 0
