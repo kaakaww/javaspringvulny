@@ -33,7 +33,7 @@ jobs:
       - name: Set up Docker
         uses: docker/setup-docker-action@v4
       - name: Build and run JavaSpringVulny (Docker)
-        run: docker-compose up --detach
+        run: docker compose up --detach
       - name: Run HawkScan
         env:
           HAWK_ENV: GitHub Actions
