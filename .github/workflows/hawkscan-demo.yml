@@ -32,6 +32,11 @@ jobs:
       #     ./gradlew bootRun &
       - name: Set up Docker
         uses: docker/setup-docker-action@v4
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin' # See 'Supported distributions' for available options
+          java-version: '17'
       - name: Build and run JavaSpringVulny (Docker)
         run: docker compose up --detach
       - name: Run HawkScan
