@@ -2,19 +2,23 @@ app:
   applicationId: ${APP_ID:b04badbc-b0b9-4988-be65-2ebc25e507d5}
   env: ${APP_ENV:Development}
   host: ${APP_HOST:https://localhost:9000}
+  waitForAppTarget:
+    path: /x
+    pollDelay: 1000
+    waitTimeoutMillis: 300000
   openApiConf:
     path: /openapi
   antiCsrfParam: "_csrf"
   authentication:
-    loggedInIndicator: ".*"
-    loggedOutIndicator: "^$"
+    loggedInIndicator: "\\QSign Out\\E"
+    loggedOutIndicator: ".*Location:.*/login.*"
     usernamePassword:
       type: JSON
       loginPath: /api/jwt/auth/signin
       usernameField: username
       passwordField: password
       scanUsername: "janesmith"
-      scanPassword: "password"
+      scanPassword: "${APP_PASSWORD:password}"
     tokenAuthorization:
       type: HEADER
       value: Authorization
@@ -27,5 +31,12 @@ app:
       success: "HTTP.*200.*"
   excludePaths:
     - "/logout"
+    
 hawk:
   failureThreshold: high
+
+tags:
+  - name: _STACKHAWK_GIT_COMMIT_SHA
+    value: ${COMMIT_SHA}
+  - name: _STACKHAWK_GIT_BRANCH
+    value: ${BRANCH_NAME}
