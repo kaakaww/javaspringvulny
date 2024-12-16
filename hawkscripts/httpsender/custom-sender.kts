@@ -1,4 +1,4 @@
-import com.stackhawk.hste.extension.talon.hawkscan.ExtensionTalonHawkscan
+import com.stackhawk.zap.extension.talon.hawkscan.ExtensionTalonHawkscan
 import org.apache.log4j.LogManager
 import org.parosproxy.paros.control.Control
 import org.parosproxy.paros.network.HttpMessage
@@ -15,7 +15,6 @@ val talon = Control
 fun sendingRequest(msg: HttpMessage, initiator: Int, helper: HttpSenderScriptHelper) {
     logger.info("req ${msg.requestHeader.uri}")
     msg.requestHeader.setHeader("X-HawkScanId", talon.talonHawkScanConf.scanId)
-	talon.
 }
 
 // modify the response from the web application before sending to the client
