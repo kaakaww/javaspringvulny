@@ -1,4 +1,4 @@
-FROM openjdk:11.0-jdk-slim
+FROM openjdk:17-jdk-slim
 
 RUN mkdir /javavulny /app
 COPY . /javavulny/
