@@ -1,4 +1,4 @@
-FROM openjdk:11.0-jdk-slim
+FROM public.ecr.aws/amazoncorretto/amazoncorretto:17
 
 RUN mkdir /javavulny /app
 COPY . /javavulny/

@@ -1,7 +1,7 @@
 import com.fasterxml.jackson.databind.ObjectMapper
-import com.stackhawk.zap.extension.talon.HawkConfExtensions
-import com.stackhawk.zap.extension.talon.cleanHost
-import com.stackhawk.zap.extension.talon.hawkscan.ExtensionTalonHawkscan
+import com.stackhawk.hste.extension.talon.HawkConfExtensions
+import com.stackhawk.hste.extension.talon.cleanHost
+import com.stackhawk.hste.extension.talon.hawkscan.ExtensionTalonHawkscan
 import org.apache.commons.httpclient.URI
 import org.apache.log4j.LogManager
 import org.parosproxy.paros.control.Control
