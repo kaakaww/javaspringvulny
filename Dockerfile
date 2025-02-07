@@ -14,4 +14,4 @@ RUN cd /javavulny \
 WORKDIR /app
 
 ENV PWD=/app
-CMD ["java", "-Djava.security.egd=file:/dev/./urandom", "-jar", "/app/java-spring-vuly-0.2.0.jar"]
+CMD ["java", "-Djava.security.egd=file:/dev/./urandom", "-Dcom.sun.jndi.ldap.object.trustSerialData=true", "-jar", "/app/java-spring-vuly-0.2.0.jar"]
