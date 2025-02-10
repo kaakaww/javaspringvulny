@@ -12,8 +12,8 @@ repositories {
     mavenCentral()
 }
 
-java.sourceCompatibility = JavaVersion.VERSION_17
-java.targetCompatibility = JavaVersion.VERSION_17
+java.sourceCompatibility = JavaVersion.VERSION_11
+java.targetCompatibility = JavaVersion.VERSION_11
 
 dependencies {
 
@@ -26,6 +26,7 @@ dependencies {
     implementation("com.h2database:h2")
     runtimeOnly("org.postgresql:postgresql")
     implementation("io.jsonwebtoken:jjwt-api:0.10.7")
+    // dependency intentionally vulnerable to spring4shell
     implementation("org.apache.logging.log4j:log4j-slf4j-impl:2.14.1")
 
     implementation("org.springdoc:springdoc-openapi-ui:1.8.0")

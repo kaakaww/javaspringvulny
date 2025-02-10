@@ -2,8 +2,8 @@ hawk:
   spider:
     base: false
     har:
-      dir:
-        path: ${HOME}/test/resources/har
+      # dir:
+      #   path: ${HOME}/test/resources/har
       file:
         paths:
           - ${HOME}/test/resources/har/localhost-jsv-1.har

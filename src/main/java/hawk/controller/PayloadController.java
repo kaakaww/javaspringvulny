@@ -37,7 +37,7 @@ public class PayloadController {
     public void sleepy() {
         if ((payloadDelayStart > 0 || payloadDelayEnd > 0) && payloadDelayEnd > payloadDelayStart) {
             Random random = new Random();
-            Long sleepFor = random.nextLong(payloadDelayStart, payloadDelayEnd);
+            long sleepFor = payloadDelayStart + ((payloadDelayEnd - payloadDelayStart) * random.nextLong());
             try {
                 Thread.sleep(sleepFor);
             } catch (InterruptedException e) {
