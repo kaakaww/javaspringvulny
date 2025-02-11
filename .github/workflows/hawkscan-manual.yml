@@ -14,15 +14,6 @@ jobs:
   hawkscan:
     name: HawkScan
     runs-on: ubuntu-latest
-    services:
-      postgres-db:
-        image: postgres
-        ports:
-          - 5432:5432
-        env:
-          POSTGRES_DB: postgresql
-          POSTGRES_USER: postgresql
-          POSTGRES_PASSWORD: postgresql
     steps:
       - uses: actions/checkout@v4
       - name: Build and run JavaSpringVulny (slower)
