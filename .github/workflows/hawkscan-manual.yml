@@ -26,7 +26,7 @@ jobs:
         with:
           apiKey: ${{ secrets.HAWK_API_KEY }}
         env:
-          APP_ID: ${{ secrets.appId }}
+          #APP_ID: ${{ secrets.appId }}
           NO_PROGRESS: true
           SARIF_ARTIFACT: true
       - name: Upload SARIF file

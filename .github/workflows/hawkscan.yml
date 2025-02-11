@@ -10,16 +10,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Create ${{ github.event.client_payload.repoName }} app directory
-        run: mkdir -p common/build/integrationTests/hawkscan-action/apps/${{ github.event.client_payload.repoName }}
-      - name: Navigate to ${{ github.event.client_payload.repoName }} app directory
-        run: cd common/build/integrationTests/hawkscan-action/apps/${{ github.event.client_payload.repoName }}
+      - name: Create ${{ github.event.repository.name }} app directory
+        run: mkdir -p common/build/integrationTests/hawkscan-action/apps/${{ github.event.repository.name }}
+      - name: Navigate to ${{ github.event.repository.name }} app directory
+        run: cd common/build/integrationTests/hawkscan-action/apps/${{ github.event.repository.name }}
       - name: Checkout vulny repo
-        run: git clone https://github.com/${{ github.event.client_payload.repoOrg }}/${{ github.event.client_payload.repoName }}.git
-      - name: Run ${{ github.event.client_payload.repoName }}
+        run: git clone https://github.com/${{ github.event.repository.full_name }}.git
+      - name: Run ${{ github.event.repository.name }}
         run: docker compose up -d
       - name: Navigate to repo root directory
-        run: cd /home/runner/work/${{ github.event.client_payload.repoName }}/${{ github.event.client_payload.repoName }}
+        run: cd /home/runner/work/${{ github.event.repository.full_name }}
       - name: Run HawkScan
         id: run-hawkscan
         uses: stackhawk/hawkscan-action@main
