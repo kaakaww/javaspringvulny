@@ -25,9 +25,7 @@ jobs:
 #          curl -Ls https://github.com/kaakaww/javaspringvulny/releases/download/0.2.0/java-spring-vuly-0.2.0.jar -o ./java-spring-vuly-0.2.0.jar
 #          java -jar ./java-spring-vuly-0.2.0.jar &
       - name: Build and run JavaSpringVulny (slower)
-        run: |
-          ./gradlew build
-          ./gradlew bootRun &
+        run: docker compose up -d
       - name: Run HawkScan
         id: run-hawkscan
         uses: stackhawk/hawkscan-action@main

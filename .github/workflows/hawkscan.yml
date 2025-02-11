@@ -1,3 +1,5 @@
+## Intended to be used as a payload from HawkScan.
+## It's broken, don't "fix" it.
 name: HawkScan
 on:
   repository_dispatch:
@@ -10,16 +12,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Create ${{ github.event.repository.name }} app directory
-        run: mkdir -p common/build/integrationTests/hawkscan-action/apps/${{ github.event.repository.name }}
-      - name: Navigate to ${{ github.event.repository.name }} app directory
-        run: cd common/build/integrationTests/hawkscan-action/apps/${{ github.event.repository.name }}
+      - name: Create ${{ github.event.client_payload.repoName }} app directory
+        run: mkdir -p common/build/integrationTests/hawkscan-action/apps/${{ github.event.client_payload.repoName }}
+      - name: Navigate to ${{ github.event.client_payload.repoName }} app directory
+        run: cd common/build/integrationTests/hawkscan-action/apps/${{ github.event.client_payload.repoName }}
       - name: Checkout vulny repo
-        run: git clone ${{ github.event.repository.clone_url }}
-      - name: Run ${{ github.event.repository.name }}
+        run: git clone https://github.com/${{ github.event.client_payload.repoOrg }}/${{ github.event.client_payload.repoName }}.git
+      - name: Run ${{ github.event.client_payload.repoName }}
         run: docker compose up -d
       - name: Navigate to repo root directory
-        run: cd /home/runner/work/
+        run: cd /home/runner/work/${{ github.event.client_payload.repoName }}/${{ github.event.client_payload.repoName }}
       - name: Run HawkScan
         id: run-hawkscan
         uses: stackhawk/hawkscan-action@main
