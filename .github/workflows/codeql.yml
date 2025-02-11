@@ -1,0 +1,23 @@
+name: CodeQL
+on:
+  repository_dispatch:
+    types: [integration-initial-test]
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+          # Analyzes Java code directly from the codebase without a build
+          - language: java-kotlin
+            build-mode: none # analyzes Java only
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Initializes CodeQL tools and creates a codebase for analysis.
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v3
+        with:
+          languages: java-kotlin
