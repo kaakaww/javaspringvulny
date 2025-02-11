@@ -14,18 +14,19 @@ jobs:
   hawkscan:
     name: HawkScan
     runs-on: ubuntu-latest
+    services:
+      postgres-db:
+        image: postgres
+        ports:
+          - 5432:5432
+        env:
+          POSTGRES_DB: postgresql
+          POSTGRES_USER: postgresql
+          POSTGRES_PASSWORD: postgresql
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-java@v4
-        with:
-          distribution: 'temurin'
-          java-version: '17'
-#      - name: Download and run JavaSpringVulny release jar
-#        run: |
-#          curl -Ls https://github.com/kaakaww/javaspringvulny/releases/download/0.2.0/java-spring-vuly-0.2.0.jar -o ./java-spring-vuly-0.2.0.jar
-#          java -jar ./java-spring-vuly-0.2.0.jar &
       - name: Build and run JavaSpringVulny (slower)
-        run: docker compose up -d
+        run: docker-compose build && docker-compose up -d
       - name: Run HawkScan
         id: run-hawkscan
         uses: stackhawk/hawkscan-action@main
