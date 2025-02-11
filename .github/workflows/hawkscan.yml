@@ -15,11 +15,11 @@ jobs:
       - name: Navigate to ${{ github.event.repository.name }} app directory
         run: cd common/build/integrationTests/hawkscan-action/apps/${{ github.event.repository.name }}
       - name: Checkout vulny repo
-        run: git clone https://github.com/${{ github.event.repository.full_name }}.git
+        run: git clone ${{ github.event.repository.clone_url }}
       - name: Run ${{ github.event.repository.name }}
         run: docker compose up -d
       - name: Navigate to repo root directory
-        run: cd /home/runner/work/${{ github.event.repository.full_name }}
+        run: cd /home/runner/work/
       - name: Run HawkScan
         id: run-hawkscan
         uses: stackhawk/hawkscan-action@main
