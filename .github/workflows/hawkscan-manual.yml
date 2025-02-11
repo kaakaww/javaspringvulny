@@ -1,6 +1,14 @@
 name: HawkScan Example
 on:
   workflow_dispatch:
+permissions:
+  # required for all workflows
+  security-events: write
+  # required to fetch internal or private CodeQL packs
+  packages: read
+  # only required for workflows in private repositories
+  actions: read
+  contents: read
 
 jobs:
   hawkscan:
@@ -8,25 +16,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-java@v4
-        with:
-          distribution: 'temurin'
-          java-version: '17'
-#      - name: Download and run JavaSpringVulny release jar
-#        run: |
-#          curl -Ls https://github.com/kaakaww/javaspringvulny/releases/download/0.2.0/java-spring-vuly-0.2.0.jar -o ./java-spring-vuly-0.2.0.jar
-#          java -jar ./java-spring-vuly-0.2.0.jar &
       - name: Build and run JavaSpringVulny (slower)
-        run: |
-          ./gradlew build
-          ./gradlew bootRun &
+        run: docker compose build && docker compose up -d
       - name: Run HawkScan
         id: run-hawkscan
         uses: stackhawk/hawkscan-action@main
         with:
           apiKey: ${{ secrets.HAWK_API_KEY }}
         env:
-          APP_ID: ${{ secrets.appId }}
+          #APP_ID: ${{ secrets.appId }}
           NO_PROGRESS: true
           SARIF_ARTIFACT: true
       - name: Upload SARIF file

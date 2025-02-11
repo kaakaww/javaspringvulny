@@ -1,3 +1,5 @@
+## Intended to be used as a payload from HawkScan.
+## It's broken, don't "fix" it.
 name: HawkScan
 on:
   repository_dispatch:
