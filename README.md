@@ -199,3 +199,14 @@ These are example CICD pipelines to refer to:
 
 [github actions](https://github.com/kaakaww/javaspringvulny/blob/main/.github/workflows/hawkscan.yml)
 [azure-pipelines](https://github.com/kaakaww/javaspringvulny/blob/main/azure-pipelines.yml)
+
+### Repository Tools
+
+#### Update OpenAPI Spec Files
+
+Use the script in the `tools` directory `update-openapi-files.sh`
+```shell
+cd tools
+./update-openapi-files.sh
+cd ..
+```
