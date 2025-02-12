@@ -1,7 +1,9 @@
 package hawk.hotel.domain;
 
 import javax.persistence.*;
-import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Comparator;
 
 /*
@@ -11,27 +13,26 @@ import java.util.Comparator;
 @Table(name = "hotel")
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
-public class Hotel implements Comparable<Hotel>{
-
-    @Id
-    @GeneratedValue()
-    private long id;
-
-    @Column(nullable = false)
-    private String name;
-
-    @Column()
-    private String description;
+public class Hotel implements Comparable<Hotel> {
 
     @Column()
     String city;
-
+    @Id
+    @GeneratedValue()
+    private long id;
+    @Column(nullable = false)
+    private String name;
+    @Column()
+    private String description;
     @Column()
     private int rating;
 
     @Column()
     @Enumerated(EnumType.STRING)
     private Continent continent;
+    @OneToOne
+    @JoinColumn(name = "building_id")
+    private Building building;
 
     public Hotel() {
     }
@@ -90,10 +91,6 @@ public class Hotel implements Comparable<Hotel>{
     public void setContinent(Continent continent) {
         this.continent = continent;
     }
-
-    @OneToOne
-    @JoinColumn(name = "building_id")
-    private Building building;
 
     public Building getBuilding() {
         return building;

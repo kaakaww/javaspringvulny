@@ -2,14 +2,7 @@ package hawk.hotel.domain;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.List;
 
 @Entity
@@ -50,21 +43,21 @@ public class Building {
         this.staff = staff;
     }
 
-    public void setBlahs(List<Integer> blahs) {
-        ObjectMapper objectMapper = new ObjectMapper();
-        try {
-            this.blahs = objectMapper.writeValueAsString(blahs);
-        } catch (Exception e) {
-            throw new RuntimeException("Error converting numbers to JSON", e);
-        }
-    }
-
     public List<Integer> getBlahs() {
         ObjectMapper objectMapper = new ObjectMapper();
         try {
             return objectMapper.readValue(this.blahs, objectMapper.getTypeFactory().constructCollectionType(List.class, Integer.class));
         } catch (Exception e) {
             throw new RuntimeException("Error converting JSON to numbers", e);
+        }
+    }
+
+    public void setBlahs(List<Integer> blahs) {
+        ObjectMapper objectMapper = new ObjectMapper();
+        try {
+            this.blahs = objectMapper.writeValueAsString(blahs);
+        } catch (Exception e) {
+            throw new RuntimeException("Error converting numbers to JSON", e);
         }
     }
 

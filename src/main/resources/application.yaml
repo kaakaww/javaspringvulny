@@ -33,5 +33,3 @@ payload:
   count: 10
   delayStart: 0
   delayEnd: 0
-
-#logging.level.root: debug

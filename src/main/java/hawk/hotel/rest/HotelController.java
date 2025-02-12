@@ -1,14 +1,9 @@
 package hawk.hotel.rest;
 
-import java.util.List;
-import java.util.Map;
-
 import hawk.hotel.domain.Continent;
-
 import hawk.hotel.domain.Hotel;
 import hawk.hotel.exception.DataFormatException;
 import hawk.hotel.service.HotelService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -18,6 +13,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
+import java.util.Map;
 
 /*
  * Demonstrates how to set up RESTful API endpoints using Spring MVC
@@ -36,7 +33,7 @@ public class HotelController extends AbstractRestHandler {
             produces = {"application/json", "application/xml"})
     @ResponseStatus(HttpStatus.CREATED)
     public void createHotel(@RequestBody Hotel hotel,
-                                 HttpServletRequest request, HttpServletResponse response) {
+                            HttpServletRequest request, HttpServletResponse response) {
         Hotel createdHotel = this.hotelService.createHotel(hotel);
         response.setHeader("Location", request.getRequestURL().append("/").append(createdHotel.getId()).toString());
     }
@@ -48,8 +45,8 @@ public class HotelController extends AbstractRestHandler {
     public
     @ResponseBody
     Page<Hotel> getAllHotel(@RequestParam(value = "page", required = true, defaultValue = DEFAULT_PAGE_NUM) Integer page,
-                                      @RequestParam(value = "size", required = true, defaultValue = DEFAULT_PAGE_SIZE) Integer size,
-                                      HttpServletRequest request, HttpServletResponse response) {
+                            @RequestParam(value = "size", required = true, defaultValue = DEFAULT_PAGE_SIZE) Integer size,
+                            HttpServletRequest request, HttpServletResponse response) {
         return this.hotelService.getAllHotels(page, size);
     }
 
@@ -60,9 +57,9 @@ public class HotelController extends AbstractRestHandler {
     public
     @ResponseBody
     Page<? extends Hotel> upperBoundedCollectionOfHotels(
-                            @RequestParam(value = "page", required = true, defaultValue = DEFAULT_PAGE_NUM) Integer page,
-                            @RequestParam(value = "size", required = true, defaultValue = DEFAULT_PAGE_SIZE) Integer size,
-                            HttpServletRequest request, HttpServletResponse response) {
+            @RequestParam(value = "page", required = true, defaultValue = DEFAULT_PAGE_NUM) Integer page,
+            @RequestParam(value = "size", required = true, defaultValue = DEFAULT_PAGE_SIZE) Integer size,
+            HttpServletRequest request, HttpServletResponse response) {
         return this.hotelService.getAllHotels(page, size);
     }
 
@@ -73,10 +70,10 @@ public class HotelController extends AbstractRestHandler {
     public
     @ResponseBody
     Page<? super Hotel> lowerBoundedCollectionOfHotels(
-                                                         @RequestParam(value = "page", required = true, defaultValue = DEFAULT_PAGE_NUM) Integer page,
+            @RequestParam(value = "page", required = true, defaultValue = DEFAULT_PAGE_NUM) Integer page,
 
-                                                         @RequestParam(value = "size", required = true, defaultValue = DEFAULT_PAGE_SIZE) Integer size,
-                                                         HttpServletRequest request, HttpServletResponse response) {
+            @RequestParam(value = "size", required = true, defaultValue = DEFAULT_PAGE_SIZE) Integer size,
+            HttpServletRequest request, HttpServletResponse response) {
         return this.hotelService.getAllHotels(page, size);
     }
 
@@ -87,10 +84,10 @@ public class HotelController extends AbstractRestHandler {
     public
     @ResponseBody
     Page<?> unboundedCollectionOfHotels(
-                                                       @RequestParam(value = "page", required = true, defaultValue = DEFAULT_PAGE_NUM) Integer page,
+            @RequestParam(value = "page", required = true, defaultValue = DEFAULT_PAGE_NUM) Integer page,
 
-                                                       @RequestParam(value = "size", required = true, defaultValue = DEFAULT_PAGE_SIZE) Integer size,
-                                                       HttpServletRequest request, HttpServletResponse response) {
+            @RequestParam(value = "size", required = true, defaultValue = DEFAULT_PAGE_SIZE) Integer size,
+            HttpServletRequest request, HttpServletResponse response) {
         return this.hotelService.getAllHotels(page, size);
     }
 
@@ -107,8 +104,8 @@ public class HotelController extends AbstractRestHandler {
     }
 
     @RequestMapping(value = "/locations",
-    method = RequestMethod.GET,
-    produces = {"application/json", "application/xml"})
+            method = RequestMethod.GET,
+            produces = {"application/json", "application/xml"})
     @ResponseStatus(HttpStatus.OK)
     public @ResponseBody Map<Continent, List<Hotel>> getHotelsByLocation(HttpServletRequest request, HttpServletResponse response) {
         return this.hotelService.hotelsByLocation();
@@ -121,8 +118,8 @@ public class HotelController extends AbstractRestHandler {
     public
     @ResponseBody
     Hotel getHotel(
-        @PathVariable("id") Long id,
-        HttpServletRequest request, HttpServletResponse response) throws Exception {
+            @PathVariable("id") Long id,
+            HttpServletRequest request, HttpServletResponse response) throws Exception {
         Hotel hotel = this.hotelService.getHotel(id);
         checkResourceFound(hotel);
         //todo: http://goo.gl/6iNAkz
@@ -131,12 +128,12 @@ public class HotelController extends AbstractRestHandler {
 
     @RequestMapping(value = "/{id}",
             method = RequestMethod.PUT,
-            consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE },
-            produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
+            consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
+            produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void updateHotel(
-                                 @PathVariable("id") Long id, @RequestBody Hotel hotel,
-                                 HttpServletRequest request, HttpServletResponse response) {
+            @PathVariable("id") Long id, @RequestBody Hotel hotel,
+            HttpServletRequest request, HttpServletResponse response) {
         checkResourceFound(this.hotelService.getHotel(id));
         if (id != hotel.getId()) throw new DataFormatException("ID doesn't match!");
         this.hotelService.updateHotel(hotel);

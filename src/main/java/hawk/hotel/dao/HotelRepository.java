@@ -12,5 +12,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface HotelRepository extends PagingAndSortingRepository<Hotel, Long> {
     Hotel findHotelByCity(String city);
+
     Page<Hotel> findAll(Pageable pageable);
 }

@@ -22,11 +22,18 @@ import javax.servlet.http.HttpServletResponse;
 //@ControllerAdvice?
 public abstract class AbstractRestHandler implements ApplicationEventPublisherAware {
 
+    protected static final String DEFAULT_PAGE_SIZE = "100";
+    protected static final String DEFAULT_PAGE_NUM = "0";
     protected final Logger log = LoggerFactory.getLogger(this.getClass());
     protected ApplicationEventPublisher eventPublisher;
 
-    protected static final String  DEFAULT_PAGE_SIZE = "100";
-    protected static final String DEFAULT_PAGE_NUM = "0";
+    //todo: replace with exception mapping
+    public static <T> T checkResourceFound(final T resource) {
+        if (resource == null) {
+            throw new ResourceNotFoundException("resource not found");
+        }
+        return resource;
+    }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(DataFormatException.class)
@@ -51,14 +58,6 @@ public abstract class AbstractRestHandler implements ApplicationEventPublisherAw
     @Override
     public void setApplicationEventPublisher(ApplicationEventPublisher applicationEventPublisher) {
         this.eventPublisher = applicationEventPublisher;
-    }
-
-    //todo: replace with exception mapping
-    public static <T> T checkResourceFound(final T resource) {
-        if (resource == null) {
-            throw new ResourceNotFoundException("resource not found");
-        }
-        return resource;
     }
 
 }
