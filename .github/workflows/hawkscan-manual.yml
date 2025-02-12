@@ -23,10 +23,13 @@ jobs:
         uses: stackhawk/hawkscan-action@main
         with:
           apiKey: ${{ secrets.HAWK_API_KEY }}
+          configurationFiles: stackhawk.d/stackhawk.yml stackhawk.d/stackhawk-jsv-json-token.yml stackhawk.d/stackhawk-github-pr.yml
         env:
           #APP_ID: ${{ secrets.appId }}
           NO_PROGRESS: true
           SARIF_ARTIFACT: true
+          COMMIT_SHA: ${{ github.event.pull_request.head.sha }}
+          BRANCH_NAME: ${{ github.head_ref }}
       - name: Upload SARIF file
         uses: github/codeql-action/upload-sarif@v3
         with:
