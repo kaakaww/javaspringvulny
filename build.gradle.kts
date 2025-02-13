@@ -23,6 +23,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-security")
     implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
     implementation("org.thymeleaf.extras:thymeleaf-extras-springsecurity5")
+    implementation("org.springframework.boot:spring-boot-actuator")
     implementation("com.h2database:h2")
     runtimeOnly("org.postgresql:postgresql")
     implementation("io.jsonwebtoken:jjwt-api:0.10.7")
