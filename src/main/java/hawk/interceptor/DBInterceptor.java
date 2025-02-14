@@ -56,6 +56,10 @@ public class DBInterceptor {
     public LocalContainerEntityManagerFactoryBean entityManagerFactory(EntityManagerFactoryBuilder factory, DataSource dataSource, JpaProperties properties) {
         Map<String, Object> jpaPropertiesMap = new HashMap<>(jpaProperties.getProperties());
         jpaPropertiesMap.put("hibernate.ejb.interceptor", hibernateInterceptor());
-        return factory.dataSource(dataSource).packages("hawk.entity").properties(jpaPropertiesMap).build();
+        return factory.dataSource(dataSource)
+                // This replaces the traditional @EntityScan that you'd find associated with @EnableJpaRepositories
+                .packages("hawk.entity", "hawk.hotel.domain")
+                .properties(jpaPropertiesMap)
+                .build();
     }
 }
