@@ -23,7 +23,7 @@ spring:
     hibernate:
       ddl-auto: create-drop
     properties:
-      hibernate.jdbc.lob.non_contextual_creation: true
+      #hibernate.jdbc.lob.non_contextual_creation: true
       hibernate.use_sql_comments: false
       hibernate.dialect: org.hibernate.dialect.PostgreSQL81Dialect
     show-sql: false
@@ -35,8 +35,8 @@ springdoc:
 logging:
   level:
     org.hibernate.SQL: debug
-    org.hibernate.type: trace
-    org.hibernate.descriptor.sql: trace
+    org.hibernate.type: debug
+    org.hibernate.descriptor.sql: debug
     org.springframework: info
     org.baeldung: info
 

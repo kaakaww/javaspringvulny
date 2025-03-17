@@ -1,0 +1,17 @@
+hawk:
+  spider:
+    base: false
+    custom:
+      command: "../http-driver/target/release/http-driver"
+      arguments:
+        - "../http-driver/request_flow1.json"
+hawkAddOn:
+  scripts:
+    - name: passive-matcher.kts
+      id: 1000065
+      type: passive
+      path: hawkscripts
+      vars:
+        - name: MATCH
+          val: "alert\\(1\\)"
+      language: KOTLIN

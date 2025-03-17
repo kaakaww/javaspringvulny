@@ -1,5 +1,6 @@
 package hawk;
 
+import com.googlecode.jsonrpc4j.spring.AutoJsonRpcServiceImplExporter;
 import hawk.service.SearchService;
 import hawk.service.UserSearchService;
 import hawk.service.UserService;
@@ -17,5 +18,10 @@ public class Config implements WebMvcConfigurer {
     public UserSearchService userSearchService() { return new UserSearchService(); }
     @Bean
     public UserService userService() { return new UserService(); }
+
+    @Bean
+    public static AutoJsonRpcServiceImplExporter rpcServiceImplExporter() {
+        return new AutoJsonRpcServiceImplExporter();
+    }
 
 }

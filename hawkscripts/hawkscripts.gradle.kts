@@ -30,6 +30,7 @@ kotlin {
                     "httpsender",
                     "active",
                     "proxy",
+                    "passive"
                 )
             }
         }

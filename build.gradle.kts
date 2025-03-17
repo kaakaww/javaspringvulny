@@ -41,6 +41,9 @@ dependencies {
     implementation("io.resurface:resurfaceio-logger:2.2.0")
     implementation("org.apache.commons:commons-compress:1.27.1")
 
+    implementation("javax.jws:javax.jws-api:1.1")
+    implementation("com.github.briandilley.jsonrpc4j:jsonrpc4j:1.6")
+
     compileOnly("org.projectlombok:lombok:1.18.10")
     annotationProcessor("org.projectlombok:lombok:1.18.22")
 }
