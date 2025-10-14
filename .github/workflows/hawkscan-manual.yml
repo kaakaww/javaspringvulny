@@ -1,32 +1,42 @@
 name: HawkScan Example
 on:
   workflow_dispatch:
+  pull_request:
+    branches: [ "main" ]
+permissions:
+  # required for all workflows
+  security-events: write
+  # required to fetch internal or private CodeQL packs
+  packages: read
+  # only required for workflows in private repositories
+  actions: read
+  contents: read
 
 jobs:
   hawkscan:
     name: HawkScan
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-java@v4
-        with:
-          distribution: 'temurin'
-          java-version: '17'
-#      - name: Download and run JavaSpringVulny release jar
-#        run: |
-#          curl -Ls https://github.com/kaakaww/javaspringvulny/releases/download/0.2.0/java-spring-vuly-0.2.0.jar -o ./java-spring-vuly-0.2.0.jar
-#          java -jar ./java-spring-vuly-0.2.0.jar &
+      - uses: actions/checkout@v4
       - name: Build and run JavaSpringVulny (slower)
-        run: |
-          ./gradlew build
-          ./gradlew bootRun &
+        run: docker compose build && docker compose up -d
       - name: Run HawkScan
         id: run-hawkscan
         uses: stackhawk/hawkscan-action@main
         with:
           apiKey: ${{ secrets.HAWK_API_KEY }}
-          sourceURL: https://download.stackhawk.com/dev/hawk/cli
-          version: 3.9.12
+          configurationFiles: stackhawk.d/stackhawk.yml stackhawk.d/stackhawk-jsv-json-token.yml stackhawk.d/stackhawk-github-pr.yml
         env:
-          APP_ID: ${{ secrets.appId }}
+          #APP_ID: ${{ secrets.appId }}
           NO_PROGRESS: true
+          SARIF_ARTIFACT: true
+          COMMIT_SHA: ${{ github.event.pull_request.head.sha }}
+          BRANCH_NAME: ${{ github.head_ref }}
+      - name: Upload SARIF file
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          # Path to SARIF file relative to the root of the repository
+          sarif_file: stackhawk.sarif
+          # Optional category for the results
+          # Used to differentiate multiple results for one commit
+          category: StackHawk

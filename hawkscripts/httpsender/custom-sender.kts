@@ -1,4 +1,4 @@
-import com.stackhawk.zap.extension.talon.hawkscan.ExtensionTalonHawkscan
+import com.stackhawk.hste.extension.talon.hawkscan.ExtensionTalonHawkscan
 import org.apache.log4j.LogManager
 import org.parosproxy.paros.control.Control
 import org.parosproxy.paros.network.HttpMessage

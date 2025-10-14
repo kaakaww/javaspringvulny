@@ -1,5 +1,5 @@
 app:
-  applicationId: ${APP_ID:dacc7d3e-babc-47d2-b040-ab117ab04526}
+  applicationId: ${APP_ID:f5ee2290-3383-415c-96c7-ee0a398d90b9}
   env: ${APP_ENV:dev-api}
   host: ${APP_HOST:https://localhost:9000}
   excludePaths:
@@ -27,6 +27,10 @@ app:
       success: "HTTP.*200.*"
 
   openApiConf:
+    forbiddenVariables:
+      - field: zone_id
+        values:
+          - "<zone-id that shouldn't have access>"
     # path: /openapi
     filePath: openapi.yaml
     includeAllMethods: true
@@ -39,6 +43,12 @@ app:
           - "customTextValue1"
           - "customTextValue2"
           - "customTextValue3"
+      - field: Dana
+        values:
+          - "no judgment!"
+          - "quiet you!"
+          - "shoosh!"
+          - "something something... your face!"
       - field: searchText
         values:
           - "customSearchText1"

@@ -11,7 +11,6 @@ steps:
   # install the latest version of hawkscan
   - task: HawkScanInstall@1
     inputs:
-      version: "3.5.28"
       installerType: "auto"
 
   # azure pipelines default jdk is 8, so we upgrade to 17 to run JavaSpringVulny
@@ -31,7 +30,6 @@ steps:
   - task: RunHawkScan@1
     inputs:
       configFile: "stackhawk.yml"
-      version: "3.5.28"
     env:
       APP_ENV: 'Azure Pipeline'
       # use variables in the azure devops ui to configure secrets and env vars
@@ -39,3 +37,9 @@ steps:
       HAWK_API_KEY: $(HAWK_API_KEY)
       APP_ID: $(APP_ID)
       SARIF_ARTIFACT: true
+      
+  - task: PublishBuildArtifacts@1
+    inputs:
+      pathToPublish:  '$(System.DefaultWorkingDirectory)/stackhawk.sarif'
+      artifactName: 'CodeAnalysisLogs'
+      publishLocation: 'Container'

@@ -79,7 +79,7 @@ public class Application {
                 });
 
 
-                System.out.println(String.format("Items in DB %d", userRepo.count()));
+                System.out.println(String.format("Users in DB %d", userRepo.count()));
                 userRepo.findAll().forEach(item -> System.out.println(String.format("user: %s", item.getName())));
             }
 
