@@ -101,7 +101,7 @@ jobs:
           NO_COLOR: true
           NO_PROGRESS: true
           SARIF_ARTIFACT: true
-        continue-on-error: true
+        continue-on-error: false
         uses: stackhawk/hawkscan-action@v2
         with:
           apiKey: ${{ secrets.HAWK_API_KEY }}
