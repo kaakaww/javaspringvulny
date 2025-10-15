@@ -1,0 +1,36 @@
+name: Daily Production Scan
+
+on:
+  schedule:
+    # Run at 6:00 AM UTC (midnight Mountain Daylight Time)
+    # Note: During MST (Mountain Standard Time), this will run at 11:00 PM
+    - cron: '0 6 * * *'
+  workflow_dispatch:  # Allow manual triggering
+
+jobs:
+  scan-production:
+    name: Scan Production Environment
+    runs-on: ubuntu-latest
+    permissions:
+      security-events: write
+      contents: read
+      issues: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run HawkScan against Production
+        env:
+          HAWK_ENV: Production
+          PROD_APP_HOST: http://prod.172-236-97-209.nip.io
+          COMMIT_SHA: ${{ github.sha }}
+          BRANCH_NAME: main
+          NO_COLOR: true
+          NO_PROGRESS: true
+        id: hawkscan
+        uses: stackhawk/hawkscan-action@v2
+        with:
+          apiKey: ${{ secrets.HAWK_API_KEY }}
+          githubToken: ${{ github.token }}
+          configurationFiles: stackhawk.yml stackhawk-prod.yml

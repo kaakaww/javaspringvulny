@@ -24,6 +24,15 @@ spring:
     properties:
       hibernate.jdbc.lob.non_contextual_creation: true
 
+logging:
+  level:
+    root: INFO
+    org.hibernate: WARN
+    org.hibernate.SQL: WARN
+    org.hibernate.type.descriptor.sql: WARN
+    org.springframework.web: INFO
+    hawk: INFO
+
 springdoc:
   api-docs:
     path: /openapi

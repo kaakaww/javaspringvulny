@@ -1,0 +1,123 @@
+name: Deploy to QA
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy-qa:
+    name: Deploy to QA Environment
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+      security-events: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extract metadata for Docker
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ghcr.io/${{ github.repository }}
+          tags: |
+            type=sha,prefix={{branch}}-
+            type=raw,value=latest
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: Set up kubectl
+        uses: azure/setup-kubectl@v4
+
+      - name: Configure kubectl
+        run: |
+          mkdir -p $HOME/.kube
+          echo "${{ secrets.KUBECONFIG_BASE64 }}" | base64 -d > $HOME/.kube/config
+          chmod 600 $HOME/.kube/config
+
+      - name: Deploy to QA namespace
+        run: |
+          # Apply the QA configuration
+          kubectl apply -k k8s/overlays/qa
+
+          # Update the image to the newly built one
+          kubectl set image deployment/javavulny javavulny=ghcr.io/${{ github.repository }}:main-${{ github.sha }} -n javavulny-qa
+
+          # Wait for rollout to complete
+          kubectl rollout status deployment/javavulny -n javavulny-qa --timeout=5m
+
+      - name: Get QA URL
+        id: qa-url
+        run: |
+          QA_HOST=$(kubectl get ingress javavulny -n javavulny-qa -o jsonpath='{.spec.rules[0].host}')
+          echo "qa_host=http://${QA_HOST}" >> $GITHUB_OUTPUT
+          echo "QA URL: http://${QA_HOST}"
+
+      - name: Wait for QA app to be healthy
+        run: |
+          echo "Waiting for QA app to be ready at ${{ steps.qa-url.outputs.qa_host }}"
+          max_attempts=30
+          attempt=0
+          until curl -k -f ${{ steps.qa-url.outputs.qa_host }}/actuator/health || [ $attempt -eq $max_attempts ]; do
+            echo "Attempt $((attempt+1))/$max_attempts: App not ready yet..."
+            sleep 10
+            attempt=$((attempt+1))
+          done
+          if [ $attempt -eq $max_attempts ]; then
+            echo "QA application failed to become healthy"
+            kubectl logs -l app=javavulny -n javavulny-qa --tail=100
+            exit 1
+          fi
+          echo "QA application is ready!"
+
+      - name: Run HawkScan against QA
+        env:
+          HAWK_ENV: QA
+          QA_APP_HOST: ${{ steps.qa-url.outputs.qa_host }}
+          COMMIT_SHA: ${{ github.sha }}
+          BRANCH_NAME: ${{ github.ref_name }}
+          NO_COLOR: true
+          NO_PROGRESS: true
+          SARIF_ARTIFACT: true
+        continue-on-error: true
+        uses: stackhawk/hawkscan-action@v2
+        with:
+          apiKey: ${{ secrets.HAWK_API_KEY }}
+          githubToken: ${{ github.token }}
+          configurationFiles: stackhawk.yml stackhawk-qa.yml
+
+      - name: Upload SARIF file
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: stackhawk.sarif
+          category: StackHawk-QA
+
+      - name: Deployment summary
+        run: |
+          echo "## QA Deployment Successful :rocket:" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Environment:** QA" >> $GITHUB_STEP_SUMMARY
+          echo "**URL:** ${{ steps.qa-url.outputs.qa_host }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Image:** ghcr.io/${{ github.repository }}:main-${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Commit:** ${{ github.sha }}" >> $GITHUB_STEP_SUMMARY

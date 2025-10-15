@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: javavulny-config
+  labels:
+    app: javavulny
+data:
+  SPRING_PROFILES_ACTIVE: "postgresql"
+  SPRING_DATASOURCE_URL: "jdbc:postgresql://postgres:5432/postgresql"

@@ -1,0 +1,14 @@
+app:
+  env: QA
+  host: ${QA_APP_HOST:http://qa.172-236-97-209.nip.io}
+
+hawk:
+  failureThreshold: medium
+
+tags:
+  - name: _STACKHAWK_ENVIRONMENT
+    value: qa
+  - name: _STACKHAWK_GIT_COMMIT_SHA
+    value: ${COMMIT_SHA}
+  - name: _STACKHAWK_GIT_BRANCH
+    value: ${BRANCH_NAME:main}

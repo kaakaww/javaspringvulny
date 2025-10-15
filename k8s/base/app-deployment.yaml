@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: javavulny
+  labels:
+    app: javavulny
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: 1
+  selector:
+    matchLabels:
+      app: javavulny
+  template:
+    metadata:
+      labels:
+        app: javavulny
+    spec:
+      containers:
+      - name: javavulny
+        image: ghcr.io/hawkablock/javaspringvulny:latest
+        ports:
+        - containerPort: 9000
+          name: http
+        envFrom:
+        - configMapRef:
+            name: javavulny-config
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "250m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+        livenessProbe:
+          httpGet:
+            path: /actuator/health
+            port: 9000
+            scheme: HTTPS
+          initialDelaySeconds: 60
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 3
+        readinessProbe:
+          httpGet:
+            path: /actuator/health
+            port: 9000
+            scheme: HTTPS
+          initialDelaySeconds: 30
+          periodSeconds: 5
+          timeoutSeconds: 3
+          failureThreshold: 3
+      initContainers:
+      - name: wait-for-postgres
+        image: busybox:1.36
+        command: ['sh', '-c', 'until nc -z postgres 5432; do echo waiting for postgres; sleep 2; done;']
