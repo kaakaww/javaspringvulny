@@ -1,0 +1,16 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: javavulny
+spec:
+  rules:
+  - host: qa.172-236-97-209.nip.io
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: javavulny
+            port:
+              number: 9000

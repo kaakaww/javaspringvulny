@@ -1,0 +1,24 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: javavulny-prod
+
+bases:
+  - ../../base
+
+commonLabels:
+  environment: production
+
+patches:
+  - path: ingress-patch.yaml
+    target:
+      kind: Ingress
+      name: javavulny
+  - path: app-env-patch.yaml
+    target:
+      kind: ConfigMap
+      name: javavulny-config
+
+images:
+  - name: ghcr.io/hawkablock/javaspringvulny
+    newTag: latest

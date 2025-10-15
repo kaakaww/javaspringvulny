@@ -2,6 +2,15 @@
 
 Java Spring Vulny is a simple application that combines the power and sophistication of the Spring framework with some homegrown naïveté. Its purpose is to provide a target for web application security test scanners such as [OWASP ZAProxy](https://www.zaproxy.org/) and [StackHawk](https://www.stackhawk.com/).
 
+## Live Environments
+
+This project includes a complete CI/CD pipeline with automated deployments to Kubernetes:
+
+- **QA Environment**: http://qa.172-236-97-209.nip.io
+- **Production Environment**: http://prod.172-236-97-209.nip.io
+
+See [CICD.md](CICD.md) for complete CI/CD pipeline documentation.
+
 ## Building and Running in IDE/commandline
 ```shell script
 # run the postgresql db so you can have SQLi
@@ -90,6 +99,40 @@ A [ZAP](https://www.zaproxy.org/) or [StackHawk](https://www.stackhawk.com/login
 | --- | --- |
 | SQL Injection via search box | `a%'; insert into item values (999, 'bad bad description', 'hacker item name'); select * from item where name like  '%banan` |
 | Cross Site Scripting via search box | `<script>alert('hey guy');</script>` |
+
+## CI/CD Pipeline
+
+This project demonstrates a complete SDLC workflow with security testing at every stage:
+
+```
+PR → QA → Production → Daily Monitoring
+ ↓    ↓       ↓            ↓
+Scan Scan   Scan        Scan
+```
+
+### Pipeline Stages
+
+1. **Pull Request Check** - Build, test, and scan on every PR
+2. **QA Deployment** - Automatic deployment to QA on merge to main
+3. **Production Release** - Deploy to production with semantic version tags
+4. **Daily Scanning** - Automated security scans every night
+
+### Quick Start
+
+```bash
+# View environment status
+./scripts/get-status.sh all
+
+# Build and deploy to QA
+./scripts/build-and-push.sh latest
+./scripts/deploy-local.sh qa latest
+
+# Create a production release
+git tag v1.0.0
+git push origin v1.0.0
+```
+
+For complete CI/CD documentation, see [CICD.md](CICD.md).
 
 ## Scanning
 

@@ -1,0 +1,16 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - postgres-pvc.yaml
+  - postgres-configmap.yaml
+  - postgres-secret.yaml
+  - postgres-deployment.yaml
+  - postgres-service.yaml
+  - app-configmap.yaml
+  - app-deployment.yaml
+  - app-service.yaml
+  - ingress.yaml
+
+commonLabels:
+  project: javavulny

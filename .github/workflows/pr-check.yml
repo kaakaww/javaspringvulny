@@ -1,37 +1,35 @@
-name: HawkScan Demo
-on:
-#  push:
-#    branches:
-#      - main
-#  pull_request:
-#    branches:
-#      - main
-  workflow_dispatch:
+name: PR Security Check
 
+on:
+  pull_request:
+    branches:
+      - main
 
 jobs:
-  hawkscan:
-    name: HawkScan
+  build-and-scan:
+    name: Build and Scan PR
     runs-on: ubuntu-latest
-    permissions:      
+    permissions:
       security-events: write
-      packages: read
-      actions: read
       contents: read
+      pull-requests: write
+
     steps:
-      - uses: actions/checkout@v2
-      - name: Set up Docker
-        uses: docker/setup-docker-action@v4
-      - name: Setup Java
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Java
         uses: actions/setup-java@v4
         with:
-          distribution: 'temurin' # See 'Supported distributions' for available options
+          distribution: 'temurin'
           java-version: '17'
-      - name: Build and run JavaSpringVulny (Docker)
+
+      - name: Build and run with Docker Compose
         run: docker compose up --detach
+
       - name: Run HawkScan
         env:
-          HAWK_ENV: GitHub Actions
+          HAWK_ENV: GitHub Actions PR
           COMMIT_SHA: ${{ github.event.pull_request.head.sha }}
           BRANCH_NAME: ${{ github.head_ref }}
           NO_COLOR: true
@@ -42,8 +40,13 @@ jobs:
         with:
           apiKey: ${{ secrets.HAWK_API_KEY }}
           githubToken: ${{ github.token }}
+
       - name: Upload SARIF file
         uses: github/codeql-action/upload-sarif@v3
         with:
           sarif_file: stackhawk.sarif
           category: StackHawk
+
+      - name: Show logs on failure
+        if: failure()
+        run: docker compose logs

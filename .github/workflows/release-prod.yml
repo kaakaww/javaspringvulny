@@ -1,0 +1,166 @@
+name: Release to Production
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+jobs:
+  release-prod:
+    name: Release to Production
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      packages: write
+      security-events: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Full history for changelog
+
+      - name: Validate semver tag
+        run: |
+          TAG=${GITHUB_REF#refs/tags/}
+          if [[ ! $TAG =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "Error: Tag must be in semver format (v*.*.*))"
+            exit 1
+          fi
+          echo "VERSION=${TAG#v}" >> $GITHUB_ENV
+          echo "TAG=$TAG" >> $GITHUB_ENV
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extract metadata for Docker
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ghcr.io/${{ github.repository }}
+          tags: |
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+            type=semver,pattern={{major}}
+            type=raw,value=latest
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: Generate changelog
+        id: changelog
+        run: |
+          # Get the previous tag
+          PREV_TAG=$(git describe --tags --abbrev=0 HEAD^ 2>/dev/null || echo "")
+
+          if [ -z "$PREV_TAG" ]; then
+            echo "No previous tag found, showing all commits"
+            CHANGELOG=$(git log --pretty=format:"- %s (%h)" --no-merges)
+          else
+            echo "Generating changelog from $PREV_TAG to ${{ env.TAG }}"
+            CHANGELOG=$(git log ${PREV_TAG}..${{ env.TAG }} --pretty=format:"- %s (%h)" --no-merges)
+          fi
+
+          # Save changelog to file for GitHub release
+          echo "$CHANGELOG" > changelog.md
+
+          # Also output for use in summary
+          echo "changelog<<EOF" >> $GITHUB_OUTPUT
+          echo "$CHANGELOG" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          name: Release ${{ env.TAG }}
+          body_path: changelog.md
+          draft: false
+          prerelease: false
+          generate_release_notes: true
+
+      - name: Set up kubectl
+        uses: azure/setup-kubectl@v4
+
+      - name: Configure kubectl
+        run: |
+          mkdir -p $HOME/.kube
+          echo "${{ secrets.KUBECONFIG_BASE64 }}" | base64 -d > $HOME/.kube/config
+          chmod 600 $HOME/.kube/config
+
+      - name: Deploy to Production namespace
+        run: |
+          # Apply the Production configuration
+          kubectl apply -k k8s/overlays/prod
+
+          # Update the image to the newly released version
+          kubectl set image deployment/javavulny javavulny=ghcr.io/${{ github.repository }}:${{ env.VERSION }} -n javavulny-prod
+
+          # Wait for rollout to complete
+          kubectl rollout status deployment/javavulny -n javavulny-prod --timeout=5m
+
+      - name: Get Production URL
+        id: prod-url
+        run: |
+          PROD_HOST=$(kubectl get ingress javavulny -n javavulny-prod -o jsonpath='{.spec.rules[0].host}')
+          echo "prod_host=http://${PROD_HOST}" >> $GITHUB_OUTPUT
+          echo "Production URL: http://${PROD_HOST}"
+
+      - name: Wait for Production app to be healthy
+        run: |
+          echo "Waiting for Production app to be ready at ${{ steps.prod-url.outputs.prod_host }}"
+          max_attempts=30
+          attempt=0
+          until curl -k -f ${{ steps.prod-url.outputs.prod_host }}/actuator/health || [ $attempt -eq $max_attempts ]; do
+            echo "Attempt $((attempt+1))/$max_attempts: App not ready yet..."
+            sleep 10
+            attempt=$((attempt+1))
+          done
+          if [ $attempt -eq $max_attempts ]; then
+            echo "Production application failed to become healthy"
+            kubectl logs -l app=javavulny -n javavulny-prod --tail=100
+            exit 1
+          fi
+          echo "Production application is ready!"
+
+      - name: Run HawkScan against Production
+        env:
+          HAWK_ENV: Production
+          PROD_APP_HOST: ${{ steps.prod-url.outputs.prod_host }}
+          COMMIT_SHA: ${{ github.sha }}
+          BRANCH_NAME: main
+          RELEASE_TAG: ${{ env.TAG }}
+          NO_COLOR: true
+          NO_PROGRESS: true
+          SARIF_ARTIFACT: true
+        uses: stackhawk/hawkscan-action@v2
+        with:
+          apiKey: ${{ secrets.HAWK_API_KEY }}
+          githubToken: ${{ github.token }}
+          configurationFiles: stackhawk.yml stackhawk-prod.yml
+
+      - name: Release summary
+        run: |
+          echo "## Production Release Successful :rocket:" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Version:** ${{ env.TAG }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Environment:** Production" >> $GITHUB_STEP_SUMMARY
+          echo "**URL:** ${{ steps.prod-url.outputs.prod_host }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Image:** ghcr.io/${{ github.repository }}:${{ env.VERSION }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Commit:** ${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Changelog" >> $GITHUB_STEP_SUMMARY
+          echo "${{ steps.changelog.outputs.changelog }}" >> $GITHUB_STEP_SUMMARY
