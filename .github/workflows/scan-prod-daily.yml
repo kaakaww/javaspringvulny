@@ -2,9 +2,8 @@ name: Daily Production Scan
 
 on:
   schedule:
-    # Run at 6:00 AM UTC (midnight Mountain Daylight Time)
-    # Note: During MST (Mountain Standard Time), this will run at 11:00 PM
-    - cron: '0 6 * * *'
+    # Run every 2 hours UTC (00:00, 02:00, 04:00, ...)
+    - cron: '0 */2 * * *'
   workflow_dispatch:  # Allow manual triggering
 
 jobs:
