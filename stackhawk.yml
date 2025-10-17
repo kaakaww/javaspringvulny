@@ -35,3 +35,5 @@ tags:
     value: ${COMMIT_SHA}
   - name: _STACKHAWK_GIT_BRANCH
     value: ${BRANCH_NAME}
+  - name: department
+    value: engineering
