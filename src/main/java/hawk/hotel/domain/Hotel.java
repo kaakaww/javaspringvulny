@@ -1,5 +1,10 @@
 package hawk.hotel.domain;
 
+import hawk.entity.TenantSupport;
+import org.hibernate.annotations.Filter;
+import org.hibernate.annotations.FilterDef;
+import org.hibernate.annotations.ParamDef;
+
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -13,7 +18,9 @@ import java.util.Comparator;
 @Table(name = "hotel")
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
-public class Hotel implements Comparable<Hotel> {
+@FilterDef(name = "tenantFilter", parameters = {@ParamDef(name = "tenantId", type = "string")})
+@Filter(name = "tenantFilter", condition = "tenant_id = :tenantId")
+public class Hotel implements TenantSupport, Comparable<Hotel> {
 
     @Column()
     String city;
@@ -34,6 +41,9 @@ public class Hotel implements Comparable<Hotel> {
     @JoinColumn(name = "building_id")
     private Building building;
 
+    @Column(name = "tenant_id")
+    private String tenantId;
+
     public Hotel() {
     }
 
@@ -41,6 +51,15 @@ public class Hotel implements Comparable<Hotel> {
         this.name = name;
         this.description = description;
         this.rating = rating;
+    }
+
+    public Hotel(String name, String description, int rating, String city, Continent continent, String tenantId) {
+        this.name = name;
+        this.description = description;
+        this.rating = rating;
+        this.city = city;
+        this.continent = continent;
+        this.tenantId = tenantId;
     }
 
     public long getId() {
@@ -98,6 +117,15 @@ public class Hotel implements Comparable<Hotel> {
 
     public void setBuilding(Building building) {
         this.building = building;
+    }
+
+    public String getTenantId() {
+        return tenantId;
+    }
+
+    @Override
+    public void setTenantId(String tenantId) {
+        this.tenantId = tenantId;
     }
 
     @Override

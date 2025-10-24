@@ -151,4 +151,43 @@ public class HotelController extends AbstractRestHandler {
         checkResourceFound(this.hotelService.getHotel(id));
         this.hotelService.deleteHotel(id);
     }
+
+    /**
+     * VULNERABLE ENDPOINT: This endpoint bypasses tenant isolation
+     * BOLA (Broken Object Level Authorization) vulnerability
+     * Any authenticated user can see ALL hotels from ALL tenants
+     * This endpoint should NOT exist in production code
+     */
+    @RequestMapping(value = "/all-unfiltered",
+            method = RequestMethod.GET,
+            produces = {"application/json", "application/xml"})
+    @ResponseStatus(HttpStatus.OK)
+    public @ResponseBody List<Hotel> getAllHotelsUnfiltered(
+            HttpServletRequest request,
+            HttpServletResponse response
+    ) {
+        // VULNERABILITY: This bypasses tenant filtering entirely
+        return this.hotelService.getAllHotelsUnfiltered();
+    }
+
+    /**
+     * VULNERABLE ENDPOINT: This endpoint bypasses tenant isolation for hotel lookup by ID
+     * BOLA (Broken Object Level Authorization) vulnerability
+     * Any authenticated user can access ANY hotel from ANY tenant by ID
+     * Allows horizontal privilege escalation through ID enumeration
+     * This endpoint should NOT exist in production code
+     */
+    @RequestMapping(value = "/unfiltered/{id}",
+            method = RequestMethod.GET,
+            produces = {"application/json", "application/xml"})
+    @ResponseStatus(HttpStatus.OK)
+    public @ResponseBody Hotel getHotelByIdUnfiltered(
+            @PathVariable("id") Long id,
+            HttpServletRequest request,
+            HttpServletResponse response
+    ) {
+        // VULNERABILITY: This bypasses tenant filtering for specific hotel lookup
+        // Users can access hotels from other tenants by guessing/enumerating IDs
+        return this.hotelService.getHotelByIdUnfiltered(id);
+    }
 }

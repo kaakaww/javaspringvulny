@@ -2,6 +2,8 @@ package hawk.api.jwt;
 
 import hawk.api.jwt.JwtTokenProvider;
 import hawk.context.TenantContext;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.GenericFilterBean;
@@ -15,6 +17,7 @@ import java.io.IOException;
 
 public class JwtFilter extends GenericFilterBean {
 
+    private static final Logger log = LoggerFactory.getLogger(JwtFilter.class);
     private JwtTokenProvider jwtTokenProvider;
 
     public JwtFilter(JwtTokenProvider jwtTokenProvider) {
@@ -29,7 +32,9 @@ public class JwtFilter extends GenericFilterBean {
         if (token != null && jwtTokenProvider.validateToken(token)) {
             Authentication auth = token != null ? jwtTokenProvider.getAuthentication(token) : null;
             SecurityContextHolder.getContext().setAuthentication(auth);
-            TenantContext.setCurrentTenant(jwtTokenProvider.getTenantId(token));
+            String tenantId = jwtTokenProvider.getTenantId(token);
+            TenantContext.setCurrentTenant(tenantId);
+            log.info("JwtFilter: Set tenant context to: {} for user: {}", tenantId, auth != null ? auth.getName() : "unknown");
         }
 
         filterChain.doFilter(req, res);
