@@ -39,13 +39,13 @@ steps:
   # install the latest version of hawkscan
   - task: HawkScanInstall@1
     inputs:
-      version: "4.0.3"
+      version: "4.8.0"
       installerType: "$(installerType)"
     condition: not(and(eq(variables['installerType'], 'auto'), eq(variables['imageName'], 'ubuntu-latest')))
 
   - task: HawkScanInstall@1
     inputs:
-      version: "4.0.3"
+      version: "4.8.0"
       installerType: "$(installerType)"
       installPath: '/home/vsts/custom'
     condition: and(eq(variables['installerType'], 'auto'), eq(variables['imageName'], 'ubuntu-latest'))
@@ -79,7 +79,7 @@ steps:
   - task: RunHawkScan@1
     inputs:
       configFile: "stackhawk.yml"
-      version: "4.0.3"
+      version: "4.8.0"
     env:
       HAWK_API_KEY: $(HAWK_API_KEY) # use variables in the azure devops ui to configure secrets and env vars
       APP_ENV: $(imageName)
@@ -90,7 +90,7 @@ steps:
   - task: RunHawkScan@1
     inputs:
       configFile: "stackhawk.yml"
-      version: "4.0.3"
+      version: "4.8.0"
       installPath: '/home/vsts/custom'
     env:
       HAWK_API_KEY: $(HAWK_API_KEY) # use variables in the azure devops ui to configure secrets and env vars
