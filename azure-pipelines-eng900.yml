@@ -1,0 +1,179 @@
+# ENG-900 — exploratory proof that azure-extension v2 self-heals a v1-installed
+# compatibility shim. Not a CI gate; run it by hand when you want the evidence.
+#
+# The bug: an agent that ran HawkScanInstall@1 against a HawkScan 6.x version got
+# the compatibility shim served at the legacy hawk/cli/hawk-<version>.zip key (that
+# key still returns 200 for 6.x). Upgrading to v2 did not repair it — the install
+# task reported Succeeded while installing nothing and skipping sha256 verification.
+#
+# Why hosted agents are enough. In production the stuck state needs $HOME to survive
+# BETWEEN runs, which only self-hosted agents do. But to prove the *heal* we only
+# need the shim on disk BEFORE the v2 install task, and both run in the same job on
+# the same filesystem. So we plant it in an earlier step.
+#
+# Why planting is faithful rather than a shortcut: v1's zip path was literally
+# downloadTool(zipUrl) + extractZip(tmp, installPath) with no transformation, so
+# fetching the same URL and unzipping to the same place reproduces the exact
+# on-disk state v1 left behind.
+#
+# We cannot literally run HawkScanInstall@1 first: an ADO org installs one version
+# of an extension at a time, and the current VSIX defines only Major 2.
+#
+# Read the matrix as an A/B. `shim` arms start poisoned and must heal; `clean` arms
+# are the control and must behave identically at the end. Linux is the arm that
+# matters most — there the shim's file is named `hawk`, colliding with the real
+# binary, so the isShimInstall guard is the only thing preventing selection. On
+# Windows the shim ships no hawk.exe, so it is rejected by the dropped hawk.ps1
+# lookup arm instead. The two arms exercise different halves of the fix.
+
+strategy:
+  matrix:
+    linux-shim:
+      imageName: "ubuntu-latest"
+      plantShim: "true"
+    linux-clean:
+      imageName: "ubuntu-latest"
+      plantShim: "false"
+    windows-shim:
+      imageName: "windows-latest"
+      plantShim: "true"
+    windows-clean:
+      imageName: "windows-latest"
+      plantShim: "false"
+
+pool:
+  vmImage: $(imageName)
+
+trigger: none
+pr: none
+
+variables:
+  # Pinned rather than `latest` so a failure means the fix regressed, not that the
+  # release moved. Must be >= 6.0.0 to exercise the single-binary path at all.
+  hawkVersion: "6.3.0"
+  # Every task below must agree on this. The default is $HOME; naming it explicitly
+  # keeps the planted shim and the install task pointed at the same directory, and
+  # keeps the Linux and Windows arms symmetrical.
+  installRoot: "$(Agent.TempDirectory)/hawkhome"
+  # installerType: zip is what the affected customer used (they chose it to avoid
+  # the MSI). For 6.x setUpBinary overrides it and downloads the binary regardless,
+  # which is itself worth demonstrating.
+  installerType: "zip"
+
+steps:
+  - checkout: self
+
+  - script: echo "ENG-900 | $(imageName) | plantShim=$(plantShim) | hawk $(hawkVersion)"
+    displayName: "🦅 $(imageName) plantShim=$(plantShim)"
+
+  # ---------------------------------------------------------------- plant
+  - bash: |
+      set -euo pipefail
+      D="$(installRoot)/hawk-$(hawkVersion)"
+      mkdir -p "$(installRoot)"
+      curl -fsSL "https://download.stackhawk.com/hawk/cli/hawk-$(hawkVersion).zip" -o /tmp/legacy.zip
+      unzip -oq /tmp/legacy.zip -d "$(installRoot)"
+      # Fail loudly if the published shim ever stops shipping the marker the fix
+      # keys off — that would silently invalidate this whole test.
+      test -f "$D/.hawk-base-url" || { echo "shim marker absent; shim shape changed"; exit 1; }
+      echo "planted v1 shim:"; ls -la "$D"
+    displayName: "Plant the v1 shim (what HawkScanInstall@1 left behind)"
+    condition: and(eq(variables['plantShim'], 'true'), eq(variables['imageName'], 'ubuntu-latest'))
+
+  - powershell: |
+      $ErrorActionPreference = 'Stop'
+      $D = "$(installRoot)\hawk-$(hawkVersion)"
+      New-Item -ItemType Directory -Force -Path "$(installRoot)" | Out-Null
+      Invoke-WebRequest -Uri "https://download.stackhawk.com/hawk/cli/hawk-$(hawkVersion).zip" -OutFile "$env:TEMP\legacy.zip"
+      # Same extractor azure-pipelines-tool-lib uses on Windows, so the on-disk
+      # result (including absence of Mark-of-the-Web) matches what v1 produced.
+      Add-Type -AssemblyName System.IO.Compression.FileSystem
+      [System.IO.Compression.ZipFile]::ExtractToDirectory("$env:TEMP\legacy.zip", "$(installRoot)")
+      if (-not (Test-Path "$D\.hawk-base-url")) { throw "shim marker absent; shim shape changed" }
+      Write-Host "planted v1 shim:"; Get-ChildItem $D -Force | Format-Table Name, Length
+    displayName: "Plant the v1 shim (what HawkScanInstall@1 left behind)"
+    condition: and(eq(variables['plantShim'], 'true'), eq(variables['imageName'], 'windows-latest'))
+
+  # ---------------------------------------------------------------- the fix
+  # Expect "Found a legacy HawkScan compatibility shim at ..." on the shim arms,
+  # then a download and "Checksum verified:". On the clean arms, just the download.
+  - task: HawkScanInstall@2
+    displayName: "HawkScanInstall@2 (must heal, not report AlreadyInstalled)"
+    inputs:
+      version: "$(hawkVersion)"
+      installerType: "$(installerType)"
+      installPath: "$(installRoot)"
+
+  # ---------------------------------------------------------------- assert
+  - bash: |
+      set -euo pipefail
+      D="$(installRoot)/hawk-$(hawkVersion)"
+      echo "after install:"; ls -la "$D"
+      [ -f "$D/.hawk-base-url" ] && { echo "FAIL: shim marker survived the install"; exit 1; }
+      [ -f "$D/hawk.ps1" ]       && { echo "FAIL: shim hawk.ps1 survived the install"; exit 1; }
+      # The decisive check on Linux: `hawk` must be the real binary, not the shim
+      # script that shares its name.
+      file "$D/hawk" | grep -q 'ELF' || { echo "FAIL: not a native binary:"; file "$D/hawk"; exit 1; }
+      "$D/hawk" version
+      echo "PASS: healed to a real binary"
+    displayName: "Assert the shim was replaced by a real binary"
+    condition: and(succeeded(), eq(variables['imageName'], 'ubuntu-latest'))
+
+  - powershell: |
+      $ErrorActionPreference = 'Stop'
+      $D = "$(installRoot)\hawk-$(hawkVersion)"
+      Write-Host "after install:"; Get-ChildItem $D -Force | Format-Table Name, Length
+      if (Test-Path "$D\.hawk-base-url") { throw "FAIL: shim marker survived the install" }
+      if (Test-Path "$D\hawk.ps1")       { throw "FAIL: shim hawk.ps1 survived the install" }
+      if (-not (Test-Path "$D\hawk.exe")) { throw "FAIL: no hawk.exe was installed" }
+      # PE header check: a script would not start with "MZ".
+      $b = [System.IO.File]::ReadAllBytes("$D\hawk.exe")[0..1]
+      if ($b[0] -ne 0x4D -or $b[1] -ne 0x5A) { throw "FAIL: hawk.exe is not a PE binary" }
+      & "$D\hawk.exe" version
+      Write-Host "PASS: healed to a real binary"
+    displayName: "Assert the shim was replaced by a real binary"
+    condition: and(succeeded(), eq(variables['imageName'], 'windows-latest'))
+
+  # Second install against the healed tree: must short-circuit, not re-download
+  # ~300MB, and must still export PATH (that early return previously skipped it).
+  - task: HawkScanInstall@2
+    displayName: "HawkScanInstall@2 again (must be idempotent)"
+    inputs:
+      version: "$(hawkVersion)"
+      installerType: "$(installerType)"
+      installPath: "$(installRoot)"
+
+  # ---------------------------------------------------------------- real scan
+  # The part that makes this a proof rather than a file-shape check: the healed
+  # binary has to actually scan. HawkScan 6.x bundles its own runtime, so this JDK
+  # is for JavaSpringVulny, not for hawk.
+  - task: JavaToolInstaller@0
+    inputs:
+      versionSpec: "17"
+      jdkArchitectureOption: "x64"
+      jdkSourceOption: "PreInstalled"
+
+  - script: |
+      curl -Ls https://github.com/kaakaww/javaspringvulny/releases/download/0.2.0/java-spring-vuly-0.2.0.jar -o ./java-spring-vuly-0.2.0.jar
+      java -jar ./java-spring-vuly-0.2.0.jar &
+    displayName: "Start JavaSpringVulny (linux)"
+    condition: and(succeeded(), eq(variables['imageName'], 'ubuntu-latest'))
+
+  - powershell: |
+      Invoke-WebRequest -Uri "https://github.com/kaakaww/javaspringvulny/releases/download/0.2.0/java-spring-vuly-0.2.0.jar" -OutFile "java-spring-vuly-0.2.0.jar"
+      Start-Process java -ArgumentList "-jar","java-spring-vuly-0.2.0.jar","--spring.profiles.active=windows"
+    displayName: "Start JavaSpringVulny (windows)"
+    env:
+      SPRING_DATASOURCE_URL: 'jdbc:h2:file:D:\\a\\1\\db\\vulny;DB_CLOSE_ON_EXIT=FALSE;AUTO_RECONNECT=TRUE'
+    condition: and(succeeded(), eq(variables['imageName'], 'windows-latest'))
+
+  - task: RunHawkScan@2
+    displayName: "RunHawkScan@2 with the healed binary"
+    inputs:
+      configFile: "stackhawk.yml"
+      version: "$(hawkVersion)"
+      installPath: "$(installRoot)"
+    env:
+      HAWK_API_KEY: $(HAWK_API_KEY)
+      APP_ENV: "eng900-$(imageName)-$(plantShim)"
+      APP_ID: $(appId2)
