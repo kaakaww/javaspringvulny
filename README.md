@@ -82,6 +82,17 @@ You can log in to the application with the following credentials:
 | https://localhost:9000/openapi.yaml | The OpenAPI spec in YAML format |
 | https://localhost:9000/swagger-ui.html | The Swagger doc for the OpenAPI spec |
 
+### API Routes Documentation
+
+📚 **[Complete API Routes & Vulnerabilities Documentation](ROUTES.md)**
+
+See [ROUTES.md](ROUTES.md) for comprehensive documentation of all API endpoints, authentication methods, and known security vulnerabilities including:
+- Hotel Management API (with BOLA vulnerabilities)
+- User & Item Management APIs
+- Authentication endpoints
+- Search functionality (SQL Injection & XSS)
+- Admin and hidden endpoints
+
 ### Security Bugs
 
 A [ZAP](https://www.zaproxy.org/) or [StackHawk](https://www.stackhawk.com/login) scan should uncover these bugs:
@@ -90,6 +101,9 @@ A [ZAP](https://www.zaproxy.org/) or [StackHawk](https://www.stackhawk.com/login
 | --- | --- |
 | SQL Injection via search box | `a%'; insert into item values (999, 'bad bad description', 'hacker item name'); select * from item where name like  '%banan` |
 | Cross Site Scripting via search box | `<script>alert('hey guy');</script>` |
+| BOLA - Broken Object Level Authorization | Access hotels across tenants: `/example/v1/hotels/all-unfiltered` or `/example/v1/hotels/unfiltered/{id}` |
+
+**For a complete list of vulnerabilities and testing examples, see [ROUTES.md](ROUTES.md).**
 
 ## Scanning
 

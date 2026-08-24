@@ -3,6 +3,7 @@ package hawk.hotel.service;
 import hawk.hotel.dao.HotelRepository;
 import hawk.hotel.domain.Continent;
 import hawk.hotel.domain.Hotel;
+import org.hibernate.Session;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.*;
 
 /*
@@ -25,6 +28,9 @@ public class HotelService {
     @Autowired
     private HotelRepository hotelRepository;
 
+    @PersistenceContext
+    public EntityManager entityManager;
+
     public HotelService() {
     }
 
@@ -33,7 +39,11 @@ public class HotelService {
     }
 
     public Hotel getHotel(long id) {
-        return hotelRepository.findById(id).orElse(null);
+        // Use query instead of findById to ensure tenant filter is applied
+        List<Hotel> results = entityManager.createQuery("SELECT h FROM Hotel h WHERE h.id = :id", Hotel.class)
+                .setParameter("id", id)
+                .getResultList();
+        return results.isEmpty() ? null : results.get(0);
     }
 
     public void updateHotel(Hotel hotel) {
@@ -41,7 +51,11 @@ public class HotelService {
     }
 
     public void deleteHotel(Long id) {
-        hotelRepository.deleteById(id);
+        // First check if the hotel exists and belongs to current tenant
+        Hotel hotel = getHotel(id);
+        if (hotel != null) {
+            hotelRepository.deleteById(id);
+        }
     }
 
     public Page<Hotel> getAllHotels(Integer page, Integer size) {
@@ -72,5 +86,31 @@ public class HotelService {
             hotelsByLocation.get(continent).add(hotel);
         }
         return hotelsByLocation;
+    }
+
+    /**
+     * VULNERABLE: This method bypasses tenant filtering and returns ALL hotels across ALL tenants
+     * This is a Broken Object Level Authorization (BOLA) vulnerability
+     * Users should only see hotels from their own tenant
+     */
+    public List<Hotel> getAllHotelsUnfiltered() {
+        log.warn("VULNERABILITY: Fetching all hotels without tenant filtering!");
+        // Deliberately NOT enabling the tenant filter here
+        // This allows any authenticated user to see hotels from ALL tenants
+        return entityManager.createQuery("SELECT h FROM Hotel h", Hotel.class).getResultList();
+    }
+
+    /**
+     * VULNERABLE: This method bypasses tenant filtering and returns ANY hotel by ID regardless of tenant
+     * This is a Broken Object Level Authorization (BOLA) vulnerability
+     * Users should only be able to access hotels from their own tenant
+     */
+    public Hotel getHotelByIdUnfiltered(Long id) {
+        log.warn("VULNERABILITY: Fetching hotel ID {} without tenant filtering!", id);
+        // Deliberately NOT enabling the tenant filter here
+        // This allows any authenticated user to access hotels from ANY tenant by guessing/enumerating IDs
+        return entityManager.createQuery("SELECT h FROM Hotel h WHERE h.id = :id", Hotel.class)
+                .setParameter("id", id)
+                .getSingleResult();
     }
 }

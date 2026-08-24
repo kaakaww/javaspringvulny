@@ -45,7 +45,9 @@ public class MultiHttpSecurityConfig {
 
         protected void configure(HttpSecurity http) throws Exception {
             http
-                    .antMatcher("/api/jwt/**")
+                    .requestMatchers()
+                        .antMatchers("/api/jwt/**", "/example/v1/hotels/**")
+                    .and()
                         .httpBasic().disable()
                         .csrf().disable()
                         .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
@@ -168,7 +170,14 @@ public class MultiHttpSecurityConfig {
                         .roles("USER")
                         .build();
 
-        return new InMemoryUserDetailsManager(user, user2);
+        UserDetails user3 =
+                User.withDefaultPasswordEncoder()
+                        .username("ronburgandy")
+                        .password("password")
+                        .roles("USER")
+                        .build();
+
+        return new InMemoryUserDetailsManager(user, user2, user3);
     }
 
     // "/api/okta/**"
