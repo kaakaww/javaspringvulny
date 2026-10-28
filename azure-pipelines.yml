@@ -52,7 +52,7 @@ steps:
   - task: HawkScanInstall@2
     inputs:
       installerType: "$(installerType)"
-      installPath: '/home/vsts/custom'
+      installPath: '$(Agent.TempDirectory)/hawk-custom'
     condition: and(eq(variables['installerType'], 'auto'), eq(variables['imageName'], 'ubuntu-latest'))
 
   # This JDK is for JavaSpringVulny, not for HawkScan — 6.x ships as a single
@@ -97,7 +97,7 @@ steps:
   - task: RunHawkScan@2
     inputs:
       configFile: "stackhawk.yml"
-      installPath: '/home/vsts/custom'
+      installPath: '$(Agent.TempDirectory)/hawk-custom'
     env:
       HAWK_API_KEY: $(HAWK_API_KEY) # use variables in the azure devops ui to configure secrets and env vars
       APP_ENV: $(imageName)
